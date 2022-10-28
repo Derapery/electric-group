@@ -1,0 +1,39 @@
+
+header.page {
+   height: 180px;
+    border-bottom: 1px solid #dfdfdf;
+}
+
+header.page .status {
+    background: #f4f4f4;
+    border-bottom: 1px solid #dfdfdf;
+}
+
+header.page .status>.nav {
+    width: 90vw;
+    margin: auto;
+    line-height: 30px;
+}
+
+header.page .status .nav-item {
+    padding: 0 1rem;
+}
+
+header.page .status .nav-item:last-child {
+    padding-right: 0;
+}
+
+footer.page {
+    background: #f0f0f0;
+}
+
+footer.page .copyright {
+    width: 90vw;
+    margin: 10px auto;
+    text-align: center;
+}
+.dropdown .FIS>i{
+    display: block;
+    width:10px;
+    height:10px;
+}

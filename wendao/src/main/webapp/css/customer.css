@@ -1,0 +1,141 @@
+
+.sign {
+
+    background: url("/image/background.jpg") rgba(248,245,245,0.05)  ;
+    background-size: cover;
+}
+
+.sign .wrapper {
+    width: 620px;
+    margin: auto;
+}
+.logo{
+    margin:50px auto;
+    align-items: center;
+
+    height: 115px;
+    width: 132px;
+}
+.logo img {
+    margin: auto;
+  border-radius: 50%;
+    height: 150px;
+    width: 150px;
+}
+.sign .form-container {
+    width: 80%;
+    border: 1px solid #fefefe ;
+    border-radius: 4px;
+    box-shadow: 0 0 5px 4px #c8cbcf;
+    margin: auto;
+    background: #fefefe ;
+}
+
+.sign .form-row {
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid #dedede;
+    margin: 10px;
+    height: 50px;
+}
+
+.sign .form-row>label {
+    flex-basis: 20%;
+    text-align: right;
+    line-height: 48px;
+}
+
+.sign .form-row>input {
+    flex-basis: 78%;
+    height: 48px;
+    border: none;
+    outline: none;
+    margin-top: 0;
+    margin-left: 2%;
+    background: #fefefe;
+}
+
+.sign .form-captcha>input {
+    flex-basis: 38%;
+}
+
+.sign .form-captcha>img {
+    height: 48px;
+    margin-left: 2%;
+}
+
+.sign .form-buttons {
+    margin: 10px;
+}
+
+.sign .form-buttons>button {
+    color: #343a40;
+    background: #dfdfdf;
+    opacity: 0.6;
+    width: 100%;
+    height: 50px;
+}
+
+.sign .form-container>hr {
+    margin: 10px;
+    background: #dfdfdf;
+}
+
+.sign .form-container>p {
+    text-align: center;
+}
+.dropdown>.btn-primary{
+    color: #555F70;
+    background: #DEE1E6;
+    border: 1px #dfdfdf;
+}
+.dropdown>.btn-primary:active{
+    box-shadow:0 0 5px 4px #DEE1E6 ;
+}
+.page>.status>.between{
+    display: flex;
+    justify-content: space-between;
+    width: 90vw;
+    margin: auto;
+    padding-right: 10px;
+
+}
+header>.facade{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 150px;
+    width: 90vw;
+    margin: auto;
+}
+header>.facade .logo{
+    margin-left: 150px;
+    margin-bottom: 50px;
+}
+header>.facade .search-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.facade .search-wrapper>.frame{
+    margin-right: 300px;
+    position: relative;
+}
+.search-wrapper>.frame input{
+    width: 550px;
+    height: 44px;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 10px 0px 0px 10px/10px 0px 0px 10px;
+}
+.search-wrapper>.frame button{
+    width: 108px;
+    height: 44px;
+    position: absolute;
+    left: 540px;
+    border-radius: 0px 10px 10px 0px/0px 10px 10px 0px;
+    color: #ffffff;
+    background: #4E6EF2;
+    cursor: pointer;
+}
+
