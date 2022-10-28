@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDao extends BaseDao<Customer,Long>{
-    private String INSERT_ONE="INSERT INTO t_customer(username,password,salt,nickname,reg_date,id) VALUES(?,?,?,?,?,?)";
+    private String INSERT_ONE="INSERT INTO t_customers(username,password,salt,nickname,reg_date,id) VALUES(?,?,?,?,?,?)";
     private String SELECT_MAX_ID="SELECT MAX(id) FROM t_customer";
-    private String Modify="UPDATE t_customer SET username=?,password=?,salt=?,nickname=? WHERE id=?";
-    private String DELETE="DELETE FROM t_customer WHERE id=?";
-    private String SELECT_ONE_BASE="SELECT username,password,salt,nickname,reg_date,id FROM t_customer WHERE";
+    private String Modify="UPDATE t_customers SET username=?,password=?,salt=?,nickname=? WHERE id=?";
+    private String DELETE="DELETE FROM t_customers WHERE id=?";
+    private String SELECT_ONE_BASE="SELECT username,password,salt,nickname,reg_date,id FROM t_customers WHERE";
     private String SELECT_ONE= SELECT_ONE_BASE+" id=?";
     private String SELECT_ONE_USERNAME=SELECT_ONE_BASE+" username=?";
-    private String SELECT_ALL="SELECT username,password,salt,nickname,reg_date,id FROM t_customer ORDER BY id";
+    private String SELECT_ALL="SELECT username,password,salt,nickname,reg_date,id FROM t_customers ORDER BY id";
     @Override
     public boolean save(Customer customer) {
         LocalDate local=customer.getRegisterDate();
