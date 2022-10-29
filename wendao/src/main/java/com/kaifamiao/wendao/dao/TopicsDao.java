@@ -15,7 +15,7 @@ public class TopicsDao extends BaseDao<Topic,Long> {
     private String SELECT_MAX_ID="SELECT max(id) FROM t_topics";
     private String MODIFY="UPDATE t_topics SET title=?,content=?,publish_time=?,publish_address=?,priority=?,customer_id=? WHERE id=?";
     private String DELETE_ONE="DELETE FROM t_topics WHERE id=?";
-    private String FIND_BASE="SELECT title,content,publish_time,publish_address,priority,customer_id,id FROM t_topics WHERE ";
+    private String FIND_BASE="SELECT title,content,publish_time,publish_address,priority,customer_id,category_id,id FROM t_topics WHERE ";
     private String FIND_ONE_ID=FIND_BASE+" id=?";
     private String FIND_USER_ID=FIND_BASE+" customer_id=?";
     private String FIND_ALL="SELECT title,content,publish_time,publish_address,priority,customer_id,id FROM t_topics";
@@ -64,6 +64,7 @@ public class TopicsDao extends BaseDao<Topic,Long> {
             throw new RuntimeException("删除话题失败！",cause);
         }
     }
+
     //对于数据集的处理
     private Topic rsHandler(ResultSet rs) throws SQLException {
         if(rs!=null){
@@ -75,6 +76,7 @@ public class TopicsDao extends BaseDao<Topic,Long> {
             topic.setPriority(rs.getInt("priority"));
             topic.setId(rs.getLong("id"));
             Long customer_id=rs.getLong("customer_id");
+            topic.setCategory_id(rs.getLong("category_id"));
             Customer customer= cusDao.find(customer_id);
             topic.setAuthor(customer);
             return topic;
@@ -90,6 +92,7 @@ public class TopicsDao extends BaseDao<Topic,Long> {
             throw new RuntimeException("查询话题失败！",cause);
         }
     }
+
     //根据用户的ID来查询话题列表
     public List<Topic> findUser(Long along){
        return seekAll(FIND_USER_ID,along);
@@ -105,6 +108,7 @@ public class TopicsDao extends BaseDao<Topic,Long> {
             throw new RuntimeException("查询话题列表失败！",cause);
         }
     }
+
     //查询所有的话题
     @Override
     public List<Topic> finaAll() {
@@ -122,6 +126,7 @@ public class TopicsDao extends BaseDao<Topic,Long> {
             throw new RuntimeException("查询数据条目时发生错误！",cause);
         }
     }
+
     //根据分页查询话题
     public List<Topic> findPage(Integer begin,Integer size,Long customer_id){
         try{
@@ -136,6 +141,7 @@ public class TopicsDao extends BaseDao<Topic,Long> {
             throw new RuntimeException("根据分页查询话题失败！",cause);
         }
     }
+
     //根据用户搜索的关键字进行模糊查询话题的数
     public Integer findCountLike(String keyWord){
         try{
@@ -144,6 +150,7 @@ public class TopicsDao extends BaseDao<Topic,Long> {
             throw  new RuntimeException("模糊查询话题数时失败！",cause);
         }
     }
+
     //根据用户搜索的关键字进行模糊查询
     public List<Topic> findPageLike(Integer begin,Integer size,String keyWord){
         try{
