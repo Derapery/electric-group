@@ -6,6 +6,7 @@ import com.kaifamiao.wendao.dao.TopicsDao;
 import com.kaifamiao.wendao.entity.Customer;
 import com.kaifamiao.wendao.entity.Explain;
 import com.kaifamiao.wendao.entity.Topic;
+import com.kaifamiao.wendao.utils.Constants;
 import com.kaifamiao.wendao.utils.SnowflakeIdGenerator;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -45,6 +46,7 @@ public class CustomerService {
         customer.setRegisterDate(LocalDate.now());
         String pass = customer.getPassword();
         customer.setSalt(HavSal());
+        customer.setManagement(Constants.CUSTOMER_ID.getValue());
         customer.setPassword(encrypt(pass, customer.getSalt()));
         return customerDao.save(customer);
     }
