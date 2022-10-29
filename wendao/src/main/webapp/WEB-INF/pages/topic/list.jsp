@@ -22,17 +22,19 @@
         <div class="row title">
             <span class="col-1">序号</span>
             <span class="col-4">标题</span>
-            <span class="col-4">发布时间</span>
-            <span class="col-3">发布者</span>
+            <span class="col-2">类别</span>
+            <span class="col-3">发布时间</span>
+            <span class="col-2">发布者</span>
         </div>
         <c:forEach items="${paging.dataList}" var="topic" varStatus="x">
             <div class="row topic">
                 <span class="col-1">${paging.begin+x.count}</span>
-                <span class="col-4">
+                <span class="col-3">
                 <a href="${ctxPath}/topic/detail?id=${topic.id}">${topic.title}</a>
             </span>
-                <span class="col-4">${topic.publishTime}</span>
-                <span class="col-3">${topic.author.nickname}</span>
+                <span class="col-3">${topic.category_name}</span>
+                <span class="col-3">${topic.publishTime}</span>
+                <span class="col-2">${topic.author.nickname}</span>
             </div>
         </c:forEach>
         <div class=" row pagination-container">
