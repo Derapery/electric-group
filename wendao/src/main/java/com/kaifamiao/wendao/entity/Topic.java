@@ -19,6 +19,16 @@ public class Topic {
     // 维护从 Topic 到 Explain 之间的 一对多 关联关系
     private List<Explain> explains; // 当前话题下的所有解答
 
+    private String category_name;
+
+    public String getCategory_name() {
+        return category_name;
+    }
+
+    public void setCategory_name(String category_name) {
+        this.category_name = category_name;
+    }
+
     // 对象标识符属性
     public Long getId() {
         return id;
@@ -91,4 +101,6 @@ public class Topic {
     public void setExplains(List<Explain> explains) {
         this.explains = explains;
     }
+
+
 }
