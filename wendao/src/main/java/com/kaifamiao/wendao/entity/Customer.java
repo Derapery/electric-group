@@ -6,6 +6,7 @@ import java.util.List;
 public class Customer {
     // 对象标识符字段
     private Long id;
+    private Integer management;
     private String username;
     private String password;
     private String salt;
@@ -17,6 +18,9 @@ public class Customer {
     // 维护从 Customer 到 Explain 的 一对多 关联关系
     private List<Explain> explains; // 当前用户所有的解答
 
+    private List<Customer> attention;
+
+    private List<Customer> fans;
     // 对象标识符属性
     public Long getId() {
         return id;
@@ -80,5 +84,13 @@ public class Customer {
 
     public void setExplains(List<Explain> explains) {
         this.explains = explains;
+    }
+
+    public Integer getManagement() {
+        return management;
+    }
+
+    public void setManagement(Integer management) {
+        this.management = management;
     }
 }

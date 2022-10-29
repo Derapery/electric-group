@@ -6,6 +6,7 @@ import java.util.List;
 public class Topic {
     // 对象标识符字段
     private Long id;
+    private Long category_id;
     private String title;
     private String content;
     private LocalDateTime publishTime;
@@ -72,6 +73,14 @@ public class Topic {
 
     public void setAuthor(Customer author) {
         this.author = author;
+    }
+
+    public Long getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(Long category_id) {
+        this.category_id = category_id;
     }
 
     public List<Explain> getExplains() {
