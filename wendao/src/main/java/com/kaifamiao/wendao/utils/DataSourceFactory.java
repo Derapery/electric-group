@@ -21,9 +21,9 @@ public class DataSourceFactory {
     public void init(){
         dataSource=new DruidDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/wendao?serverTimezone=Asia/Chongqing");
-        dataSource.setUsername("king");
-        dataSource.setPassword("king");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/shuzu?serverTimezone=Asia/Chongqing");
+        dataSource.setUsername("root");
+        dataSource.setPassword("");
     }
     //注销dataSource
     public void destroy(){
