@@ -29,10 +29,10 @@
         <c:forEach items="${paging.dataList}" var="topic" varStatus="x">
             <div class="row topic">
                 <span class="col-1">${paging.begin+x.count}</span>
-                <span class="col-3">
+                <span class="col-4">
                 <a href="${ctxPath}/topic/detail?id=${topic.id}">${topic.title}</a>
             </span>
-                <span class="col-3">${topic.category_name}</span>
+                <span class="col-2">${topic.category_name}</span>
                 <span class="col-3">${topic.publishTime}</span>
                 <span class="col-2">${topic.author.nickname}</span>
             </div>
