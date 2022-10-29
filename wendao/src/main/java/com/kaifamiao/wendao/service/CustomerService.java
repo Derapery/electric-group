@@ -83,13 +83,15 @@ public class CustomerService {
         return customerDao.delete(along);
     }
     //修改用户信息
-    public boolean modify(Customer customer){
-        String password=customer.getPassword();
-        //获得新生成的盐值
-        String salt=HavSal();
-        customer.setSalt(salt);
-        //对新密码进行加密
-        customer.setPassword(encrypt(password,salt));
+    public boolean modify(Customer customer,boolean is){
+        if(is){
+            String password=customer.getPassword();
+            //获得新生成的盐值
+            String salt=HavSal();
+            customer.setSalt(salt);
+            //对新密码进行加密
+            customer.setPassword(encrypt(password,salt));
+        }
         return customerDao.modify(customer);
     }
     //查询用户发表的评论

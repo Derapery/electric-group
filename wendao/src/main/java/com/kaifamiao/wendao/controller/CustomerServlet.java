@@ -256,7 +256,7 @@ public class CustomerServlet extends HttpServlet {
                 try {
                     String newPassword=req.getParameter("newPassword");
                     customer.setPassword(newPassword);
-                    cusSer.modify(customer);
+                    cusSer.modify(customer,true);
                     session.setAttribute("message", "修改成功！");
                     resp.sendRedirect(req.getContextPath()+"/customer/sign/out");
                 } catch (Exception cause) {
@@ -283,12 +283,23 @@ public class CustomerServlet extends HttpServlet {
             session.setAttribute("message","昵称不能为空！");
             resp.sendRedirect(req.getContextPath()+"/customer/edit");
         }
+        String introduction=req.getParameter("introduction");
+        if(StringUtils.isBlank(introduction) || StringUtils.isBlank(introduction)){
+            session.setAttribute("message","简介不能为空！");
+            session.setAttribute("nickname",nickname);
+            resp.sendRedirect(req.getContextPath()+"/customer/edit");
+        }
         Customer customer=(Customer) session.getAttribute("customer");
+        System.out.println(customer);
         customer.setNickname(nickname);
+        customer.setIntroduction(introduction);
+        System.out.println(introduction);
         try {
-            cusSer.modify(customer);
+            cusSer.modify(customer,false);
         }catch (Exception cause){
             session.setAttribute("message","修改昵称错误！");
+            session.setAttribute("nickname",nickname);
+            session.setAttribute("introduction",introduction);
             resp.sendRedirect(req.getContextPath()+"/customer/edit");
         }
         resp.sendRedirect("/index.jsp");

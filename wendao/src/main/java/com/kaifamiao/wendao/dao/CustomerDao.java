@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CustomerDao extends BaseDao<Customer,Long>{
     private String INSERT_ONE="INSERT INTO t_customers(username,password,salt,nickname,reg_date,introduce,management,gender,id) VALUES(?,?,?,?,?,?,?,?,?)";
-    private String Modify="UPDATE t_customers SET username=?,password=?,salt=?,nickname=?,introduce=?,gender=?, WHERE id=?";
+    private String Modify="UPDATE t_customers SET username=?,password=?,salt=?,nickname=?,introduce=?,gender=? WHERE id=?";
     private String DELETE="DELETE FROM t_customers WHERE id=?";
     private String SELECT_ONE_BASE="SELECT username,password,salt,nickname,reg_date,introduce,management,gender,id FROM t_customers WHERE";
     private String SELECT_ONE= SELECT_ONE_BASE+" id=?";

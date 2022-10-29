@@ -22,6 +22,10 @@
                 <label for="nickname">昵称</label>
                 <input type="text" name="nickname" value="${pageContext.request.getParameter("nickname")}" id="nickname">
             </div>
+            <div class="form-row">
+                 <label for="introduction">简介</label>
+                <input type="text" name="introduction" value="${pageContext.request.getParameter("introduction")}" id="introduction">
+            </div>
             <div class="form-buttons">
                 <button type="submit">确认修改</button>
             </div>
