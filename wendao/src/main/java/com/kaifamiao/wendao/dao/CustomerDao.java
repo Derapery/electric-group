@@ -28,7 +28,7 @@ public class CustomerDao extends BaseDao<Customer,Long>{
         try {
             return runner.update(INSERT_ONE,objects)==1;
         } catch (SQLException cause) {
-           throw new RuntimeException("填入用户时失败！",cause);
+            throw new RuntimeException("填入用户时失败！",cause);
         }
     }
     @Override
@@ -70,21 +70,21 @@ public class CustomerDao extends BaseDao<Customer,Long>{
     }
     //对结果集进行处理
     private Customer rsHandler(ResultSet rs) throws SQLException {
-            if(rs !=null){
-                Customer cus= new Customer();
-                cus.setUsername(rs.getString("username"));
-                cus.setPassword(rs.getString("password"));
-                cus.setNickname(rs.getString("nickname"));
-                cus.setId(rs.getLong("id"));
-                cus.setSalt(rs.getString("salt"));
-                java.sql.Date date= rs.getDate("reg_date");
-                cus.setRegisterDate(date==null? null:date.toLocalDate());
-                cus.setGender(rs.getString("gender"));
-                cus.setManagement(rs.getInt("management"));
-                cus.setIntroduction(rs.getString("introduce"));
-                return cus;
-            }
-            return null;
+        if(rs !=null){
+            Customer cus= new Customer();
+            cus.setUsername(rs.getString("username"));
+            cus.setPassword(rs.getString("password"));
+            cus.setNickname(rs.getString("nickname"));
+            cus.setId(rs.getLong("id"));
+            cus.setSalt(rs.getString("salt"));
+            java.sql.Date date= rs.getDate("reg_date");
+            cus.setRegisterDate(date==null? null:date.toLocalDate());
+            cus.setGender(rs.getString("gender"));
+            cus.setManagement(rs.getInt("management"));
+            cus.setIntroduction(rs.getString("introduce"));
+            return cus;
+        }
+        return null;
     }
     @Override
     public List<Customer> finaAll() {

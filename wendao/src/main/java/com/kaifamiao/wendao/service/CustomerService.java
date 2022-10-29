@@ -1,5 +1,6 @@
 package com.kaifamiao.wendao.service;
 
+import com.kaifamiao.wendao.dao.AttentionDao;
 import com.kaifamiao.wendao.dao.CustomerDao;
 import com.kaifamiao.wendao.dao.ExplainDao;
 import com.kaifamiao.wendao.dao.TopicsDao;
@@ -18,12 +19,14 @@ public class CustomerService {
     private CustomerDao customerDao;
     private ExplainDao explainDao;
     private TopicsDao topicsDao;
+    private AttentionDao attentionDao;
     //获得一个SnowflakeIdGenerator实例
     private SnowflakeIdGenerator snowId= SnowflakeIdGenerator.getInstance();
     public CustomerService(){
         customerDao=new CustomerDao();
         explainDao=new ExplainDao();
         topicsDao=new TopicsDao();
+        attentionDao=new AttentionDao();
     }
     //加密码进行加密
     public  String encrypt(String password,String sal){
@@ -74,6 +77,8 @@ public class CustomerService {
             //删除话题
             topicsDao.delete(topic.getId());
         }
+        //删除用户关注的信息
+        attentionDao.customerDelete(along);
         //最后删除用户
         return customerDao.delete(along);
     }
