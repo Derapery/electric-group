@@ -12,7 +12,9 @@ CREATE TABLE `t_customers` (
                                `salt` VARCHAR(5) NOT NULL,
                                `reg_date` DATE,
                                `nickname` VARCHAR(100),
+                               `introduce` VARCHAR(100),
                                `management` INT,
+                               `gender` VARCHAR(20),
                                PRIMARY KEY(`id`),
                                UNIQUE(`username`)
 );
