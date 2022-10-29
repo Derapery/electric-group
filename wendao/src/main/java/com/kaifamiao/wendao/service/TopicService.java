@@ -19,6 +19,7 @@ public class TopicService {
    public TopicService(){
        topicsDao=new TopicsDao();
        explainDao=new ExplainDao();
+       categoryDao = new CategoryDao();
    }
    //保存话题
    public boolean save(Topic topic){

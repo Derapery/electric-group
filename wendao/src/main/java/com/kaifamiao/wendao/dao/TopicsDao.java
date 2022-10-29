@@ -18,7 +18,7 @@ public class TopicsDao extends BaseDao<Topic,Long> {
     private String FIND_BASE="SELECT title,content,publish_time,publish_address,priority,customer_id,category_id,id FROM t_topics WHERE ";
     private String FIND_ONE_ID=FIND_BASE+" id=?";
     private String FIND_USER_ID=FIND_BASE+" customer_id=?";
-    private String FIND_ALL="SELECT title,content,publish_time,publish_address,priority,customer_id,id FROM t_topics";
+    private String FIND_ALL="SELECT title,content,publish_time,publish_address,priority,customer_id,category_id,id FROM t_topics";
     private String SELECT_COUNT_BASE="SELECT count(1) FROM t_topics";
     private String SELECT_COUNT_CUS=SELECT_COUNT_BASE+" WHERE customer_id=?";
     private String SELECT_PAGE_BASE=FIND_ALL+" ORDER BY id DESC LIMIT ?,?";
