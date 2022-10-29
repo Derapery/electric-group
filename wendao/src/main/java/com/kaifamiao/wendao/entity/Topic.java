@@ -6,6 +6,7 @@ import java.util.List;
 public class Topic {
     // 对象标识符字段
     private Long id;
+    //用来表示话题的分类
     private Long category_id;
     private String title;
     private String content;
