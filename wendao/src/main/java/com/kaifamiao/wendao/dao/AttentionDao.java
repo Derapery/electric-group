@@ -16,7 +16,7 @@ public class AttentionDao extends BaseDao<Attention,Long>{
     private static final String DELETE = "DELETE FROM t_fans WHERE follwer_id = ? and up_id = ?";
     private static final String FIND_BY_ATTENTION = "SELECT up_id , follwer_id FROM t_category WHERE follwer_id = ?";
     private static final String FIND_BY_FANS = "SELECT follwer_id , follwer_id FROM t_category WHERE up_id = ?";
-
+    private static final String DELETE_CUSTOMER="DELETE FROM t_fans WHERE follwer_id=? AND up_id=?";
     //添加关注的信息到表中
     @Override
     public boolean save(Attention attention) {
@@ -42,6 +42,14 @@ public class AttentionDao extends BaseDao<Attention,Long>{
             return runner.update(DELETE,attention.getFans_id(),attention.getAttention_id()) == 1 ;
         } catch (SQLException cause) {
             throw new RuntimeException("删除失败", cause);
+        }
+    }
+    //删除关注用户的信息
+    public void customerDelete(Long along){
+        try{
+            runner.update(DELETE_CUSTOMER,along,along);
+        }catch (SQLException cause){
+            throw new RuntimeException("删除用户相关关注信息失败!",cause);
         }
     }
     @Override
