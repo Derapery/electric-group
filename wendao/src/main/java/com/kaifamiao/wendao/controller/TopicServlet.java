@@ -182,7 +182,6 @@ public class TopicServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session=req.getSession();
         String id=req.getParameter("id");
-        System.out.println(id);
         Topic topic=topicService.find(Long.valueOf(id));
         session.setAttribute("topic",topic);
         String path="/WEB-INF/pages/topic/detail.jsp";

@@ -22,8 +22,9 @@ public class TopicsDao extends BaseDao<Topic,Long> {
     private String SELECT_COUNT_BASE="SELECT count(1) FROM t_topics";
     private String SELECT_COUNT_CUS=SELECT_COUNT_BASE+" WHERE customer_id=?";
     private String SELECT_PAGE_BASE=FIND_ALL+" ORDER BY id DESC LIMIT ?,?";
-    private  String SELECT_PAGE_CUS=FIND_ALL+" WHERE customer_id = ? ORDER BY id DESC LIMIT ?,?";
-    private  String SELECT_COUNT_LIKE=SELECT_COUNT_BASE+" WHERE title like ?";
+    private String SELECT_PAGE_CUS=FIND_ALL+" WHERE customer_id = ? ORDER BY id DESC LIMIT ?,?";
+    private String SELECT_COUNT_LIKE=SELECT_COUNT_BASE+" WHERE title like ?";
+    private static final String ADD_COUNT = "UPDATE t_topics SET priority=? WHERE id =?";
     private ResultSetHandler<List<Topic>> rsHand=rs->{
         List<Topic> list=new ArrayList<>();
         while(rs.next()){
@@ -157,6 +158,17 @@ public class TopicsDao extends BaseDao<Topic,Long> {
             return runner.query(FIND_ALL+" WHERE title like ? ORDER BY id DESC LIMIT ?,?",rsHand,"%"+keyWord+"%",begin,size);
         }catch (SQLException cause){
             throw new RuntimeException("进行话题模糊查询时发生错误！",cause);
+        }
+    }
+
+    public void addcount(Long id){
+        try{
+            Topic t = this.find(id);
+            Integer priority = t.getPriority();
+            System.out.println(priority);
+            runner.update(ADD_COUNT,priority+1,t.getId());
+        }catch (SQLException cause){
+            throw new RuntimeException("热度自增出现错误！",cause);
         }
     }
 
