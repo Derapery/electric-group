@@ -11,12 +11,42 @@ public class Customer {
     private String password;
     private String salt;
     private String nickname;
+    //用来存储用户的性别
+    private String gender;
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
+    public List<Customer> getAttention() {
+        return attention;
+    }
+
+    public void setAttention(List<Customer> attention) {
+        this.attention = attention;
+    }
+    //用来存储对于用户的简介
+    private String introduction;
     private LocalDate registerDate;
     // 黑话: 维护从 Customer 到 Topic 的 一对多 关联关系
     // 白话: 当前用户发表了哪些话题
     private List<Topic> topics;
     // 维护从 Customer 到 Explain 的 一对多 关联关系
     private List<Explain> explains; // 当前用户所有的解答
+    //维护用户到关注的一对多关系
+
 
     private List<Customer> attention;
 
@@ -54,6 +84,22 @@ public class Customer {
         this.salt = salt;
     }
 
+    public Integer getManagement() {
+        return management;
+    }
+
+    public void setManagement(Integer management) {
+        this.management = management;
+    }
+
+    public List<Customer> getFans() {
+        return fans;
+    }
+
+    public void setFans(List<Customer> fans) {
+        this.fans = fans;
+    }
+
     public String getNickname() {
         return nickname;
     }
@@ -84,13 +130,5 @@ public class Customer {
 
     public void setExplains(List<Explain> explains) {
         this.explains = explains;
-    }
-
-    public Integer getManagement() {
-        return management;
-    }
-
-    public void setManagement(Integer management) {
-        this.management = management;
     }
 }
