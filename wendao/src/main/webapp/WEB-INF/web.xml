@@ -31,6 +31,7 @@
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>
   </filter-mapping>
+
   <filter>
     <filter-name>login-filter</filter-name>
     <filter-class>com.kaifamiao.wendao.filter.LoginFilter</filter-class>
@@ -39,6 +40,16 @@
   <filter-mapping>
     <filter-name>login-filter</filter-name>
     <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>count-filter</filter-name>
+    <filter-class>com.kaifamiao.wendao.filter.CountFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>count-filter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
   </filter-mapping>
 
 
