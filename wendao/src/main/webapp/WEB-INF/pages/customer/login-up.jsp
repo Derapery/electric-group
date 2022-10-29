@@ -31,6 +31,11 @@
                     <label for="confirm">确认密码</label>
                     <input type="password" name="confirm" id="confirm" >
                 </div>
+                <div >
+                    性别：
+                    <input type="radio" name="gender"  checked value="女">女
+                    <input type="radio" name="gender" id="gender" value="男">男
+                </div>
                 <div class="form-row form-captcha">
                     <label for="captcha">验证码</label>
                     <input type="text" name="captcha" id="captcha" >

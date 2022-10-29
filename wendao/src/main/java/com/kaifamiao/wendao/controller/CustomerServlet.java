@@ -175,11 +175,13 @@ public class CustomerServlet extends HttpServlet {
             session.setAttribute("nickname",nickname);
             session.setAttribute("username",username);
             session.setAttribute("message","验证码不能为空！");
+            return false;
         }
         if(!StringUtils.equalsIgnoreCase(captcha,(String)session.getAttribute("CAPTCHA"))){
             session.setAttribute("nickname",nickname);
             session.setAttribute("username",username);
             session.setAttribute("message","输入的验证码不正确！");
+            return false;
         }
         return true;
     }
