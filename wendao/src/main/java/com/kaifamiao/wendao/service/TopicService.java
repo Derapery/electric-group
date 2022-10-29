@@ -1,5 +1,6 @@
 package com.kaifamiao.wendao.service;
 
+import com.kaifamiao.wendao.dao.CategoryDao;
 import com.kaifamiao.wendao.dao.ExplainDao;
 import com.kaifamiao.wendao.dao.TopicsDao;
 import com.kaifamiao.wendao.entity.Topic;
@@ -12,6 +13,7 @@ import java.util.List;
 public class TopicService {
    private TopicsDao topicsDao;
    private ExplainDao explainDao;
+   private CategoryDao categoryDao;
    //获得雪花实例
    private SnowflakeIdGenerator snow = SnowflakeIdGenerator.getInstance();
    public TopicService(){
@@ -69,6 +71,9 @@ public class TopicService {
        paging.setTotal(total);
        paging.setBegin(begin);
        List<Topic> list=topicsDao.findPage(begin,size,customer_id);
+        for (Topic t:list) {
+            t.setCategory_name(categoryDao.find(t.getCategory_id()).getName());
+        }
        paging.setDataList(list);
        return paging;
     }
