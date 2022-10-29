@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDao extends BaseDao<Customer,Long>{
-    private String INSERT_ONE="INSERT INTO t_customers(username,password,salt,nickname,reg_date,introduce,management,gender,id) VALUES(?,?,?,?,?,?,?,?)";
+    private String INSERT_ONE="INSERT INTO t_customers(username,password,salt,nickname,reg_date,introduce,management,gender,id) VALUES(?,?,?,?,?,?,?,?,?)";
     private String Modify="UPDATE t_customers SET username=?,password=?,salt=?,nickname=?,introduce=?,gender=?, WHERE id=?";
     private String DELETE="DELETE FROM t_customers WHERE id=?";
     private String SELECT_ONE_BASE="SELECT username,password,salt,nickname,reg_date,introduce,management,gender,id FROM t_customers WHERE";
@@ -23,7 +23,7 @@ public class CustomerDao extends BaseDao<Customer,Long>{
         java.sql.Date date=java.sql.Date.valueOf(local);
         Object [] objects={
                 customer.getUsername(),customer.getPassword(),customer.getSalt(),customer.getNickname(),
-                date,customer.getManagement(),customer.getGender(),customer.getId()
+                date,customer.getIntroduction(),customer.getManagement(),customer.getGender(),customer.getId()
         };
         try {
             return runner.update(INSERT_ONE,objects)==1;
