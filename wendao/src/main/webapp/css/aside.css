@@ -1,0 +1,169 @@
+
+.big{
+    width: 1120px;
+    background-color: #ea7777;
+    display: flex;
+    justify-content: space-around;
+}
+aside{
+    width: 10vw;
+    float:left;
+    margin-left: 9vw;
+}
+.left{
+    height: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: blue;
+}
+.left-one{
+    width: 130px;
+    height: 40px;
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top:10px;
+    background-color: greenyellow;
+}
+.left-tu{
+    width: 24px;
+    height: 24px;
+}
+.left-zi{
+    color: #333333;
+    font-size:16px;
+    font-family: "微软雅黑";
+}
+a:hover{
+    color:#FF8200;
+    text-decoration: none;
+}
+
+/*以下是个人信息的侧边栏*/
+.left-center{
+    width: 642px;
+    height: 500px;
+    background-color: bisque;
+    float:left;
+}
+.bgc-tu{
+    position: relative;
+    width: 642px;
+    height: 256px;
+    background:url("/image/background.jpg");
+}
+.fanhui{
+    position: absolute;
+    top:0;
+    left:20px;
+    height: 44px;
+    width: 100px;
+    color: #333333;
+    font-size: 18px;
+    line-height: 44px;
+}
+.yuan-ren{
+    position: absolute;
+    bottom:-50px;
+    left:30px;
+    height: 100px;
+    width: 100px;
+}
+.ni-cheng{
+    position: absolute;
+    bottom:-50px;
+    left:120px;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+.guan-zhu {
+    margin-left: 30px;
+    margin-top: 50px;
+    width: 100px;
+    height: 30px;
+    text-align: left;
+    font-size: 16px;
+    color: #958e8e;
+}
+.jie-shao{
+    margin-left: 30px;
+    height: 50px;
+    margin-top: 50px;
+    font-size: 16px;
+    color: #958e8e;
+}
+
+/*以下是修改昵称*/
+.left-n-kuang{
+    margin-top:80px;
+    margin-left: 50px;
+}
+.form-row>input {
+    flex-basis: 78%;
+    height: 48px;
+    border: none;
+    outline: none;
+    margin-top: 0;
+    margin-left: 2%;
+}
+.form-row:hover {
+    border-color:#FF8200;
+}
+.form-row>label {
+    line-height: 48px;
+}
+.form-buttons {
+    margin-top: 10px;
+    margin-right: 70px;
+    float: right;
+}
+.form-buttons>button {
+    width: 100px;
+    height: 30px;
+    border-color:#FF8200;
+}
+
+/*修改密码*/
+.left-n-kuang-n{
+    margin-top:50px;
+    margin-left: 140px;
+}
+.form-row-m>input {
+    flex-basis: 78%;
+    width: 250px;
+    height: 30px;
+    border: none;
+    outline: none;
+    margin-top: 0;
+    margin-right:30% ;
+    float: right;
+}
+.form-row-m:hover {
+    border-color:#FF8200;
+}
+.form-row-m>label {
+    line-height: 30px;
+}
+.form-buttons-m {
+    margin-right: 70px;
+    float: right;
+}
+.form-buttons-m>button {
+    width: 100px;
+    height: 30px;
+    border-color:#FF8200;
+}
+/*以下是右边*/
+.right-n{
+    height: 500px;
+    width: 282px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: blue;
+}

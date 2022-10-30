@@ -1,5 +1,6 @@
 
 nav.publish,
+
 nav.list {
     width: 90vw;
     padding: 10px;
@@ -41,7 +42,7 @@ nav.list {
 }
 
 .topics-container {
-    width: 90vw;
+    width: 60vw;
     border: 1px solid #c69500;
     margin: 15px auto;
 }
@@ -90,4 +91,9 @@ nav.list {
 .topic-detail-container .topic-explains {
     border: 1px solid red;
     margin: 10px;
+}
+.list-conter{
+    position: relative;
+    margin: 0px auto;
+    width: 60vw;
 }

@@ -165,7 +165,6 @@ public class TopicsDao extends BaseDao<Topic,Long> {
         try{
             Topic t = this.find(id);
             Integer priority = t.getPriority();
-            System.out.println(priority);
             runner.update(ADD_COUNT,priority+1,t.getId());
         }catch (SQLException cause){
             throw new RuntimeException("热度自增出现错误！",cause);

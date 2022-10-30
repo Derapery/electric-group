@@ -2,7 +2,6 @@ package com.kaifamiao.wendao.controller;
 
 import com.kaifamiao.wendao.entity.Customer;
 import com.kaifamiao.wendao.service.CustomerService;
-import com.kaifamiao.wendao.utils.Constants;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 import java.util.Objects;
 
 @WebServlet("/customer/*")
@@ -71,15 +69,18 @@ public class CustomerServlet extends HttpServlet {
             this.delete(req,resp);
             return;
         }
-        if("GET".equals(method) && uri.endsWith("/fans/list")){
-            this.fansList(req,resp);
-            return;
-        }
-        if("GET".equals(method) && uri.endsWith("/attention/list")){
-            this.attentionList(req,resp);
+        if("GET".equals(method) && uri.endsWith("/mine")){
+            this.mineAction(req,resp);
             return;
         }
     }
+
+    private void mineAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String path="/WEB-INF/pages/customer/list.jsp";
+        RequestDispatcher dis= req.getRequestDispatcher(path);
+        dis.forward(req,resp);
+    }
+
     //"GET" "/sing/in"
     private void singPage(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -160,7 +161,7 @@ public class CustomerServlet extends HttpServlet {
             session.setAttribute("message","用户名不能为空");
             return false;
         }
-        Customer customer=cusSer.find(username);
+        Customer customer=cusSer.exist(username);
         if(customer !=null){
             session.setAttribute("nickname",nickname);
             session.setAttribute("message","用户名已存在");
@@ -328,23 +329,5 @@ public class CustomerServlet extends HttpServlet {
         }
         resp.sendRedirect(req.getContextPath()+"/topic/list");
 
-    }
-    private void fansList(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        HttpSession session=req.getSession();
-        Customer customer=(Customer) session.getAttribute(Constants.CUSTOMER_LOGINED.getName());
-        req.setAttribute(Constants.FANS_LIST.getName(),customer.getFans());
-        String path="/WEB-INF/pages/customer/fansList.jsp";
-        RequestDispatcher rd=req.getRequestDispatcher(path);
-        rd.forward(req,resp);
-    }
-    private void attentionList(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        HttpSession session=req.getSession();
-        Customer customer=(Customer) session.getAttribute(Constants.CUSTOMER_LOGINED.getName());
-        req.setAttribute(Constants.ATTENTION_LIST.getName(), customer.getAttention());
-        String path="/WEB-INF/pages/customer/attentionList.jsp";
-        RequestDispatcher rd=req.getRequestDispatcher(path);
-        rd.forward(req,resp);
     }
 }

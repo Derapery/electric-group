@@ -31,6 +31,15 @@ public class CustomerDao extends BaseDao<Customer,Long>{
             throw new RuntimeException("填入用户时失败！",cause);
         }
     }
+    //查询用户是否存在
+    public Customer exist(String username){
+        try {
+            Customer customer=runner.query(SELECT_ONE_USERNAME,rs -> rs.next()?rsHandler(rs):null,username);
+            return customer;
+        } catch (SQLException cause) {
+           throw new RuntimeException("查询用户是否存在是发生错误！",cause);
+        }
+    }
     @Override
     public boolean modify(Customer customer) {
         Object [] objects={customer.getUsername(),customer.getPassword(),
