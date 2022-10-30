@@ -59,7 +59,14 @@ public class CustomerService {
     }
     //根据用户名来查找用户
     public Customer find(String username){
-        return customerDao.findName(username);
+        Customer customer=customerDao.findName(username);
+        //获取用户的关注的列表
+        List<Customer> list=attentionDao.findByCustomer(customer);
+        customer.setAttention(list);
+        //获取用户的粉丝列表
+        List<Customer> fans=attentionDao.findByFans(customer);
+        customer.setFans(fans);
+        return customer;
     }
     //查询用户列表
     public List<Customer> findAll(){
