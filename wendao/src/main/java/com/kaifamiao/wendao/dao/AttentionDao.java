@@ -1,6 +1,4 @@
 package com.kaifamiao.wendao.dao;
-
-import com.kaifamiao.wendao.entity.Category;
 import com.kaifamiao.wendao.entity.Customer;
 import com.kaifamiao.wendao.utils.Attention;
 import org.apache.commons.dbutils.ResultSetHandler;

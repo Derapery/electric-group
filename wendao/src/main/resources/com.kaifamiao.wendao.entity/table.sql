@@ -64,3 +64,13 @@ CREATE TABLE `t_file_infos` (
                                 PRIMARY KEY(`id`),
                                 FOREIGN KEY(`customer_id`) REFERENCES `t_customers` (`id`)
 );
+CREATE TABLE `t_like` (
+                                `id` BIGINT,
+                                `customer_id` BIGINT,
+                                `topic_id` BIGINT,
+                                `praise` BIGINT,
+                                PRIMARY KEY(`id`),
+                                FOREIGN KEY(`customer_id`) REFERENCES `t_customers` (`id`),
+                                FOREIGN KEY (`topic_id`) REFERENCES `t_topics` (`id`)
+
+);
