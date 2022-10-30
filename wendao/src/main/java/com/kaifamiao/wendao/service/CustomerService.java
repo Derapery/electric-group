@@ -64,6 +64,7 @@ public class CustomerService {
         return customerDao.find(along);
     }
     //根据用户名来查找用户
+
     public Customer find(String username){
         Customer customer=customerDao.findName(username);
         //获取用户的关注的列表
@@ -74,6 +75,7 @@ public class CustomerService {
         customer.setFans(fans);
         return customer;
     }
+
     //查询用户列表
     public List<Customer> findAll(){
         return customerDao.finaAll();
