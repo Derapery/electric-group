@@ -69,7 +69,18 @@ public class CustomerServlet extends HttpServlet {
             this.delete(req,resp);
             return;
         }
+        if("GET".equals(method) && uri.endsWith("/mine")){
+            this.mineAction(req,resp);
+            return;
+        }
     }
+
+    private void mineAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String path="/WEB-INF/pages/customer/list.jsp";
+        RequestDispatcher dis= req.getRequestDispatcher(path);
+        dis.forward(req,resp);
+    }
+
     //"GET" "/sing/in"
     private void singPage(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
