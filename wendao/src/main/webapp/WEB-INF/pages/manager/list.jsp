@@ -105,8 +105,8 @@
 
 
 
-    <jsp:include page="/WEB-INF/pages/commons/footer.jsp"></jsp:include>
 </body>
+<jsp:include page="/WEB-INF/pages/commons/footer.jsp"></jsp:include>
 
 <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>

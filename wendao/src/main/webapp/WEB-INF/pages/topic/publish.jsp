@@ -49,6 +49,6 @@
 <script type="text/javascript" src="${ctxPath}/simditor/scripts/simditor.js"></script>
 <script type="text/javascript" src="${ctxPath}/js/editor.js"></script>
 
-<jsp:include page="/WEB-INF/pages/commons/footer.jsp"></jsp:include>
 </body>
+<jsp:include page="/WEB-INF/pages/commons/footer.jsp"></jsp:include>
 </html>

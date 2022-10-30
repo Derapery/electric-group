@@ -1,4 +1,6 @@
-
+.root{
+    height: 100%;
+}
 header.page {
    height: 180px;
     border-bottom: 1px solid #dfdfdf;
@@ -24,7 +26,10 @@ header.page .status .nav-item:last-child {
 }
 
 footer.page {
+    padding: 0;
+    position: absolute;
     background: #f0f0f0;
+    width: 100vw;
 }
 
 footer.page .copyright {

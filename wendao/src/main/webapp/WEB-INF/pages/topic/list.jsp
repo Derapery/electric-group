@@ -59,22 +59,19 @@
 
     <%--当前页面主要内容--%>
     <main class="topics-container">
-        <div class="row title">
-            <span class="col-1">序号</span>
-            <span class="col-4">标题</span>
-            <span class="col-2">类别</span>
-            <span class="col-3">发布时间</span>
-            <span class="col-2">发布者</span>
-        </div>
         <c:forEach items="${paging.dataList}" var="topic" varStatus="x">
-            <div class="row topic">
-                <span class="col-1">${paging.begin+x.count}</span>
-                <span class="col-4">
-                <a href="${ctxPath}/topic/detail?id=${topic.id}">${topic.title}</a>
-            </span>
-                <span class="col-2">${topic.category_name}</span>
-                <span class="col-3">${topic.publishTime}</span>
-                <span class="col-2">${topic.author.nickname}</span>
+            <div class="topic-all">
+                <div class="topic-list-detail-head">
+                    <img class="topic-head-img rounded-circle" src="/image/ren.png" alt="">
+                    <a class="athor-name" href="${ctxPath}/customer?id=${topic.author.id}">${topic.author.nickname}</a>
+                    <span class="athor-where">发布于${topic.publishTime}</span>
+                </div>
+                <h4 class="topic-detail-category">#${topic.category_name}</h4>
+                <h3 class="topic-detail-title">${topic.title}</h3>
+                <div class="topic-content">${topic.content}</div>
+                <div>
+                    <a href="${ctxPath}/topic/publishExplain?id=${topic.id}">我来解答</a>
+                </div>
             </div>
         </c:forEach>
         <div class=" row pagination-container">
@@ -103,11 +100,8 @@
     </main>
     </div>
 
-
-
-    <jsp:include page="/WEB-INF/pages/commons/footer.jsp"></jsp:include>
 </body>
-
+<jsp:include page="/WEB-INF/pages/commons/footer.jsp"></jsp:include>
 <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>

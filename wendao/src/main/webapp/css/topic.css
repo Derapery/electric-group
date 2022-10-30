@@ -97,3 +97,24 @@ nav.list {
     margin: 0px auto;
     width: 60vw;
 }
+.topic-head-img{
+    height: 30px;
+    width: 30px;
+}
+
+.topic-list-detail-head{
+   display: flex;
+}
+.athor-where{
+    font-family: 老報宋;
+    font-size: 4px;
+    margin-top: 8px;
+    color: #8c999f;
+}
+.topic-detail-category{
+    color:#FF0000FF;
+}
+.topic-all{
+    background: #edf2f6;
+    margin: 10px;
+}

@@ -55,6 +55,6 @@
 <c:remove var="message" scope="session" />
 <c:remove var="content" scope="session" />
 <script type="text/javascript" src="${ctxPath}/js/editor.js"></script>
-<jsp:include page="/WEB-INF/pages/commons/footer.jsp"></jsp:include>
 </body>
+<jsp:include page="/WEB-INF/pages/commons/footer.jsp"></jsp:include>
 </html>
