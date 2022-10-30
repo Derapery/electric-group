@@ -6,6 +6,7 @@
     justify-content: space-around;
 }
 aside{
+    position: fixed;
     width: 10vw;
     float:left;
     margin-left: 9vw;
@@ -15,7 +16,7 @@ aside{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: blue;
+    background-color: #eaeaf1;
 }
 .left-one{
     width: 130px;
@@ -24,7 +25,7 @@ aside{
     justify-content: space-around;
     align-items: center;
     margin-top:10px;
-    background-color: greenyellow;
+   /* background-color: greenyellow;*/
 }
 .left-tu{
     width: 24px;
