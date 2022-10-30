@@ -4,7 +4,9 @@ public enum Constants {
 
     CUSTOMER_LOGINED("customer"),
     MANAGEMENT_ID(0),
-    CUSTOMER_ID(1);
+    CUSTOMER_ID(1),
+    FANS_LIST("fans"),
+    ATTENTION_LIST("attentions");
     private Integer value;
     private String name;
 
