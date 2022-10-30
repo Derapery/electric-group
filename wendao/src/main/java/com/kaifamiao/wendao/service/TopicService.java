@@ -73,7 +73,7 @@ public class TopicService {
        paging.setBegin(begin);
        List<Topic> list=topicsDao.findPage(begin,size,customer_id);
         for (Topic t:list) {
-            t.setCategory_name("科幻");
+            t.setCategory_name(categoryDao.find(t.getCategory_id()).getName());
         }
        paging.setDataList(list);
        return paging;
@@ -94,6 +94,9 @@ public class TopicService {
         paging.setTotal(total);
         paging.setBegin(begin);
         List<Topic> list=topicsDao.findPageLike(begin,size,keyWord);
+        for (Topic t:list) {
+            t.setCategory_name(categoryDao.find(t.getCategory_id()).getName());
+        }
         paging.setDataList(list);
         return paging;
    }
