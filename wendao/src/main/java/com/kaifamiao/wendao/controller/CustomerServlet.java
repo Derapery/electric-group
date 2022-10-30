@@ -161,7 +161,7 @@ public class CustomerServlet extends HttpServlet {
             session.setAttribute("message","用户名不能为空");
             return false;
         }
-        Customer customer=cusSer.find(username);
+        Customer customer=cusSer.exist(username);
         if(customer !=null){
             session.setAttribute("nickname",nickname);
             session.setAttribute("message","用户名已存在");

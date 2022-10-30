@@ -28,7 +28,13 @@ public class CustomerService {
         topicsDao=new TopicsDao();
         attentionDao=new AttentionDao();
     }
-    //加密码进行加密
+    //查看用户是否存在
+    public Customer exist(String username){
+         Customer customer=customerDao.exist(username);
+         return customer;
+    }
+    //加密码进行加密{
+
     public  String encrypt(String password,String sal){
         //对密码进行第一次加密
         String pass= DigestUtils.sha1Hex(password);
