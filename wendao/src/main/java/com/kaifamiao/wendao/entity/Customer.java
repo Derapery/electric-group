@@ -13,6 +13,16 @@ public class Customer {
     private String nickname;
     //用来存储用户的性别
     private String gender;
+    //用来存储用户的喜欢的话题列表
+    private List<Topic> likeList;
+
+    public List<Topic> getLikeList() {
+        return likeList;
+    }
+
+    public void setLikeList(List<Topic> likeList) {
+        this.likeList = likeList;
+    }
 
     public String getGender() {
         return gender;

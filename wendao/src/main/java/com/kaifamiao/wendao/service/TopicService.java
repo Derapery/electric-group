@@ -2,6 +2,7 @@ package com.kaifamiao.wendao.service;
 
 import com.kaifamiao.wendao.dao.CategoryDao;
 import com.kaifamiao.wendao.dao.ExplainDao;
+import com.kaifamiao.wendao.dao.TopicLikeDao;
 import com.kaifamiao.wendao.dao.TopicsDao;
 import com.kaifamiao.wendao.entity.Category;
 import com.kaifamiao.wendao.entity.Topic;
@@ -15,12 +16,14 @@ public class TopicService {
    private TopicsDao topicsDao;
    private ExplainDao explainDao;
    private CategoryDao categoryDao;
+   private TopicLikeDao topicLikeDao;
    //获得雪花实例
    private SnowflakeIdGenerator snow = SnowflakeIdGenerator.getInstance();
    public TopicService(){
        topicsDao=new TopicsDao();
        explainDao=new ExplainDao();
        categoryDao = new CategoryDao();
+       topicLikeDao=new TopicLikeDao();
    }
    //保存话题
    public boolean save(Topic topic){
@@ -43,6 +46,8 @@ public class TopicService {
       List<Topic> list=topicsDao.finaAll();
         for (Topic topic:list) {
             topic.setExplains(explainDao.findTop(topic.getId()));
+            topic.setThumbUpCount(topicLikeDao.thumbUPCount(topic.getId()));
+            topic.setThumbDownCount(topicLikeDao.thumbDownCount(topic.getId()));
         }
         return list;
    }
