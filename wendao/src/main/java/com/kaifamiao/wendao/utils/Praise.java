@@ -6,6 +6,8 @@ import com.kaifamiao.wendao.entity.Topic;
 import java.util.List;
 
 public class Praise {
+    //话题的点赞和踩的信息记录的ID
+    private Long id;
     //喜欢列表
     private List<Topic> likeTopics;
     //用户
@@ -14,6 +16,14 @@ public class Praise {
     private  Topic topic;
     //状态
     private Integer state;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public List<Topic> getLikeTopics() {
         return likeTopics;
