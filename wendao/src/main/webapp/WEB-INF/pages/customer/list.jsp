@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 
-<jsp:include page="/WEB-INF/pages/commons/header.jsp"></jsp:include>
 
 <head>
     <title>个人主页</title>
@@ -14,6 +13,8 @@
     <link rel="stylesheet" href="/css/aside.css">
 </head>
 <body>
+<jsp:include page="/WEB-INF/pages/commons/search.jsp"></jsp:include>
+
 <div class="big">
     <aside>
         <div class="left">

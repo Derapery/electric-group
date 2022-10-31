@@ -138,6 +138,7 @@ public class CustomerServlet extends HttpServlet {
         System.out.println(req.getContextPath());
         if(validateSgin(req)){
             resp.sendRedirect(req.getContextPath() + "/index.jsp");
+            return;
         }
         resp.sendRedirect(req.getContextPath()+"/customer/sign/in");
     }
@@ -225,7 +226,7 @@ public class CustomerServlet extends HttpServlet {
         //“GET” “/change”
         private void changePage(HttpServletRequest req, HttpServletResponse resp)
                 throws ServletException, IOException {
-            String path="/WEB-INF/pages/customer/change.jsp";
+            String path="/WEB-INF/pages/customer/password.jsp";
             RequestDispatcher db=req.getRequestDispatcher(path);
             db.forward(req,resp);
         }
@@ -281,8 +282,8 @@ public class CustomerServlet extends HttpServlet {
     //”GET“ ”edit“
     private void editPage(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        System.out.println(req.getParameter("nickname"));
-        String path="/WEB-INF/pages/customer/edit.jsp";
+
+        String path="/WEB-INF/pages/customer/nickname.jsp";
         RequestDispatcher RB=req.getRequestDispatcher(path);
         RB.forward(req,resp);
     }

@@ -1,12 +1,13 @@
-
+body{
+    background-color: #F5F5F5;
+}
 .big{
-    width: 1120px;
-    background-color: #ea7777;
+    /*width: 1120px;*/
     display: flex;
     justify-content: space-around;
 }
 aside{
-    position: fixed;
+    /*position: fixed;*/
     width: 10vw;
     float:left;
     margin-left: 9vw;
@@ -16,7 +17,7 @@ aside{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: #eaeaf1;
+    background-color: white;
 }
 .left-one{
     width: 130px;
@@ -40,12 +41,14 @@ a:hover{
     color:#FF8200;
     text-decoration: none;
 }
-
+article{
+    width: 40vw;
+}
 /*以下是个人信息的侧边栏*/
 .left-center{
     width: 642px;
     height: 500px;
-    background-color: bisque;
+    background-color:white;
     float:left;
 }
 .bgc-tu{
@@ -107,7 +110,6 @@ a:hover{
 .form-row>input {
     flex-basis: 78%;
     height: 48px;
-    border: none;
     outline: none;
     margin-top: 0;
     margin-left: 2%;
@@ -138,7 +140,6 @@ a:hover{
     flex-basis: 78%;
     width: 250px;
     height: 30px;
-    border: none;
     outline: none;
     margin-top: 0;
     margin-right:30% ;
@@ -160,11 +161,3 @@ a:hover{
     border-color:#FF8200;
 }
 /*以下是右边*/
-.right-n{
-    height: 500px;
-    width: 282px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    background-color: blue;
-}

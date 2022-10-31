@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/css/aside.css">
 </head>
 <body>
+<jsp:include page="/WEB-INF/pages/commons/search.jsp"></jsp:include>
+
 <div class="big">
     <aside>
         <div class="left">

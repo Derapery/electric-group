@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/aside.css">
 </head>
 <body>
+<jsp:include page="/WEB-INF/pages/commons/search.jsp"></jsp:include>
 <div class="big">
     <aside>
         <div class="left">
@@ -49,7 +50,7 @@
                 </div>
                 <div class="form-row">
                     <label for="nickname">简介:</label>
-                    <input type="text" name="nickname" value="${customer.nickname}" id="nicknames" >
+                    <input type="text" name="introduction" value="${customer.introduction}" id="nicknames" >
                 </div>
                 <div class="form-buttons">
                     <button type="submit">确认修改</button>
@@ -58,9 +59,7 @@
         </div>
         </div>
     </article>
-    <div class="right-n">
 
-    </div>
 
 </div>
 </body>
