@@ -3,6 +3,7 @@ package com.kaifamiao.wendao.service;
 import com.kaifamiao.wendao.dao.CategoryDao;
 import com.kaifamiao.wendao.dao.ExplainDao;
 import com.kaifamiao.wendao.dao.TopicsDao;
+import com.kaifamiao.wendao.entity.Category;
 import com.kaifamiao.wendao.entity.Topic;
 import com.kaifamiao.wendao.utils.Paging;
 import com.kaifamiao.wendao.utils.SnowflakeIdGenerator;
@@ -102,5 +103,9 @@ public class TopicService {
    }
     private Integer findCountLike(String keyWord){
        return topicsDao.findCountLike(keyWord);
+    }
+
+    public List<Category> loadCategoryList() {
+        return categoryDao.finaAll();
     }
 }

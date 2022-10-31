@@ -24,8 +24,12 @@
 <main class="editor-container">
     <form action="${ctxPath}/topic/publish" method="post">
         <p class="topic-title">
-            <input type="text" name="title" value="${title}" placeholder="请输入标题">
-
+            <input type="text" name="title" value="${title}" placeholder="请输入标题"/>
+            <div class="btn-group">
+                <c:forEach items="${categoryList}" var="cate" varStatus="x">
+                    <button type="button"  name="title" class="btn btn-primary">${cate.name}</button>
+                </c:forEach>
+            </div>
         </p>
         <textarea name="content" id="editor">${content}</textarea>
         <%--在Bootstrap中.row表示一行--%>

@@ -1,5 +1,6 @@
 package com.kaifamiao.wendao.controller;
 
+import com.kaifamiao.wendao.entity.Category;
 import com.kaifamiao.wendao.entity.Customer;
 import com.kaifamiao.wendao.entity.Topic;
 import com.kaifamiao.wendao.service.TopicService;
@@ -110,6 +111,11 @@ public class TopicServlet extends HttpServlet {
     //”GET“ "publish"
     private void publishPage(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        if (session.getAttribute("categoryList")==null){
+            List<Category> categoryList = topicService.loadCategoryList();
+            session.setAttribute("categoryList",categoryList);
+        }
         String path="/WEB-INF/pages/topic/publish.jsp";
         RequestDispatcher rd=req.getRequestDispatcher(path);
         rd.forward(req,resp);
