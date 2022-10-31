@@ -73,6 +73,7 @@ public class CustomerServlet extends HttpServlet {
             this.mineAction(req,resp);
             return;
         }
+
     }
 
     private void mineAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
