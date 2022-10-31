@@ -47,23 +47,6 @@
         </ul>
     </div>
     </div>
-    <div class="row facade">
-        <div class="col-3 logo-wrapper">
-            <a href="${ctxPath}/index.jsp" class="logo">
-                <img src="/image/logo.svg">
-            </a>
-        </div>
-        <div class="col-9 search-wrapper">
-            <div class="frame">
-            <form action="${ctxPath}/topic/search" method="GET">
-                <span class="key">
-                    <input type="text" name="keyworkd" placeholder="请输入话题搜索关键字">
-                </span>
-                <span class="search">
-                    <button type="submit">搜索一下</button>
-                </span>
-            </form>
-            </div>
-        </div>
+
     </div>
 </header>

@@ -1,0 +1,63 @@
+.search-wrapper {
+    height: 380px ;
+    position: sticky;
+    top:-330px;
+    z-index: 19;
+}
+
+.search-done {
+    height: 180px ; position: relative;top: -300px;
+}
+
+.search-dtwo{
+    height: 180px ;
+    position: relative;
+    top: -300px;
+}
+
+.search-dthree{
+    width: 200px ;
+    height: 60px;
+    margin:0 auto;
+}
+
+.search-dfour{
+    border-radius: 8px;
+    width: 704px ;
+    height: 48px;
+    margin: 68px auto 0 ;
+    border: 1px solid royalblue ;
+    background: #ffffff;
+    display: flex;
+    justify-content: flex-start;
+}
+
+
+.search-dfive{
+
+    display: flex;
+    width: 72px ;
+    height: 46px ;
+    float: left ;
+    justify-content: center;
+    align-items: center
+}
+
+.search-icon {
+    font-size:22px;
+    text-align: center;
+    color: #838383;
+
+}
+
+.search-button{
+    width: 90px  ;
+    height: 47px ;
+    float: right;
+    border:none;
+    text-align: center ;
+    padding: 0;
+    bmargin: 0;
+    border-radius: 0px 8px 8px 0px/0px 8px 8px 0px;
+    -moz-border-radius-bottomright: 8px;
+}

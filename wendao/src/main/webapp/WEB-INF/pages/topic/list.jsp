@@ -6,12 +6,40 @@
     <link rel="stylesheet" href="${ctxPath}/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${ctxPath}/css/common.css">
     <link rel="stylesheet" href="${ctxPath}/css/topic.css">
-
+    <link rel="stylesheet" href="${ctxPath}/css/search.css">
+    <link rel="stylesheet" href="${ctxPath}/font-awesome/css/font-awesome.min.css">
 </head>
 
 <body>
     <jsp:include page="/WEB-INF/pages/commons/header.jsp"></jsp:include>
     <%--面包屑导航--%>
+    <header class="header-wendao">
+
+            <div class="search-wrapper">
+                <video src="/image/earth.mp4" width="1920" height="330" STYLE="user-select: none" autoplay="autoplay" loop muted ></video>
+                <div class="search-dtwo">
+                    <div>
+                        <div class="search-dthree">
+                            <img src="/image/LOGO.png">
+                        </div>
+                        <div class="search-dfour">
+                            <div class="search-dfive">
+                                <div>
+                                    <i class="fa fa-search search-icon"></i>
+                                </div>
+                            </div>
+                            <div class="search-dan">
+                                <form action="/topic/search" method="post">
+                                    <input type="text" style="width: 540px ;outline:none;
+                                      height: 46px;margin: 0px;padding: 0px;border: none" name="keyworkd" placeholder="请输入话题搜索关键字" >
+                                    <button class="search-button" type="submit">搜索一下</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </header>
     <aside>
         <link  rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="/css/aside.css">
