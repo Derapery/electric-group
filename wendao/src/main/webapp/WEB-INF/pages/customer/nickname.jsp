@@ -16,7 +16,7 @@
                 <div class="left-zi"><b>修改昵称、简介</b></div>
             </div>
             <div class="left-one">
-                <a class="left-zi" href="${ctxPath}/customer/list">
+                <a class="left-zi" href="${ctxPath}/customer/mine">
                     <i class="left-tu fa fa-user-circle-o" aria-hidden="true"></i>
                     个人信息
                 </a>

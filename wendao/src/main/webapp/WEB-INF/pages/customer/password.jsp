@@ -47,7 +47,7 @@
                 <form action="${ctxPath}/customer/change" method="post">
                     <div class="form-row-m">
                         <label for="username">登录名称</label>
-                        <input type="text" name="username" value="${customer.username}" id="username" autocomplete="off" readonly>
+                        <input class="wu-border" type="text" name="username" value="${customer.username}" id="username" autocomplete="off" readonly>
                     </div>
                     <div class="form-row-m">
                         <label for="password">原始密码</label>

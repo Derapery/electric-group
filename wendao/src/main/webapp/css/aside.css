@@ -136,6 +136,9 @@ article{
     margin-top:50px;
     margin-left: 140px;
 }
+.wu-border{
+    border: none;
+}
 .form-row-m>input {
     flex-basis: 78%;
     width: 250px;
@@ -158,6 +161,5 @@ article{
 .form-buttons-m>button {
     width: 100px;
     height: 30px;
-    border-color:#FF8200;
 }
 /*以下是右边*/
