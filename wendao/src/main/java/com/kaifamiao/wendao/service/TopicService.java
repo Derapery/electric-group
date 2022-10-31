@@ -94,6 +94,9 @@ public class TopicService {
         paging.setTotal(total);
         paging.setBegin(begin);
         List<Topic> list=topicsDao.findPageLike(begin,size,keyWord);
+        for (Topic t:list) {
+            t.setCategory_name(categoryDao.find(t.getCategory_id()).getName());
+        }
         paging.setDataList(list);
         return paging;
    }

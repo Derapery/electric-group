@@ -74,3 +74,13 @@ CREATE TABLE `t_like` (
                                 FOREIGN KEY (`topic_id`) REFERENCES `t_topics` (`id`)
 
 );
+CREATE TABLE `t_like_explain` (
+                          `id` BIGINT,
+                          `customer_id` BIGINT,
+                          `explain_id` BIGINT,
+                          `praise` BIGINT,
+                          PRIMARY KEY(`id`),
+                          FOREIGN KEY(`customer_id`) REFERENCES `t_customers` (`id`),
+                          FOREIGN KEY (`explain_id`) REFERENCES `t_explains` (`id`)
+
+);

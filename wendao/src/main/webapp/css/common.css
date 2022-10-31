@@ -28,14 +28,17 @@ header.page .status .nav-item:last-child {
 
 footer.page {
     padding: 0;
-    position: absolute;
+    position: fixed;
+    bottom: 0;
+    margin:0;
+    height: 30px;
     background: #f0f0f0;
     width: 100vw;
 }
 
 footer.page .copyright {
     width: 90vw;
-    margin: 10px auto;
+    margin: 0px auto;
     text-align: center;
 }
 .dropdown .FIS>i{
