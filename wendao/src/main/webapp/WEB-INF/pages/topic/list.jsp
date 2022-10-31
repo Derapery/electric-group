@@ -1,20 +1,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!doctype html>
 <html>
 <head>
     <title>话题列表</title>
+    <link rel="stylesheet" href="${ctxPath}/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="${ctxPath}/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${ctxPath}/css/common.css">
     <link rel="stylesheet" href="${ctxPath}/css/topic.css">
     <link rel="stylesheet" href="${ctxPath}/css/search.css">
-    <link rel="stylesheet" href="${ctxPath}/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${ctxPath}/css/right.css">
+    <meta charset="UTF-8">
 </head>
 
 <body>
     <jsp:include page="/WEB-INF/pages/commons/header.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/pages/commons/right.jsp"></jsp:include>
     <%--面包屑导航--%>
     <header class="header-wendao">
-
             <div class="search-wrapper">
                 <video src="/image/earth.mp4" width="1920" height="330" STYLE="user-select: none" autoplay="autoplay" loop muted ></video>
                 <div class="search-dtwo">
@@ -40,7 +43,8 @@
                 </div>
             </div>
     </header>
-    <aside>
+
+    <aside id="left-aside" class="left-aside">
         <link  rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="/css/aside.css">
         <div class="left">
