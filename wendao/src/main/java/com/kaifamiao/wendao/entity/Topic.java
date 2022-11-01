@@ -20,6 +20,26 @@ public class Topic {
     private List<Explain> explains; // 当前话题下的所有解答
 
     private String category_name;
+    //话题点赞的数量
+    private Integer thumbUpCount;
+    //话题踩的数量
+    private Integer thumbDownCount;
+
+    public Integer getThumbDownCount() {
+        return thumbDownCount;
+    }
+
+    public void setThumbDownCount(Integer thumbDownCount) {
+        this.thumbDownCount = thumbDownCount;
+    }
+
+    public Integer getThumbUpCount() {
+        return thumbUpCount;
+    }
+
+    public void setThumbUpCount(Integer thumbUpCount) {
+        this.thumbUpCount = thumbUpCount;
+    }
 
     public String getCategory_name() {
         return category_name;

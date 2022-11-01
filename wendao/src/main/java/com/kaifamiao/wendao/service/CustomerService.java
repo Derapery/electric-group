@@ -1,13 +1,12 @@
 package com.kaifamiao.wendao.service;
 
-import com.kaifamiao.wendao.dao.AttentionDao;
-import com.kaifamiao.wendao.dao.CustomerDao;
-import com.kaifamiao.wendao.dao.ExplainDao;
-import com.kaifamiao.wendao.dao.TopicsDao;
+import com.kaifamiao.wendao.dao.*;
 import com.kaifamiao.wendao.entity.Customer;
 import com.kaifamiao.wendao.entity.Explain;
 import com.kaifamiao.wendao.entity.Topic;
 import com.kaifamiao.wendao.utils.Constants;
+import com.kaifamiao.wendao.utils.LikeExplain;
+import com.kaifamiao.wendao.utils.Praise;
 import com.kaifamiao.wendao.utils.SnowflakeIdGenerator;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -20,6 +19,8 @@ public class CustomerService {
     private ExplainDao explainDao;
     private TopicsDao topicsDao;
     private AttentionDao attentionDao;
+    private TopicLikeDao topicLikeDao;
+    private ExplainLikeDao explainLikeDao;
     //获得一个SnowflakeIdGenerator实例
     private SnowflakeIdGenerator snowId= SnowflakeIdGenerator.getInstance();
     public CustomerService(){
@@ -27,6 +28,8 @@ public class CustomerService {
         explainDao=new ExplainDao();
         topicsDao=new TopicsDao();
         attentionDao=new AttentionDao();
+        topicLikeDao=new TopicLikeDao();
+        explainLikeDao=new ExplainLikeDao();
     }
     //查看用户是否存在
     public Customer exist(String username){
@@ -61,15 +64,39 @@ public class CustomerService {
     }
     //根据ID查找用户
     public Customer find(Long along){
-        return customerDao.find(along);
+
+        Customer customer=customerDao.find(along);
+        List<Topic> list= topicLikeDao.likeList(along);
+        for(Topic topic : list){
+            Long id=topic.getId();
+            topic=topicsDao.find(id);
+            topic.setThumbDownCount(topicLikeDao.thumbDownCount(id));
+            topic.setThumbUpCount(topicLikeDao.thumbUPCount(id));
+        }
+        customer.setLikeList(list);
+        //获取用户的关注的列表
+        List<Customer> lists=attentionDao.findByCustomer(customer);
+        customer.setAttention(lists);
+        //获取用户的粉丝列表
+        List<Customer> fans=attentionDao.findByFans(customer);
+        customer.setFans(fans);
+        return customer;
     }
     //根据用户名来查找用户
 
     public Customer find(String username){
         Customer customer=customerDao.findName(username);
+        List<Topic> list= topicLikeDao.likeList(customer.getId());
+        for(Topic topic : list){
+            Long id=topic.getId();
+            topic=topicsDao.find(id);
+            topic.setThumbDownCount(topicLikeDao.thumbDownCount(id));
+            topic.setThumbUpCount(topicLikeDao.thumbUPCount(id));
+        }
+        customer.setLikeList(list);
         //获取用户的关注的列表
-        List<Customer> list=attentionDao.findByCustomer(customer);
-        customer.setAttention(list);
+        List<Customer> lists=attentionDao.findByCustomer(customer);
+        customer.setAttention(lists);
         //获取用户的粉丝列表
         List<Customer> fans=attentionDao.findByFans(customer);
         customer.setFans(fans);
@@ -82,17 +109,41 @@ public class CustomerService {
     }
     //删除用户
     public boolean delete(Long along){
-        //先删除用户存储的评论
-        explainDao.deleteCUS(along);
+        List<Topic> topics =topicsDao.findUser(along);
+        //先获取用户存储的评论
+        List<Explain> explains=explainDao.findCus(along);
+        for(Explain explain:explains){
+            LikeExplain explainLike=new LikeExplain();
+            explainLike.setExplain_id(explain.getId());
+            //删除每个评论的点赞信息
+            explainLikeDao.delete(explain.getId(),2);
+            //删除评论
+            explainDao.delete(explain.getId());
+        }
         //删除用户存储的话题
-        List<Topic> list=topicsDao.findUser(along);
-        for (Topic topic:list) {
+
+        for (Topic topic: topics) {
             //删除话题的相关评论
-            explainDao.deleteTop(topic.getId());
+            List<Explain> explainList = explainDao.findTop(topic.getId());
+            //删除话题的评论及相关的点赞信息
+            for (Explain explain : explainList) {
+                LikeExplain explainLike = new LikeExplain();
+                explainLike.setExplain_id(explain.getId());
+                //删除每个评论的点赞信息
+                explainLikeDao.delete(explain.getId());
+                //删除评论
+                explainDao.delete(explain.getId());
+            }
+            //获取每个话题的点赞信息列
+            topicLikeDao.delete(topic.getId(), 2);
             //删除话题
             topicsDao.delete(topic.getId());
         }
-        //删除用户关注的信息
+        //删除用户的点赞的话题的相关信息
+        topicLikeDao.delete(along,1);
+        //删除用户的点赞的评论的相关信息
+        explainLikeDao.delete(along,1);
+        //删除用户关注和用户被关注的信息
         attentionDao.customerDelete(along);
         //最后删除用户
         return customerDao.delete(along);
