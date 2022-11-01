@@ -34,11 +34,6 @@
                         <button type="button"  name="title" class="btn btn-primary">${cate.name}</button>
                     </c:forEach>
                 </div>
-                <div class="btn-group">
-                    <c:forEach items="${categoryList}" var="cate" varStatus="x">
-                        <button type="button"  name="title" class="btn btn-primary">${cate.name}</button>
-                    </c:forEach>
-                </div>
             </p>
             <textarea class="chi-cun" name="content" id="editor">${content}</textarea>
             <%--在Bootstrap中.row表示一行--%>
@@ -53,7 +48,6 @@
     </main>
 
 
-    <jsp:include page="/WEB-INF/pages/commons/right.jsp"></jsp:include>
 
 <c:remove var="message" scope="session"/>
 <c:remove var="title" scope="session"/>
