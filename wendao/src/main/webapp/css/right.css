@@ -1,9 +1,8 @@
 
 .right-aside aside{
-   /* position: fixed;*/
     width: 10vw;
     float:right;
-    margin-left: 80vw;
+    margin-left: 9vw;
 }
 
 .right-aside a{
@@ -85,4 +84,7 @@
     font-size: 13px;
     width: 78px;
 
+}
+.right{
+    margin-left: -55px;
 }

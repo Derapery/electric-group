@@ -2,7 +2,7 @@
 
     <aside id="right-aside">
         <link  rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/css/aside.css">
+        <link rel="stylesheet" href="/css/right.css">
         <div class="right">
             <div class="right-one">
                 <div style="width: 100%;height: 90px">

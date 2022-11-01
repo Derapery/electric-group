@@ -71,7 +71,7 @@ public class CategoryDao extends BaseDao<Category,Long>{
     public List<Category> finaAll() {
         ResultSetHandler<List<Category>> rsHandler = rs -> {
             List<Category> list = new ArrayList<>();
-            if( rs.next() ) {
+            while( rs.next() ) {
                 Category c = wrap(rs);
                 list.add(c);
             }
