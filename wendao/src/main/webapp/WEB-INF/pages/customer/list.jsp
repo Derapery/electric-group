@@ -16,7 +16,7 @@
 <jsp:include page="/WEB-INF/pages/commons/search.jsp"></jsp:include>
 
 <div class="big">
-    <aside>
+    <aside class="left-aside">
         <div class="left">
             <div class="left-one">
                 <div class="left-zi"><b>个人主页</b></div>
@@ -53,10 +53,10 @@
             <div class="jie-shao"> 简介:${customer.introduction} </div>
         </div>
     </article>
-    <div class="right-n">
-    </div>
+
 
 </div>
+<div class="kong"></div>
 
 <jsp:include page="/WEB-INF/pages/commons/footer.jsp"></jsp:include>
 </body>
