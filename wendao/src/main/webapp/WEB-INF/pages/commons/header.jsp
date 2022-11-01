@@ -18,6 +18,9 @@
                         <a>欢迎${customer.nickname}</a>
                     </li>
                     <li class="nav-item">
+                        <a>与您同时在线用户${applicationScope.onlineCustomer}位</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="${ctxPath}/topic/publish">发布话题</a>
                     </li>
                     <li class="nav-item">
