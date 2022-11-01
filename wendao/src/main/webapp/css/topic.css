@@ -4,6 +4,7 @@ nav.publish,
 .chi-cun{
     width: 60vw;
 }
+
 nav.list {
     width: 100vw;
     padding: 10px;
@@ -12,7 +13,7 @@ nav.list {
 }
 
 .editor-container {
-    width: 60vw;
+    width: 80vw;
     border: 1px solid #dedede;
     margin: 15px auto;
 }
@@ -124,3 +125,4 @@ nav.list {
     background: #edf2f6;
     margin: 10px;
 }
+
