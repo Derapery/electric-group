@@ -13,7 +13,7 @@ public class LoginFilter implements Filter {
 
     @Override
     public void init(FilterConfig config) throws ServletException {
-        urls = Set.of("/topic/publish","/topic/mine","/customer/settings","/customer/change");
+        urls = Set.of("/topic/thumbsState","/topic/publish","/topic/mine","/customer/settings","/customer/change");
     }
 
     @Override
@@ -27,7 +27,7 @@ public class LoginFilter implements Filter {
             HttpSession session = request.getSession();
             Object o = session.getAttribute("customer");
             if( o == null ) {
-                session.setAttribute("message", "您尚未登录，不能发布话题");
+                session.setAttribute("message", "您尚未登录,不能进行该操作");
                 response.sendRedirect(request.getContextPath() + "/customer/sign/in");
                 return;
             }
