@@ -36,7 +36,7 @@
             </div>
             <div class="left-one">
                 <a class="left-zi" href="${ctxPath}/customer/mine">
-                    <i class="left-tu fa fa-user-circle-o" aria-hidden="true"></i>
+                      <i class="left-tu fa fa-user-circle-o" aria-hidden="true"></i>
                     个人信息
                 </a>
             </div>
