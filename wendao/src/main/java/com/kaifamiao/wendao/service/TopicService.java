@@ -7,6 +7,7 @@ import com.kaifamiao.wendao.dao.TopicsDao;
 import com.kaifamiao.wendao.entity.Category;
 import com.kaifamiao.wendao.entity.Topic;
 import com.kaifamiao.wendao.utils.Paging;
+import com.kaifamiao.wendao.utils.Praise;
 import com.kaifamiao.wendao.utils.SnowflakeIdGenerator;
 
 import java.time.LocalDateTime;
@@ -67,7 +68,7 @@ public class TopicService {
 
     }
     //分页查询
-    public Paging<Topic> findPage(Integer size,Integer current,Long customer_id){
+    public Paging<Topic> findPage(Integer size,Integer current,Long customer_id,Integer page){
        Paging<Topic> paging=new Paging<>();
        Integer begin=(current-1)*size;
        Integer count=findCount(customer_id);
@@ -77,9 +78,22 @@ public class TopicService {
        paging.setCurrent(current);
        paging.setTotal(total);
        paging.setBegin(begin);
-       List<Topic> list=topicsDao.findPage(begin,size,customer_id);
+       List<Topic> list=topicsDao.findPage(begin,size,customer_id,page);
         for (Topic t:list) {
             t.setCategory_name(categoryDao.find(t.getCategory_id()).getName());
+            //查询话题的点赞数量
+            t.setThumbUpCount(topicLikeDao.thumbUPCount(t.getId()));
+            //查询话题的踩的数量
+            t.setThumbDownCount(topicLikeDao.thumbDownCount(t.getId()));
+            //获取话题的赞或踩的信息的状态的列表
+            if(customer_id != null){
+                Praise praise = topicLikeDao.find(customer_id,t.getId());
+                if(praise != null){
+                    t.setState(praise.getState());
+                    continue;
+                }
+            }
+            t.setState(null);
         }
        paging.setDataList(list);
        return paging;

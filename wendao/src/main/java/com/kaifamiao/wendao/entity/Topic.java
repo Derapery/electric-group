@@ -24,6 +24,16 @@ public class Topic {
     private Integer thumbUpCount;
     //话题踩的数量
     private Integer thumbDownCount;
+    //话题的点赞的状态
+    private Integer state;
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
 
     public Integer getThumbDownCount() {
         return thumbDownCount;
