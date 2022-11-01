@@ -10,6 +10,8 @@ public class ExplainLikeDao extends BaseDao<LikeExplain,Long>{
     private static final String INSERT="INSERT INTO t_like_explain(customer_id,explain_id,praise,id) VALUES(?,?,?,?)";
     private static final String DELETE="DELETE FROM t_like_explain WHERE customer_id=? AND explain_id=?";
     private static final String FIND="SELECT customer_id,explain_id,praise,id FROM t_like_explain WHERE customer_id=? AND explain_id=?";
+    private  static final  String DELETE_CUS="DELETE FROM t_like_explain WHERE customer_id=?";
+    private  static final String DELETE_EXPLAIN="DELETE FROM t_like_explain WHERE topic_id=?";
     //结果集的处理
     private ResultSetHandler<LikeExplain> rsHander=rs ->{
         if(rs.next()){
@@ -54,6 +56,18 @@ public class ExplainLikeDao extends BaseDao<LikeExplain,Long>{
             return runner.update(DELETE,objects)==1;
         } catch (SQLException e) {
             throw new RuntimeException("删除点赞信息是发生错误！",e);
+        }
+    }
+    //根据用户删除点赞信息是发生错误
+    public boolean delete(Long along ,Integer i){
+        try {
+            if(i==1) {
+                return runner.update(DELETE_CUS, along) == 1;
+            }else{
+                return runner.update(DELETE_EXPLAIN,along) ==1;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("根据用户删除点赞信息是发生错误！",e);
         }
     }
 

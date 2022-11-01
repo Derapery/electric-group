@@ -14,7 +14,7 @@ public class AttentionDao extends BaseDao<Attention,Long>{
     private static final String DELETE = "DELETE FROM t_fans WHERE follwer_id = ? and up_id = ?";
     private static final String FIND_BY_ATTENTION = "SELECT up_id FROM t_fans WHERE follwer_id = ?";
     private static final String FIND_BY_FANS = "SELECT  follwer_id FROM t_fans WHERE up_id = ?";
-    private static final String DELETE_CUSTOMER="DELETE FROM t_fans WHERE follwer_id=? AND up_id=?";
+    private static final String DELETE_CUSTOMER="DELETE FROM t_fans WHERE follwer_id=? OR up_id=?";
     private CustomerDao customerDao=new CustomerDao();
     private   ResultSetHandler<List<Customer>> rsHandler = rs -> {
         List<Customer> list = new ArrayList<>();
