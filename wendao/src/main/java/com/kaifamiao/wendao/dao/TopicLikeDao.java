@@ -17,7 +17,7 @@ public class TopicLikeDao extends BaseDao<Praise,Long>{
     private static final String FIND="SELECT topic_id,customer_id,praise,id FROM t_like WHERE  topic_id=? AND customer_id=?";
     private static final String SELECT_LIKE="SELECT topic_id FROM t_like WHERE praise=1 AND customer_id=?";
     private static final String UPCOUNT="SELECT count(1) FROM t_like WHERE praise=1 AND topic_id=?";
-    private static final String DOWNCOUNT="SELECT count(1) FROM t_like WHERE praise=0 AND top_level_count=?";
+    private static final String DOWNCOUNT="SELECT count(1) FROM t_like WHERE praise=0 AND topic_id=?";
     private static final String SELECT_CUS="SELECT topic_id,customer_id,praise,id WHERE customer_id=? ";
     private static final String SELECT_TOP="SELECT  topic_id,customer_id,praise,id WHERE topic_id=?";
     private static final String DELETE_CUS="DELETE FROM t_like WHERE customer_id=?";
