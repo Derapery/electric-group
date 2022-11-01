@@ -1,10 +1,11 @@
 .left-aside{
     position: sticky;
-    top: 10px;
+    top: 15px;
     left: 0;
 }
-.right-aside{
+.right-aside {
+    margin-right: 5vw;
     position: sticky;
-    top: 10px;
+    top: 5px;
     left: 0;
 }
