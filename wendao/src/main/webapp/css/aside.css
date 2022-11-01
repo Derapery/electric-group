@@ -7,7 +7,6 @@ body{
     justify-content: space-around;
 }
 aside{
-    position: fixed;
     width: 10vw;
     float:left;
     margin-left: 9vw;

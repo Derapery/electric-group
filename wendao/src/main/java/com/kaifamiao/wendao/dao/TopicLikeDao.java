@@ -126,7 +126,7 @@ public class TopicLikeDao extends BaseDao<Praise,Long>{
         try {
             return runner.query(SELECT_LIKE,rsList,along);
         } catch (SQLException e) {
-            throw new RuntimeException("删除话题失败！",e);
+            throw new RuntimeException("获取点赞失败！",e);
         }
     }
     @Override

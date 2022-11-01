@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-    <div class="right-aside">
     <aside id="right-aside">
         <link  rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="/css/aside.css">
@@ -77,4 +76,3 @@
 
         </div>
     </aside>
-    </div>

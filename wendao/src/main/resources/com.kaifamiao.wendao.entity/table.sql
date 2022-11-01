@@ -1,5 +1,5 @@
 CREATE DATABASE shuzu;
-USE shuzu
+USE shuzu;
 CREATE TABLE `t_category` (
                               `id` BIGINT,
                               `name` VARCHAR(300) NOT NULL,
