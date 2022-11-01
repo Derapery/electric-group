@@ -4,12 +4,12 @@ body{
 .big{
     /*width: 1120px;*/
     display: flex;
-    justify-content: space-around;
+    justify-content: start;
 }
 aside{
     width: 10vw;
     float:left;
-    margin-left: 8vw;
+    margin-left: 5vw;
 }
 .left{
     height: 500px;
@@ -41,18 +41,19 @@ a:hover{
     text-decoration: none;
 }
 article{
-    width: 40vw;
+    width: 60vw;
+    margin-left: 30px;
 }
 /*以下是个人信息的侧边栏*/
 .left-center{
-    width: 642px;
+    width: 60vw;
     height: 500px;
     background-color:white;
     float:left;
 }
 .bgc-tu{
     position: relative;
-    width: 642px;
+    width:  60vw;
     height: 256px;
     background:url("/image/background.jpg");
 }
@@ -139,8 +140,7 @@ article{
     border: none;
 }
 .form-row-m>input {
-    flex-basis: 78%;
-    width: 250px;
+    width: 50%;
     height: 30px;
     outline: none;
     margin-top: 0;
@@ -160,5 +160,8 @@ article{
 .form-buttons-m>button {
     width: 100px;
     height: 30px;
+}
+.kong {
+    height: 500px;
 }
 /*以下是右边*/

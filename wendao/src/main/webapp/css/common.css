@@ -46,3 +46,6 @@ footer.page .copyright {
     width:10px;
     height:10px;
 }
+.content-a a:link,a:visited,a:hover {
+    color: black;
+}

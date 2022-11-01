@@ -68,10 +68,7 @@
             </div>
         </div>
     </article>
-    <div class="right-n">
-
-    </div>
-
 </div>
+<div class="kong"></div>
 </body>
 </html>
