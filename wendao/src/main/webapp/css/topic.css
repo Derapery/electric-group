@@ -1,18 +1,15 @@
 
 nav.publish,
 
-.chi-cun{
-    width: 60vw;
-}
 nav.list {
-    width: 100vw;
+    width: 90vw;
     padding: 10px;
     border: 1px solid #dfdfdf;
     margin: 15px auto;
 }
 
 .editor-container {
-    width: 60vw;
+    width: 90vw;
     border: 1px solid #dedede;
     margin: 15px auto;
 }
@@ -23,7 +20,7 @@ nav.list {
 }
 
 .editor-container input[type=text] {
-    width: 60%;
+    width: 100%;
     height: 38px;
     outline: none;
 }
@@ -49,9 +46,6 @@ nav.list {
     border: 1px solid #c69500;
     margin: 15px auto;
 }
-.btn-group{
-    width: 60%;
-}
 
 .topics-container>.title {
     height: 36px;
@@ -72,7 +66,8 @@ nav.list {
 }
 
 .topics-container .pagination-container {
-    margin: 5px;
+    margin: 12px;
+    justify-content: center;
 }
 
 .topic-detail-container {
@@ -104,17 +99,24 @@ nav.list {
     width: 60vw;
 }
 .topic-head-img{
-    height: 30px;
-    width: 30px;
+    height: 50px;
+    width: 50px;
+}
+
+.topic-anquan-img{
+    height: 20px;
+    width: 20px;
 }
 
 .topic-list-detail-head{
-   display: flex;
+    display: flex;
+    margin-bottom: 15px;
 }
 .athor-where{
     font-family: 老報宋;
+    padding-left: 50px;
     font-size: 4px;
-    margin-top: 20px;
+    margin-top: 8px;
     color: #8c999f;
 }
 .topic-detail-category{
@@ -123,4 +125,89 @@ nav.list {
 .topic-all{
     background: #edf2f6;
     margin: 10px;
+}
+
+.icon-wrap{
+    font-size: inherit;
+    position: relative;
+    z-index: 9;
+    display: inline-flex;
+    line-height: 1;
+}
+
+.main-vblue-skin{
+    display: inline-block;
+    color: #fff;
+    position: relative;
+    font-size: inherit;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.athor-name{
+    margin-top: 4px;
+    font-weight: bold;
+}
+
+.guanzhu {
+    text-align: center;
+    column-rule-color: #007bff;
+    border-radius: 25px;
+    border: 1px solid ;
+    width: 64px;
+    height: 28px;
+    margin-top: 10px;
+    color: #007bff;
+    margin-left: 50px;
+}
+
+.topic-content{
+    display: flex;
+    margin-left: 50px;
+    margin-bottom: 20px;
+}
+
+.footerr{
+    display: flex;
+    width: auto;
+    height: 30px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.footerr>*{
+    text-align: center;
+}
+
+.footerr>a{
+    font-family: "JetBrains Mono";
+    font-style: normal;
+    font-weight: bold;
+}
+
+.wolaijieda>a{
+    font-size: 18px ;
+    border: 1px solid #007bff;
+    border-radius: 18px;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+.wolaijieda{
+    text-align: center;
+}
+
+.title-content{
+    display: flex;
+    margin-left: 50px;
+    margin-bottom: 20px;
+}
+
+.category-content{
+    display: flex;
+    margin-left: 50px;
+}
+
+.praise{
+    margin-left: -20px;
 }

@@ -185,12 +185,16 @@
                         <span class="athor-where">发布于${topic.publishTime}</span>
                         <a class="guanzhu :hover"  href="#">+关注</a>
                     </div>
-                    <div class="title-content">
-                        <h3 class="topic-detail-title">${topic.title}</h3>
-                    </div>
-                    <div class="topic-content">${topic.content}</div>
-                    <div class="category-content">
-                        <h6 class="topic-detail-category">#${topic.category_name}</h6>
+                    <div class="content-a">
+                        <a href="${ctxPath}/topic/detail?id=${topic.id}">
+                            <div class="title-content">
+                                <h3 class="topic-detail-title">${topic.title}</h3>
+                            </div>
+                        </a>
+                        <div class="topic-content">${topic.content}</div>
+                        <div class="category-content">
+                            <h6 class="topic-detail-category">#${topic.category_name}</h6>
+                        </div>
                     </div>
 
                     <div class="footerr">
