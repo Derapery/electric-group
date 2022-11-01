@@ -96,7 +96,10 @@ public class TopicService {
             t.setThumbDownCount(topicLikeDao.thumbDownCount(t.getId()));
             //获取话题的赞或踩的信息的状态的列表
             if(customer_id != null){
+                System.out.println(t.getId());
+                System.out.println(customer_id);
                 Praise praise = topicLikeDao.find(customer_id,t.getId());
+                System.out.println(praise);
                 if(praise != null){
                     t.setState(praise.getState());
                     continue;
