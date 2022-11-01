@@ -129,9 +129,9 @@ public class TopicsDao extends BaseDao<Topic,Long> {
     }
 
     //根据分页查询话题
-    public List<Topic> findPage(Integer begin,Integer size,Long customer_id){
+    public List<Topic> findPage(Integer begin,Integer size,Long customer_id ,Integer top){
         try{
-            if (customer_id == null) {
+            if (top==1) {
                 Object[] parms={begin,size};
                 return runner.query(SELECT_PAGE_BASE,rsHand,parms);
             }else{
