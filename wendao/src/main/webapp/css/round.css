@@ -1,0 +1,10 @@
+.left-aside{
+    position: sticky;
+    top: 10px;
+    left: 0;
+}
+.right-aside{
+    position: sticky;
+    top: 10px;
+    left: 0;
+}
