@@ -111,6 +111,49 @@
                         <a href="${ctxPath}/topic/publishExplain?id=${topic.id}">我来解答</a>
                     </div>
                 </div>
+                <div class="row">
+                    <span class="col-6 offset-6 row justify-content-end">
+                         <c:if test="${ topic.state==null}">
+                           <span class="col-2 justify-content-start">
+                          <a href="${ctxPath}/topic/thumbsState?praise=1&size=${paging.size}&current=${paging.current} &topic_id=${topic.id}" class="praise">
+                                   <i class="fa fa-thumbs-o-up"></i>(${topic.thumbUpCount})
+                          </a>
+                           </span>
+                          <span  class="col-2 offset-3">
+                          <a href="${ctxPath}/topic/thumbsState?praise=0&size=${paging.size}&current=${paging.current} &topic_id=${topic.id}" class="praise">
+                                   <i class="fa fa-thumbs-o-down"></i>(${topic.thumbDownCount})
+                          </a>
+                          </span>
+                         </c:if>
+                        <c:if test="${ topic.state == 1}">
+                            <span class="col-2 justify-content-start">
+                            <a href="${ctxPath}/topic/thumbsState?praise=1&size=${paging.size}&current=${paging.current} &topic_id=${topic.id}" class="praise">
+                                   <i class="fa fa-thumbs-up"></i>(${topic.thumbUpCount})
+                           </a>
+                           </span>
+                           <span class="col-2 offset-3">
+                                <a href="#" class="praise" style="user-select: none">
+                                   <i class="fa fa-thumbs-o-down "></i>(${topic.thumbDownCount})
+                                </a>
+                           </span>
+                        </c:if>
+                        <c:if test="${ topic.state == 0}">
+                            <span class="col-2 justify-content-start">
+                            <a href="#" class="praise disabled" style="user-select: none">
+                                   <i class="fa fa-thumbs-o-up"></i>(${topic.thumbUpCount})
+                           </a>
+                           </span>
+                            <span class="col-2 offset-3">
+                                <a href="${ctxPath}/topic/thumbsState?praise=0&size=${paging.size}&current=${paging.current} &topic_id=${topic.id}" class="praise">
+                                   <i class="fa fa-thumbs-down "></i>(${topic.thumbDownCount})
+                                </a>
+                           </span>
+                        </c:if>
+                         <span class="col-2 offset-3 ">
+                              <i class="fa fa-eye"> </i>${topic.priority}
+                         </span>
+                    </span>
+                </div>
             </c:forEach>
             <div class=" row pagination-container">
                 <div class="row col-6 justify-content-start">

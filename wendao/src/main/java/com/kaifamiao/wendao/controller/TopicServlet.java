@@ -3,8 +3,10 @@ package com.kaifamiao.wendao.controller;
 import com.kaifamiao.wendao.entity.Category;
 import com.kaifamiao.wendao.entity.Customer;
 import com.kaifamiao.wendao.entity.Topic;
+import com.kaifamiao.wendao.service.TopicLikeService;
 import com.kaifamiao.wendao.service.TopicService;
 import com.kaifamiao.wendao.utils.Paging;
+import com.kaifamiao.wendao.utils.Praise;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.tinylog.Logger;
@@ -25,9 +27,11 @@ import java.util.Map;
 @WebServlet("topic/*")
 public class TopicServlet extends HttpServlet {
     private TopicService topicService;
+    private TopicLikeService topicLikeService;
     @Override
     public void init() throws ServletException {
         topicService=new TopicService();
+        topicLikeService=new TopicLikeService();
     }
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp)
@@ -62,8 +66,12 @@ public class TopicServlet extends HttpServlet {
         }
         //"GET" "search"
         if("GET".equals(method) && uri.endsWith("/search")){
-            System.out.println(1);
             this.search(req,resp);
+            return;
+        }
+        //"GET" "thumbsState"
+        if("GET".equals(method) && uri.endsWith("/thumbsState")){
+            this.thumbsState(req,resp);
             return;
         }
     }
@@ -227,10 +235,27 @@ public class TopicServlet extends HttpServlet {
         RequestDispatcher db=req.getRequestDispatcher(path);
         db.forward(req,resp);
     }
+
+    public void thumbsState(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        HttpSession session=req.getSession();
+        Customer customer = (Customer) session.getAttribute("customer");
+        Integer size=Integer.valueOf(req.getParameter("size"));
+        String current=req.getParameter("current");
+        String topic=req.getParameter("topic_id");
+        Long topic_id =Long.valueOf(topic);
+        String praise1=req.getParameter("praise");
+        Integer state=Integer.valueOf(praise1.trim());
+        Praise praise=topicLikeService.find(customer.getId(),topic_id);
+        if(praise != null){
+            topicLikeService.delete(customer.getId(),topic_id);
+        }else{
+            topicLikeService.save(customer.getId(), topic_id,state);
+        }
+        resp.sendRedirect(req.getContextPath()+"/topic/list?size="+size+"&current="+Integer.parseInt(current.trim()));
+    }
     @Override
     public void destroy() {
         super.destroy();
     }
-
-
 }
