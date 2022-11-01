@@ -103,7 +103,7 @@ public class TopicServlet extends HttpServlet {
         HttpSession session=req.getSession();
         Customer customer=(Customer) session.getAttribute("customer");
         //根据分页查询来得到话题列表
-        Paging<Topic> paging =topicService.findPage((Integer)map.get("size"),(Integer)map.get("current"),customer.getId(),1);
+        Paging<Topic> paging =topicService.findPage((Integer)map.get("size"),(Integer)map.get("current"),customer,1);
         session.setAttribute("paging",paging);
         String path="/WEB-INF/pages/topic/list.jsp";
         RequestDispatcher db=req.getRequestDispatcher(path);
@@ -179,7 +179,7 @@ public class TopicServlet extends HttpServlet {
             session.setAttribute("message","获取话题参数失败！");
             resp.sendRedirect(req.getContextPath()+"/topic/list");
         }
-        Paging<Topic> paging=topicService.findPage((Integer)map.get("size"),(Integer)map.get("current"),customer.getId(),2);
+        Paging<Topic> paging=topicService.findPage((Integer)map.get("size"),(Integer)map.get("current"),customer,2);
         session.setAttribute("paging",paging);
         String path="/WEB-INF/pages/topic/list.jsp";
         RequestDispatcher db=req.getRequestDispatcher(path);

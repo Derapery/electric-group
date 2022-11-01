@@ -5,6 +5,7 @@ import com.kaifamiao.wendao.dao.ExplainDao;
 import com.kaifamiao.wendao.dao.TopicLikeDao;
 import com.kaifamiao.wendao.dao.TopicsDao;
 import com.kaifamiao.wendao.entity.Category;
+import com.kaifamiao.wendao.entity.Customer;
 import com.kaifamiao.wendao.entity.Topic;
 import com.kaifamiao.wendao.utils.Paging;
 import com.kaifamiao.wendao.utils.Praise;
@@ -68,10 +69,18 @@ public class TopicService {
 
     }
     //分页查询
-    public Paging<Topic> findPage(Integer size,Integer current,Long customer_id,Integer page){
+    public Paging<Topic> findPage(Integer size, Integer current, Customer customer, Integer page){
        Paging<Topic> paging=new Paging<>();
        Integer begin=(current-1)*size;
-       Integer count=findCount(customer_id);
+        Integer count;
+        Long customer_id;
+       if (customer==null){
+           count=findCount(null);
+           customer_id = null;
+       }else {
+           count=findCount(customer.getId());
+           customer_id=customer.getId();
+       }
        Integer total=count/size;
        total= count%size==0? total:total+1;
        paging.setSize(size);
