@@ -86,10 +86,7 @@
             </aside>
         </div>
         <div class="right-aside">
-            <aside id="right-aside">
-                <link  rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
-                <link rel="stylesheet" href="/css/right.css">
-                <div class="right">
+            <aside >
                     <div class="right-one">
                         <div style="width: 100%;height: 90px">
                             图片
@@ -160,16 +157,14 @@
                         </div>
                     </div>
 
-                </div>
             </aside>
         </div>
         <div class="list-conter">
 
-        <nav class="breadcrumb">
+        <nav class="breadcrumb ">
             <a class="breadcrumb-item" href="${ctxPath}/index.jsp">首页</a>
             <a class="breadcrumb-item" href="#">话题列表</a>
         </nav>
-
         <%--当前页面主要内容--%>
         <main class="topics-container">
             <c:forEach items="${paging.dataList}" var="topic" varStatus="x">

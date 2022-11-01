@@ -10,9 +10,12 @@
     <link rel="stylesheet" href="${ctxPath}/simditor/styles/simditor.css">
     <link rel="stylesheet" href="${ctxPath}/css/common.css">
     <link rel="stylesheet" href="${ctxPath}/css/topic.css">
-    <jsp:include page="/WEB-INF/pages/commons/header.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/pages/commons/search.jsp"></jsp:include>
 </head>
 <body>
+
+
+
 <%--面包屑导航--%>
 <nav class="breadcrumb">
     <a class="breadcrumb-item" href="${ctxPath}/index.jsp">首页</a>

@@ -124,3 +124,16 @@ nav.list {
     background: #edf2f6;
     margin: 10px;
 }
+/*以下是按钮话标题*/
+.tu-se{
+    color: #333333;
+}
+.tu-se:active {
+    color: #FF8200;
+}
+.biaoti{
+    margin-top: 5px;
+    color: #FF8200;
+    font-size: 16px;
+}
+

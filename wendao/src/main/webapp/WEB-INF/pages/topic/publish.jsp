@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="${ctxPath}/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="${ctxPath}/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${ctxPath}/simditor/styles/simditor.css">
-    <link rel="stylesheet" href="${ctxPath}/css/right.css">
     <link rel="stylesheet" href="${ctxPath}/css/common.css">
     <link rel="stylesheet" href="${ctxPath}/css/topic.css">
 </head>
@@ -19,7 +18,7 @@
 
 <%--面包屑导航--%>
 <%--中间发布话题内容--%>
-    <nav class="breadcrumb chi-cun">
+    <nav class="breadcrumb chi-cun ">
         <a class="breadcrumb-item" href="${ctxPath}/index.jsp">首页</a>
         <a class="breadcrumb-item" href="#">发布新话题</a>
     </nav>
@@ -29,16 +28,12 @@
         <form action="${ctxPath}/topic/publish" method="post">
             <p class="topic-title">
                 <input type="text" name="title" value="${title}" placeholder="请输入标题"/>
-                <div class="btn-group">
+                <div class="btn-group ">
                     <c:forEach items="${categoryList}" var="cate" varStatus="x">
-                        <button type="button"  name="title" class="btn btn-primary">${cate.name}</button>
+                        <button class="tu-se" type="button"  name="title" class="btn btn-primary" value="categury">${cate.name}</button>
                     </c:forEach>
                 </div>
-                <div class="btn-group">
-                    <c:forEach items="${categoryList}" var="cate" varStatus="x">
-                        <button type="button"  name="title" class="btn btn-primary">${cate.name}</button>
-                    </c:forEach>
-                </div>
+                <div class="biaoti">#生成话题标题${categury}</div>
             </p>
             <textarea class="chi-cun" name="content" id="editor">${content}</textarea>
             <%--在Bootstrap中.row表示一行--%>
@@ -52,8 +47,6 @@
 
     </main>
 
-
-    <jsp:include page="/WEB-INF/pages/commons/right.jsp"></jsp:include>
 
 <c:remove var="message" scope="session"/>
 <c:remove var="title" scope="session"/>
