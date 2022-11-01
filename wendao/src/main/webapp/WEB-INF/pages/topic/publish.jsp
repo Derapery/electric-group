@@ -8,40 +8,53 @@
     <link rel="stylesheet" href="${ctxPath}/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="${ctxPath}/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${ctxPath}/simditor/styles/simditor.css">
+    <link rel="stylesheet" href="${ctxPath}/css/right.css">
     <link rel="stylesheet" href="${ctxPath}/css/common.css">
     <link rel="stylesheet" href="${ctxPath}/css/topic.css">
 </head>
 <body>
-<jsp:include page="/WEB-INF/pages/commons/header.jsp"></jsp:include>
-<%--面包屑导航--%>
-<nav class="breadcrumb">
-    <a class="breadcrumb-item" href="${ctxPath}/index.jsp">首页</a>
-    <a class="breadcrumb-item" href="#">发布新话题</a>
-</nav>
+<jsp:include page="/WEB-INF/pages/commons/search.jsp"></jsp:include>
 
-<p class="message">${message}</p>
-<%--当前页面主要内容--%>
-<main class="editor-container">
-    <form action="${ctxPath}/topic/publish" method="post">
-        <p class="topic-title">
-            <input type="text" name="title" value="${title}" placeholder="请输入标题"/>
-            <div class="btn-group">
-                <c:forEach items="${categoryList}" var="cate" varStatus="x">
-                    <button type="button"  name="title" class="btn btn-primary">${cate.name}</button>
-                </c:forEach>
-            </div>
-        </p>
-        <textarea name="content" id="editor">${content}</textarea>
-        <%--在Bootstrap中.row表示一行--%>
-        <div class="row buttons">
+<jsp:include page="/WEB-INF/pages/commons/aside.jsp"></jsp:include>
+
+<%--面包屑导航--%>
+<%--中间发布话题内容--%>
+    <nav class="breadcrumb chi-cun">
+        <a class="breadcrumb-item" href="${ctxPath}/index.jsp">首页</a>
+        <a class="breadcrumb-item" href="#">发布新话题</a>
+    </nav>
+    <p class="message">${message}</p>
+    <%--当前页面主要内容--%>
+    <main class="editor-container">
+        <form action="${ctxPath}/topic/publish" method="post">
+            <p class="topic-title">
+                <input type="text" name="title" value="${title}" placeholder="请输入标题"/>
+                <div class="btn-group">
+                    <c:forEach items="${categoryList}" var="cate" varStatus="x">
+                        <button type="button"  name="title" class="btn btn-primary">${cate.name}</button>
+                    </c:forEach>
+                </div>
+                <div class="btn-group">
+                    <c:forEach items="${categoryList}" var="cate" varStatus="x">
+                        <button type="button"  name="title" class="btn btn-primary">${cate.name}</button>
+                    </c:forEach>
+                </div>
+            </p>
+            <textarea class="chi-cun" name="content" id="editor">${content}</textarea>
+            <%--在Bootstrap中.row表示一行--%>
+            <div class="row buttons">
             <span class="col-4 offset-8 row justify-content-end">
                 <button type="reset" class="col-5" >重置</button>
                 <button type="submit" class="col-5 offset-1" >发布</button>
             </span>
-        </div>
-    </form>
+            </div>
+        </form>
 
-</main>
+    </main>
+
+
+    <jsp:include page="/WEB-INF/pages/commons/right.jsp"></jsp:include>
+
 <c:remove var="message" scope="session"/>
 <c:remove var="title" scope="session"/>
 <c:remove var="content" scope="session"/>

@@ -1,15 +1,18 @@
 
 nav.publish,
 
+.chi-cun{
+    width: 60vw;
+}
 nav.list {
-    width: 90vw;
+    width: 100vw;
     padding: 10px;
     border: 1px solid #dfdfdf;
     margin: 15px auto;
 }
 
 .editor-container {
-    width: 90vw;
+    width: 60vw;
     border: 1px solid #dedede;
     margin: 15px auto;
 }
@@ -20,7 +23,7 @@ nav.list {
 }
 
 .editor-container input[type=text] {
-    width: 100%;
+    width: 60%;
     height: 38px;
     outline: none;
 }
@@ -45,6 +48,9 @@ nav.list {
     width: 60vw;
     border: 1px solid #c69500;
     margin: 15px auto;
+}
+.btn-group{
+    width: 60%;
 }
 
 .topics-container>.title {
@@ -108,7 +114,7 @@ nav.list {
 .athor-where{
     font-family: 老報宋;
     font-size: 4px;
-    margin-top: 8px;
+    margin-top: 20px;
     color: #8c999f;
 }
 .topic-detail-category{

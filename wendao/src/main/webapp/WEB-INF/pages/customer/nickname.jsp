@@ -10,7 +10,7 @@
 <body>
 <jsp:include page="/WEB-INF/pages/commons/search.jsp"></jsp:include>
 <div class="big">
-    <aside>
+    <aside class="left-aside">
         <div class="left">
             <div class="left-one">
                 <div class="left-zi"><b>修改昵称、简介</b></div>
