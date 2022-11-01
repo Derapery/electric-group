@@ -23,7 +23,7 @@ public class TopicLikeDao extends BaseDao<Praise,Long>{
     private static final String DELETE_CUS="DELETE FROM t_like WHERE customer_id=?";
     private static final String DELETE_TOP="DELETE FROM t_like WHERE topic_id=?";
     private Praise rsHander(ResultSet rs) throws SQLException {
-        if(rs == null){
+        if(rs != null){
             Praise praise = new Praise();
             praise.setId(rs.getLong("id"));
             Topic topic=new Topic();
