@@ -121,6 +121,10 @@ public class CustomerServlet extends HttpServlet {
         }
        //判断用户是否存在
         Customer customer= cusSer.find(username);
+       if(customer.getId()==0){
+           session.setAttribute("message",customer.getUsername());
+           return false;
+       }
        if(customer==null){
            session.setAttribute("message","输入的用户不存在！");
            return false;

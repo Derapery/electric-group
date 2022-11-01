@@ -85,8 +85,16 @@ public class CustomerService {
     //根据用户名来查找用户
 
     public Customer find(String username){
+        List<Topic> list=null;
         Customer customer=customerDao.findName(username);
-        List<Topic> list= topicLikeDao.likeList(customer.getId());
+        try{
+        list= topicLikeDao.likeList(customer.getId());
+        }catch (Exception e){
+            Customer message = new Customer();
+            message.setId(0L);
+            message.setUsername("用户不存在");
+            return message;
+        }
         for(Topic topic : list){
             Long id=topic.getId();
             topic=topicsDao.find(id);
@@ -110,7 +118,7 @@ public class CustomerService {
     //删除用户
     public boolean delete(Long along){
         List<Topic> topics =topicsDao.findUser(along);
-        //先获取用户存储的评论
+        //先获取用户储的评论存
         List<Explain> explains=explainDao.findCus(along);
         for(Explain explain:explains){
             LikeExplain explainLike=new LikeExplain();
