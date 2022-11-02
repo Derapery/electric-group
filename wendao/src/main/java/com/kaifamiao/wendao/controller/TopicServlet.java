@@ -1,5 +1,6 @@
 package com.kaifamiao.wendao.controller;
 
+import com.kaifamiao.wendao.dao.CategoryDao;
 import com.kaifamiao.wendao.entity.Category;
 import com.kaifamiao.wendao.entity.Customer;
 import com.kaifamiao.wendao.entity.Topic;
@@ -134,7 +135,13 @@ public class TopicServlet extends HttpServlet {
         HttpSession session=req.getSession();
         String title=req.getParameter("title");
         String content=req.getParameter("content");
-        if(StringUtils.isEmpty(title) || StringUtils.isBlank(title)){
+        String category = req.getParameter("category");
+        if (!StringUtils.isEmpty(category) && StringUtils.isBlank(content) &&StringUtils.isEmpty(content)){
+            Category c = topicService.loadCategory(Long.parseLong(category));
+            req.setAttribute("category",c);
+            return false;
+        }
+            if(StringUtils.isEmpty(title) || StringUtils.isBlank(title)){
             session.setAttribute("message","发布话题题目不能为空！");
             session.setAttribute("content",content);
             return false;
@@ -161,6 +168,14 @@ public class TopicServlet extends HttpServlet {
             topic.setAuthor(((Customer)session.getAttribute("customer")));
             String addr = req.getRemoteAddr();
             topic.setPublishAddress(addr);
+            String categoryID=req.getParameter("categoryID");
+            System.out.println(categoryID);
+            topic.setCategory_id(Long.valueOf(categoryID));
+            if(req.getParameter("category")==null&&req.getParameter("categoryID")==null){
+                session.setAttribute("message", "未分类");
+                resp.sendRedirect(req.getContextPath()+"/topic/publish");
+                return;
+            }
             try {
                 if (topicService.save(topic)) {
                     resp.sendRedirect(req.getContextPath() + "/topic/list");
@@ -176,7 +191,9 @@ public class TopicServlet extends HttpServlet {
                 session.setAttribute("content", topic.getContent());
             }
         }
-        resp.sendRedirect(req.getContextPath()+"/topic/publish");
+        String path="/WEB-INF/pages/topic/publish.jsp";
+        RequestDispatcher db=req.getRequestDispatcher(path);
+        db.forward(req,resp);
     }
     private void myTopic(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
