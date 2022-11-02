@@ -113,6 +113,13 @@ public class TopicServlet extends HttpServlet {
         Customer customer=(Customer) session.getAttribute("customer");
         //根据分页查询来得到话题列表
         Paging<Topic> paging =topicService.findPage((Integer)map.get("size"),(Integer)map.get("current"),customer,1);
+        List<Topic> hotTopicList=topicService.hotTopic();
+        for (Topic c:hotTopicList) {
+            if(c.getTitle().length()>10){
+                c.setTitle(c.getTitle().substring(0,10)+"...");
+            }
+        }
+        session.setAttribute("hotTopicList",hotTopicList);
         session.setAttribute("paging",paging);
         String path="/WEB-INF/pages/topic/list.jsp";
         RequestDispatcher db=req.getRequestDispatcher(path);
