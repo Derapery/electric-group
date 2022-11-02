@@ -15,7 +15,8 @@
     /*justify-content: space-around;*/
     /*align-items: center;*/
     margin-top:10px;
-    background-color: #dedede;
+    background-image: url("/image/bg.jpg");
+    background-size: contain;
 }
 .right-aside .right-two{
     width: 280px;
