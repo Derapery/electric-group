@@ -177,7 +177,7 @@
                             <img class="topic-anquan-img" src="/image/anquan.png" alt="">
                         </span>
                         </div>
-                        <a class="athor-name" href="${ctxPath}/customer?id=${topic.author.id}">${topic.author.nickname}</a>
+                        <a class="athor-name" href="${ctxPath}/customer/mine?id=${topic.author.id}">${topic.author.nickname}</a>
                         <span class="athor-where">发布于${topic.publishTime}</span>
                         <a class="guanzhu :hover"  href="#">+关注</a>
                     </div>

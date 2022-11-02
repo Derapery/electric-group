@@ -48,7 +48,7 @@
                 <img class="yuan-ren rounded-circle" src="/image/ren.png" alt="">
                 <div class="ni-cheng">${customer.nickname}</div>
             </div>
-            <%  Customer c =(Customer) request.getSession().getAttribute("customer");%>
+            <%  Customer c =(Customer) request.getAttribute("customer");%>
             <div class="guan-zhu">粉丝:<%=c.getFans().size()%>个</div>
             <div class="jie-shao"> 简介:${customer.introduction} </div>
         </div>
