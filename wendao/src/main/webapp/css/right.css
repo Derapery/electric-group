@@ -22,7 +22,6 @@
     width: 280px;
     height: 480px;
     display: inline-flex;
-    justify-content: space-around;
     align-items: center;
     margin-top:10px;
     background-color: #dedede;
@@ -34,14 +33,11 @@
     font-family: "微软雅黑";
     background-color: #eae6e6;
      border-top: 1px solid #b5b1b1;
-
-     height: 40px;
-     width: 280px;
 }
 .right-two{
 
 }
- .right-zi1{
+.right-zi{
      line-height: 38px;
      width: 280px;
      height: 40px;
@@ -84,4 +80,23 @@
     font-size: 13px;
     width: 78px;
 
+}
+.right-topic{
+
+    height: 40px;
+    width: 280px;
+    font-size: 16px;
+    font-weight: 700;
+    border-color:#ff8200 ;
+    background-color: #eae6e6;
+    color: #f26d5f;
+    padding-left: 15px;
+    border-top: 1px solid #b5b1b1;
+    font-family: "微软雅黑";
+}
+
+.right-topic a{
+    border-color:#ff8200 ;
+    background-color: #eae6e6;
+    color: #f26d5f;
 }
