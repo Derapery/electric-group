@@ -152,4 +152,8 @@ public class TopicService {
     public List<Category> loadCategoryList() {
         return categoryDao.finaAll();
     }
+
+    public  Category loadCategory(Long id){
+       return categoryDao.find(id);
+    }
 }

@@ -11,11 +11,12 @@
     <link rel="stylesheet" href="${ctxPath}/css/right.css">
     <link rel="stylesheet" href="${ctxPath}/css/common.css">
     <link rel="stylesheet" href="${ctxPath}/css/topic.css">
+    <link rel="stylesheet" href="${ctxPath}/css/search.css">
 </head>
 <body>
-<jsp:include page="/WEB-INF/pages/commons/search.jsp"></jsp:include>
-
-<jsp:include page="/WEB-INF/pages/commons/aside.jsp"></jsp:include>
+<div style="user-select: none">
+    <jsp:include page="/WEB-INF/pages/commons/search.jsp"></jsp:include>
+</div>
 
 <%--面包屑导航--%>
 <%--中间发布话题内容--%>
@@ -29,15 +30,16 @@
         <form action="${ctxPath}/topic/publish" method="post">
             <p class="topic-title">
                 <input type="text" name="title" value="${title}" placeholder="请输入标题"/>
-                <div class="btn-group">
-                    <c:forEach items="${categoryList}" var="cate" varStatus="x">
-                        <button type="button"  name="title" class="btn btn-primary">${cate.name}</button>
-                    </c:forEach>
-                </div>
-                <div class="btn-group">
-                    <c:forEach items="${categoryList}" var="cate" varStatus="x">
-                        <button type="button"  name="title" class="btn btn-primary">${cate.name}</button>
-                    </c:forEach>
+                <div class="input-button">
+                    请选择您的分类
+                    <div class="btn-group">
+                        <c:forEach items="${categoryList}" var="cate" varStatus="x">
+                            <button type="submit" id="category" name="category" value="${cate.id}" class="btn btn-primary">${cate.name}</button>
+                        </c:forEach>
+                    </div>
+                    <div>
+                        <input hidden class="category-input" type="text" name="categoryID" value="${category.id}" />
+                    </div>
                 </div>
             </p>
             <textarea class="chi-cun" name="content" id="editor">${content}</textarea>
@@ -49,11 +51,9 @@
             </span>
             </div>
         </form>
-
     </main>
 
 
-    <jsp:include page="/WEB-INF/pages/commons/right.jsp"></jsp:include>
 
 <c:remove var="message" scope="session"/>
 <c:remove var="title" scope="session"/>
