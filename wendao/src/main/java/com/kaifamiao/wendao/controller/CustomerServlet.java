@@ -77,6 +77,19 @@ public class CustomerServlet extends HttpServlet {
     }
 
     private void mineAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        String id = req.getParameter("id");
+        Customer customer;
+        if(!StringUtils.isBlank(id) && !StringUtils.isEmpty(id)){
+            customer=cusSer.find(Long.valueOf(id));
+        }else{
+            customer =(Customer)session.getAttribute("customer");
+        }
+        if(customer == null){
+            session.setAttribute("message","请先登录，再查看个人主页");
+            resp.sendRedirect(req.getContextPath()+"/customer/sign/in");
+        }
+        req.setAttribute("customer",customer);
         String path="/WEB-INF/pages/customer/list.jsp";
         RequestDispatcher dis= req.getRequestDispatcher(path);
         dis.forward(req,resp);
