@@ -54,7 +54,9 @@ article{
     position: relative;
     width:  60vw;
     height: 256px;
-    background:url("/image/background.jpg");
+    background-image:url("/image/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .LIYAN{
     margin-top: 50px;

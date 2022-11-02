@@ -75,10 +75,13 @@
                                        <i class="fa fa-thumbs-down "></i>(${e.despise})
                                     </a>
                                </span>
+
                          </c:if>
-                           <span class="col-3 offset-2">
-                                <a href="explain/delete?id=${explain.id}">删除评论</a>
-                            </span>
+                            <c:if test="${e.author.id==sessionScope.customer.id}">
+                               <span class="col-3 offset-2">
+                                   <a href="${ctxPath}/explain/delete?id=${e.id}&topic_id=${topic.id}">删除评论</a>
+                               </span>
+                            </c:if>
                         </span>
                     </div>
                 </div>

@@ -83,7 +83,7 @@
             <%  Customer c =(Customer) request.getAttribute("customer");%>
             <div class="LIYAN">
                 <div class="yan-fans"><a href="${ctxPath}/customer/fans">关注者:<%=c.getFans().size()%>个</a></div>
-                <div class="yan-concern"><a href="${ctxPath}/customer/concern">关注:<%=c.getFans().size()%>个</a></div>
+                <div class="yan-concern"><a href="${ctxPath}/customer/concern">关注:<%=c.getAttention().size()%>个</a></div>
 
             </div>
             <div class="jie-shao"> 简介:${customer.introduction} </div>

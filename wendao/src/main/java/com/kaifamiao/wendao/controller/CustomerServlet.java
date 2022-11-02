@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 @WebServlet("/customer/*")
@@ -81,6 +82,10 @@ public class CustomerServlet extends HttpServlet {
 
         if("GET".equals(method) && uri.endsWith("/concern")){
             this.concern(req,resp);
+            return;
+        }
+        if("GET".equals(method) && uri.endsWith("/customer/fans")){
+            this.fans(req,resp);
             return;
         }
 
@@ -359,19 +364,35 @@ public class CustomerServlet extends HttpServlet {
         resp.sendRedirect(req.getContextPath()+"/topic/list");
 
     }
-
-    //"GET" "/fans"
     private void fans(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        HttpSession session=req.getSession();
+        Customer customer=(Customer) session.getAttribute("customer");
+        List<Customer> list=customer.getFans();
+        for (Customer c:list) {
+            Customer customer1=cusSer.find(c.getId());
+            c=customer1;
+        }
+        customer.setFans(list);
+        session.setAttribute("customer",customer);
         String path="/WEB-INF/pages/customer/fans.jsp";
         RequestDispatcher dis= req.getRequestDispatcher(path);
         dis.forward(req,resp);
-    }
 
+    }
     //"GET" "/concern"
     private void concern(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        String path="/WEB-INF/pages/customer/concern.jsp";
+        HttpSession session=req.getSession();
+        Customer customer=(Customer) session.getAttribute("customer");
+        List<Customer> list=customer.getAttention();
+        for (Customer c:list) {
+            Customer customer1=cusSer.find(c.getId());
+            c=customer1;
+        }
+        customer.setAttention(list);
+        session.setAttribute("customer",customer);
+        String path="/WEB-INF/pages/customer/fans.jsp";
         RequestDispatcher dis= req.getRequestDispatcher(path);
         dis.forward(req,resp);
     }

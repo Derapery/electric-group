@@ -18,7 +18,7 @@ public class AttentionDao extends BaseDao<Attention,Long>{
     private CustomerDao customerDao=new CustomerDao();
     private   ResultSetHandler<List<Customer>> rsHandler = rs -> {
         List<Customer> list = new ArrayList<>();
-        if( rs.next() ) {
+        while( rs.next() ) {
             Customer c = wrap(rs);
             list.add(c);
         }
