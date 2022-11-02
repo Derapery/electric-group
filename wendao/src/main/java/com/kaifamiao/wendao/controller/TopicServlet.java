@@ -214,7 +214,14 @@ public class TopicServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session=req.getSession();
         String id=req.getParameter("id");
-        Topic topic=topicService.find(Long.valueOf(id));
+        Customer customer=(Customer) session.getAttribute("customer");
+        Long customer_id;
+        if(customer==null){
+            customer_id=null;
+        }else{
+            customer_id=customer.getId();
+        }
+        Topic topic=topicService.find(Long.valueOf(id),customer_id);
         session.setAttribute("topic",topic);
         String path="/WEB-INF/pages/topic/detail.jsp";
         RequestDispatcher BD=req.getRequestDispatcher(path);
@@ -229,7 +236,7 @@ public class TopicServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath()+"/customer/sign/in");
         }
         String id=req.getParameter("id");
-        Topic topic=topicService.find(Long.valueOf(id));
+        Topic topic=topicService.find(Long.valueOf(id),customer.getId());
         session.setAttribute("topic",topic);
         String path="/WEB-INF/pages/topic/explainPublish.jsp";
         RequestDispatcher RB=req.getRequestDispatcher(path);

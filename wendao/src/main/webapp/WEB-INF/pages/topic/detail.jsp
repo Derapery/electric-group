@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="${ctxPath}/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${ctxPath}/css/common.css">
     <link rel="stylesheet" href="${ctxPath}/css/topic.css">
+    <link rel="stylesheet" href="${ctxPath}/css/search.css">
+    <link rel="stylesheet" href="${ctxPath}/css/right.css">
+    <link rel="stylesheet" href="${ctxPath}/css/round.css">
     <jsp:include page="/WEB-INF/pages/commons/header.jsp"></jsp:include>
 </head>
 <body>
@@ -35,16 +38,47 @@
                        <span class="col-2"></span>
                        <span class="col-8">${e.content}</span>
                    </div>
-                    <div class="row ">
-                        <span class="col-2"></span>
-                        <span class="col-8">${e.author.nickname} 解答于 ${e.publishTime}</span>
-                        <span class="col-2 row">
-                               <a href="#" class="praise">
+                    <div class="footerr">
+                        <span class="col-6  row justify-content-end">
+                            <c:if test="${ e.state==null}">
+                            <span class="col-2 justify-content-start">
+                             <a href="${ctxPath}/explain/thumbsState?id=${e.id}&state=1&topic_id=${topic.id}" class="praise">
+                                       <i class="fa fa-thumbs-o-up"></i>(${e.praise})
+                            </a>
+                             </span>
+                                <span  class="col-2 offset-3">
+                             <a href="${ctxPath}/explain/thumbsState?id=${e.id}&state=0&topic_id=${topic.id}" class="praise">
+                                   <i class="fa fa-thumbs-o-down"></i>(${e.despise})
+                              </a>
+                              </span>
+                            </c:if>
+                         <c:if test="${ e.state == 1}">
+                             <span class="col-2 justify-content-start">
+                                <a href="${ctxPath}/explain/thumbsState?id=${e.id}&state=1&topic_id=${topic.id}" class="praise">
                                    <i class="fa fa-thumbs-up"></i>(${e.praise})
                                </a>
-                               <a href="#" class="praise">
-                                   <i class="fa fa-thumbs-up"></i>(${e.despise})
-                               </a>
+                              </span>
+                             <span class="col-2 offset-3">
+                                  <a href="#" class="praise" style="user-select: none">
+                                     <i class="fa fa-thumbs-o-down "></i>(${e.despise})
+                                  </a>
+                             </span>
+                         </c:if>
+                         <c:if test="${ e.state == 0}">
+                                <span class="col-2 justify-content-start">
+                             <a href="#" class="praise disabled" style="user-select: none">
+                                    <i class="fa fa-thumbs-o-up"></i>(${e.praise})
+                            </a>
+                               </span>
+                             <span class="col-2 offset-3">
+                                    <a href="${ctxPath}/explain/thumbsState?id=${e.id}&state=0&topic_id=${topic.id}" class="praise">
+                                       <i class="fa fa-thumbs-down "></i>(${e.despise})
+                                    </a>
+                               </span>
+                         </c:if>
+                           <span class="col-3 offset-2">
+                                <a href="explain/delete?id=${explain.id}">删除评论</a>
+                            </span>
                         </span>
                     </div>
                 </div>

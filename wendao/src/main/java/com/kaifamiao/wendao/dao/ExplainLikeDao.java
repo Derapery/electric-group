@@ -48,9 +48,7 @@ public class ExplainLikeDao extends BaseDao<LikeExplain,Long>{
     public boolean delete(Long aLong) {
         return false;
     }
-    public boolean delete(LikeExplain likeExplain){
-        Long customer_id=likeExplain.getCustomer_id();
-        Long explain_id=likeExplain.getExplain_id();
+    public boolean delete(Long customer_id,Long explain_id){
         Object [] objects={ customer_id,explain_id};
         try {
             return runner.update(DELETE,objects)==1;
@@ -76,9 +74,7 @@ public class ExplainLikeDao extends BaseDao<LikeExplain,Long>{
         return null;
     }
     //查询评论的点赞信息
-    public LikeExplain find(LikeExplain likeExplain){
-        Long customer_id=likeExplain.getCustomer_id();
-        Long explain_id=likeExplain.getExplain_id();
+    public LikeExplain find(Long customer_id,Long explain_id){
         Object [] objects={ customer_id,explain_id};
         try {
             return runner.query(FIND,rsHander,objects);

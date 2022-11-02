@@ -3,7 +3,9 @@ package com.kaifamiao.wendao.controller;
 import com.kaifamiao.wendao.entity.Customer;
 import com.kaifamiao.wendao.entity.Explain;
 import com.kaifamiao.wendao.entity.Topic;
+import com.kaifamiao.wendao.service.ExplainLikeService;
 import com.kaifamiao.wendao.service.ExplainService;
+import com.kaifamiao.wendao.utils.LikeExplain;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletException;
@@ -17,9 +19,11 @@ import java.io.IOException;
 @WebServlet("explain/*")
 public class ExplainServlet extends HttpServlet {
     private ExplainService explainService;
+    private ExplainLikeService explainLikeService;
     @Override
     public void init() throws ServletException {
         explainService=new ExplainService();
+        explainLikeService=new ExplainLikeService();
     }
 
     @Override
@@ -29,6 +33,11 @@ public class ExplainServlet extends HttpServlet {
         String uri=req.getRequestURI();
         if("POST".equals(method) && uri.endsWith("/publish")){
             this.publish(req,resp);
+            return;
+        }
+        //"GET" "thumbsState"
+        if("GET".equals(method) && uri.endsWith("/thumbsState")){
+            this.thumbsState(req,resp);
             return;
         }
     }
@@ -57,6 +66,38 @@ public class ExplainServlet extends HttpServlet {
         Customer customer=(Customer) session.getAttribute("customer");
         explain.setAuthor(customer);
         explainService.save(explain);
+        resp.sendRedirect(req.getContextPath()+"/topic/detail?id="+topicID);
+    }
+    public void thumbsState(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        HttpSession session=req.getSession();
+        String id=req.getParameter("id");
+        String praise=req.getParameter("state");
+        String topic=req.getParameter("topic_id");
+        Long topicID=Long.valueOf(topic.trim());
+        Integer state=Integer.valueOf(praise.trim());
+        Long ID=Long.valueOf(id.trim());
+        Customer customer = (Customer) session.getAttribute("customer");
+        LikeExplain likeExplain=explainLikeService.find(customer.getId(), ID);
+        Explain explain=explainService.find(ID);
+        Integer thumb_up=explain.getPraise();
+        Integer thumb_down=explain.getDespise();
+        if(likeExplain != null){
+            Integer tage=likeExplain.getState();
+             if(tage==1){
+                 explainService.modify(thumb_up-1,ID,1);
+             }else{
+                 explainService.modify(thumb_down-1,ID,0);
+             }
+            explainLikeService.delete(customer.getId(),ID);
+        }else{
+            explainLikeService.save(customer.getId(), ID,state);
+            if(state==1){
+                explainService.modify(thumb_up+1,ID,1);
+            }else{
+                explainService.modify(thumb_down+1,ID,0);
+            }
+        }
         resp.sendRedirect(req.getContextPath()+"/topic/detail?id="+topicID);
     }
 }
