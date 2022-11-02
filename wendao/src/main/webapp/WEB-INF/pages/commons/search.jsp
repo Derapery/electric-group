@@ -14,12 +14,12 @@
 
         <div class="search-wrapper">
 
-            <video  src="/image/earth.mp4" width="1920" height="330" controls autoplay="autoplay" loop muted></video>
+            <video  src="/image/earth.mp4" width="1520" height="330" autoplay="autoplay" loop muted></video>
 
             <div class="search-dtwo">
                 <div>
                     <div class="search-dthree">
-                        <img src="/image/logo.png">
+                        <img src="/image/2.png">
                     </div>
                     <div class="search-dfour">
                         <div class="search-dfive">

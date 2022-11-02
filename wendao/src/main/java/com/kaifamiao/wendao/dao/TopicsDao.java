@@ -11,7 +11,7 @@ import java.util.List;
 
 public class TopicsDao extends BaseDao<Topic,Long> {
     private CustomerDao cusDao=new CustomerDao();
-    private String INSERT_ONE="INSERT INTO t_topics(title,content,publish_time,publish_address,priority,customer_id,id) VALUES(?,?,?,?,?,?,?)";
+    private String INSERT_ONE="INSERT INTO t_topics(title,content,publish_time,publish_address,priority,customer_id,id,category_id) VALUES(?,?,?,?,?,?,?,?)";
     private String SELECT_MAX_ID="SELECT max(id) FROM t_topics";
     private String MODIFY="UPDATE t_topics SET title=?,content=?,publish_time=?,publish_address=?,priority=?,customer_id=? WHERE id=?";
     private String DELETE_ONE="DELETE FROM t_topics WHERE id=?";
@@ -44,7 +44,7 @@ public class TopicsDao extends BaseDao<Topic,Long> {
         LocalDateTime date=topic.getPublishTime();
         java.sql.Timestamp dateTime =java.sql.Timestamp.valueOf(date);
         Object [] objects={topic.getTitle(),topic.getContent(),
-                dateTime,topic.getPublishAddress(),topic.getPriority(),customer.getId(),topic.getId()};
+                dateTime,topic.getPublishAddress(),topic.getPriority(),customer.getId(),topic.getId(),topic.getCategory_id()};
         try {
             return runner.update(sql,objects)==1;
         } catch (SQLException cause) {

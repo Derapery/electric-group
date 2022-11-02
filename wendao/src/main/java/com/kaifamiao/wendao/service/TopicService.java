@@ -1,12 +1,11 @@
 package com.kaifamiao.wendao.service;
 
-import com.kaifamiao.wendao.dao.CategoryDao;
-import com.kaifamiao.wendao.dao.ExplainDao;
-import com.kaifamiao.wendao.dao.TopicLikeDao;
-import com.kaifamiao.wendao.dao.TopicsDao;
+import com.kaifamiao.wendao.dao.*;
 import com.kaifamiao.wendao.entity.Category;
 import com.kaifamiao.wendao.entity.Customer;
+import com.kaifamiao.wendao.entity.Explain;
 import com.kaifamiao.wendao.entity.Topic;
+import com.kaifamiao.wendao.utils.LikeExplain;
 import com.kaifamiao.wendao.utils.Paging;
 import com.kaifamiao.wendao.utils.Praise;
 import com.kaifamiao.wendao.utils.SnowflakeIdGenerator;
@@ -19,6 +18,7 @@ public class TopicService {
    private ExplainDao explainDao;
    private CategoryDao categoryDao;
    private TopicLikeDao topicLikeDao;
+   private ExplainLikeDao explainLikeDao;
    //获得雪花实例
    private SnowflakeIdGenerator snow = SnowflakeIdGenerator.getInstance();
    public TopicService(){
@@ -26,6 +26,7 @@ public class TopicService {
        explainDao=new ExplainDao();
        categoryDao = new CategoryDao();
        topicLikeDao=new TopicLikeDao();
+       explainLikeDao=new ExplainLikeDao();
    }
    //保存话题
    public boolean save(Topic topic){
@@ -62,9 +63,21 @@ public class TopicService {
         return list;
     }
     //查看话题详情
-    public Topic find(Long along){
+    public Topic find(Long along,Long customer_id){
        Topic topic = topicsDao.find(along);
-       topic.setExplains(explainDao.findTop(along));
+       int state;
+       List<Explain> explains = explainDao.findTop(along);
+       for(Explain explain:explains){
+           if(customer_id!= null){
+               LikeExplain likeExplain  = explainLikeDao.find(customer_id,explain.getId());
+               if(likeExplain != null){
+                   explain.setState(likeExplain.getState());
+               }
+           }else{
+               explain.setState(null);
+           }
+       }
+       topic.setExplains(explains);
        return topic;
 
     }
@@ -138,5 +151,9 @@ public class TopicService {
 
     public List<Category> loadCategoryList() {
         return categoryDao.finaAll();
+    }
+
+    public  Category loadCategory(Long id){
+       return categoryDao.find(id);
     }
 }
