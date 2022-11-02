@@ -30,10 +30,16 @@
         <form action="${ctxPath}/topic/publish" method="post">
             <p class="topic-title">
                 <input type="text" name="title" value="${title}" placeholder="请输入标题"/>
-                <div class="btn-group">
-                    <c:forEach items="${categoryList}" var="cate" varStatus="x">
-                        <button type="button"  name="title" class="btn btn-primary">${cate.name}</button>
-                    </c:forEach>
+                <div class="input-button">
+                    请选择您的分类
+                    <div class="btn-group">
+                        <c:forEach items="${categoryList}" var="cate" varStatus="x">
+                            <button type="submit" id="category" name="category" value="${cate.id}" class="btn btn-primary">${cate.name}</button>
+                        </c:forEach>
+                    </div>
+                    <div>
+                        <input hidden class="category-input" type="text" name="categoryID" value="${category.id}" />
+                    </div>
                 </div>
             </p>
             <textarea class="chi-cun" name="content" id="editor">${content}</textarea>

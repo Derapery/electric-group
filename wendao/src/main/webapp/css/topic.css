@@ -211,3 +211,7 @@ nav.list {
 .praise{
     margin-left: -20px;
 }
+.editor-container .category-input {
+    user-select: none;
+    background: #dcdee3;
+}
