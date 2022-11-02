@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-@WebFilter("/*")
 public class OnlineFilter implements Filter {
 
     private static HashMap<Customer,HttpSession> list = new HashMap<>();
