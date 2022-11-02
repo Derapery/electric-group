@@ -1,25 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<link>
-<html>
-<head>
-    <title>首页</title>
-    <link rel="stylesheet" href="${ctxPath}/css/search.css">
-    <link rel="stylesheet" href="${ctxPath}/font-awesome/css/font-awesome.min.css">
-</head>
-<body>
+
 <header class="header-wendao">
 
     <div>
 
-        <div class="search-wrapper">
+        <div class="search-wrapper" >
 
-            <video  src="/image/earth.mp4" width="1920" height="330" controls autoplay="autoplay" loop muted></video>
+            <video style="user-select:none" src="/image/earth.mp4" width="1520" height="330" autoplay="autoplay" loop muted></video>
 
             <div class="search-dtwo">
                 <div>
                     <div class="search-dthree">
-                        <img src="/image/logo.png">
+                        <img src="/image/2.png">
                     </div>
                     <div class="search-dfour">
                         <div class="search-dfive">
@@ -42,8 +35,4 @@
         </div>
     </div>>
 </header>
-
-
-</body>
-</html>
 

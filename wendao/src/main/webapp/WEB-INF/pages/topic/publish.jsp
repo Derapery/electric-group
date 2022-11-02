@@ -11,11 +11,12 @@
     <link rel="stylesheet" href="${ctxPath}/css/right.css">
     <link rel="stylesheet" href="${ctxPath}/css/common.css">
     <link rel="stylesheet" href="${ctxPath}/css/topic.css">
+    <link rel="stylesheet" href="${ctxPath}/css/search.css">
 </head>
 <body>
-<jsp:include page="/WEB-INF/pages/commons/search.jsp"></jsp:include>
-
-<jsp:include page="/WEB-INF/pages/commons/aside.jsp"></jsp:include>
+<div style="user-select: none">
+    <jsp:include page="/WEB-INF/pages/commons/search.jsp"></jsp:include>
+</div>
 
 <%--面包屑导航--%>
 <%--中间发布话题内容--%>
@@ -34,11 +35,6 @@
                         <button type="button"  name="title" class="btn btn-primary">${cate.name}</button>
                     </c:forEach>
                 </div>
-                <div class="btn-group">
-                    <c:forEach items="${categoryList}" var="cate" varStatus="x">
-                        <button type="button"  name="title" class="btn btn-primary">${cate.name}</button>
-                    </c:forEach>
-                </div>
             </p>
             <textarea class="chi-cun" name="content" id="editor">${content}</textarea>
             <%--在Bootstrap中.row表示一行--%>
@@ -49,11 +45,9 @@
             </span>
             </div>
         </form>
-
     </main>
 
 
-    <jsp:include page="/WEB-INF/pages/commons/right.jsp"></jsp:include>
 
 <c:remove var="message" scope="session"/>
 <c:remove var="title" scope="session"/>
