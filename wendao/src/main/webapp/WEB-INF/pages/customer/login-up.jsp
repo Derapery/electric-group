@@ -10,7 +10,7 @@
 
     <div class="wrapper">
         <div class="logo">
-            <img src="/image/logo.svg">
+            <img src="/image/2.png">
         </div>
         <div class="form-container">
             <p>${message}</p>
@@ -31,7 +31,7 @@
                     <label for="confirm">确认密码</label>
                     <input type="password" name="confirm" id="confirm" >
                 </div>
-                <div >
+                <div class="gender">
                     性别：
                     <input type="radio" name="gender"  checked value="女">女
                     <input type="radio" name="gender" id="gender" value="男">男
