@@ -10,10 +10,21 @@ public class Explain {
     private String publishAddress;
     private int praise; // 赞美数量
     private int despise; // 鄙视数量
+
     // 维护从 Explain 到 Customer 之间的 多对一 关联关系
     private Customer author; // 当前解答是哪个用户发布的
     // 维护从 Explain 到 Topic 之间的 多对一 关联关系
     private Topic topic; // 当前解答为哪个话题解答
+    //用来记录话题的点赞状态
+    private Integer state;
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
 
     // 对象标识符属性
     public Long getId() {

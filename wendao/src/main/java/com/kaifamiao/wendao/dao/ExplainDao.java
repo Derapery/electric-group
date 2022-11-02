@@ -23,6 +23,8 @@ public class ExplainDao extends BaseDao<Explain,Long> {
     private String FIND_ONE_CUS=FIND_ONE_BASE+" customer_id=?";
     private String FIND_ONE_TOP=FIND_ONE_BASE+" topic_id=?";
     private String FIND_ALL="SELECT content,publish_time,publish_address,praise,despise,customer_id,topic_id,id FROM t_explains ORDER BY topic_id";
+    private String MODIFY_PRAISE="UPDATE t_explains SET praise=? WHERE id=?  ";
+    private String MODIFY_DESPISE="UPDATE t_explains SET despise=? WHERE id=?";
     private CustomerDao cusDAO=new CustomerDao();
     private TopicsDao topicsDao=new TopicsDao();
     private Explain raHand(ResultSet rs)throws SQLException{
@@ -34,10 +36,11 @@ public class ExplainDao extends BaseDao<Explain,Long> {
             explain.setPublishTime(rs.getTimestamp("publish_time").toLocalDateTime());
             explain.setContent(rs.getString("content"));
             explain.setPublishAddress(rs.getString("publish_address"));
-            explain.setDespise(rs.getInt("praise"));
+            explain.setPraise(rs.getInt("praise"));
             explain.setDespise(rs.getInt("despise"));
             Topic topic=topicsDao.find(rs.getLong("topic_id"));
             explain.setTopic(topic);
+            System.out.println("点赞数："+explain.getPraise());
          return explain;
         }
         return null;
@@ -70,6 +73,21 @@ public class ExplainDao extends BaseDao<Explain,Long> {
     @Override
     public boolean modify(Explain explain) {
         return false;
+    }
+    //修改评论的点赞和踩的数量
+    public boolean modify(Integer count,Long id,int tage){
+        try{
+            Object[] objects={count,id};
+            if(tage==1){
+                return  runner.update(MODIFY_PRAISE,objects)==1;
+            }else{
+                return runner.update(MODIFY_DESPISE,objects)==1;
+            }
+        }catch (SQLException cause){
+            throw new RuntimeException("修改评论的点赞时发生错误");
+        }
+
+
     }
     //删除评论
     @Override
