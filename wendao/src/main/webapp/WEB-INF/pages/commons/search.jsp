@@ -1,13 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-
+<link>
+<html>
+<head>
+    <title>首页</title>
+    <link rel="stylesheet" href="${ctxPath}/css/search.css">
+    <link rel="stylesheet" href="${ctxPath}/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
 <header class="header-wendao">
 
     <div>
 
-        <div class="search-wrapper" >
+        <div class="search-wrapper">
 
-            <video style="user-select:none" src="/image/earth.mp4" width="1520" height="330" autoplay="autoplay" loop muted></video>
+            <video  src="/image/earth.mp4" width="1520" height="330" autoplay="autoplay" loop muted></video>
 
             <div class="search-dtwo">
                 <div>
@@ -33,6 +40,10 @@
 
             </div>
         </div>
-    </div>
+    </div>>
 </header>
+
+
+</body>
+</html>
 
