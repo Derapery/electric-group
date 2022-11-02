@@ -48,14 +48,19 @@ article{
 .left-center{
     width: 60vw;
     height: 500px;
-    background-color:white;
-    float:left;
+    background-color:#ffffff;
 }
 .bgc-tu{
     position: relative;
     width:  60vw;
     height: 256px;
     background:url("/image/background.jpg");
+}
+.LIYAN{
+    margin-top: 50px;
+    display: flex;
+    padding: 0 250px;
+    justify-content: space-between;
 }
 .fanhui{
     position: absolute;
@@ -85,15 +90,96 @@ article{
     font-weight: 700;
     text-align: center;
 }
-.guan-zhu {
-    margin-left: 30px;
-    margin-top: 50px;
-    width: 100px;
-    height: 30px;
-    text-align: left;
-    font-size: 16px;
+/* 粉丝关注关注者 */
+.yan-fans,
+.yan-concern{
     color: #958e8e;
+    font-size: 16px;
 }
+
+.yan-fans {
+    text-align: left;
+}
+
+.yan-concern {
+    text-align: right;
+}
+
+
+
+.topics-container {
+    width: 60vw;
+    border: 1px solid #565666;
+
+    margin-top: 68px;
+
+}
+
+.topics-container>.title {
+    height: 36px;
+    line-height: 36px;
+    background: #7b7b95;
+    color: white;
+    margin: 0;
+}
+
+.topics-container>.topic {
+    height: 36px;
+    line-height: 36px;
+    margin: 0;
+}
+
+.topics-container>.topic:nth-child(2n+1) {
+    background: #dfdfdf;
+}
+
+.topics-container .pagination-container {
+    margin: 5px;
+}
+
+.topic-detail-container {
+    width: 90vw;
+    border: 1px solid #dedede;
+    margin: 15px auto;
+}
+
+.topic-detail-container .topic-title {
+    text-align: center;
+}
+
+.topic-detail-container .topic-author {
+    text-align: center;
+    background: #f4f4f4;
+}
+
+.topic-detail-container .topic-content {
+    margin: 10px;
+}
+
+.topic-detail-container .topic-explains {
+    margin: 10px;
+}
+
+.topic-detail-container .topic-explains .explain {
+    border: 1px solid #dfdfdf;
+    margin: 10px auto;
+}
+
+.topic-detail-container .topic-explains .author-and-time {
+    background: #f4f4f4;
+    margin: 1px;
+}
+
+.topic-detail-container .topic-explains .praise,
+.topic-detail-container .topic-explains .despise{
+    text-decoration: none;
+}
+
+.topic-detail-container .open-explain-page {
+    margin: 10px;
+}
+
+
 .jie-shao{
     margin-left: 30px;
     height: 50px;

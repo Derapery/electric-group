@@ -74,6 +74,16 @@ public class CustomerServlet extends HttpServlet {
             return;
         }
 
+        if("GET".equals(method) && uri.endsWith("/fans")){
+            this.fans(req,resp);
+            return;
+        }
+
+        if("GET".equals(method) && uri.endsWith("/concern")){
+            this.concern(req,resp);
+            return;
+        }
+
     }
 
     private void mineAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -348,5 +358,21 @@ public class CustomerServlet extends HttpServlet {
         }
         resp.sendRedirect(req.getContextPath()+"/topic/list");
 
+    }
+
+    //"GET" "/fans"
+    private void fans(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        String path="/WEB-INF/pages/customer/fans.jsp";
+        RequestDispatcher dis= req.getRequestDispatcher(path);
+        dis.forward(req,resp);
+    }
+
+    //"GET" "/concern"
+    private void concern(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        String path="/WEB-INF/pages/customer/concern.jsp";
+        RequestDispatcher dis= req.getRequestDispatcher(path);
+        dis.forward(req,resp);
     }
 }

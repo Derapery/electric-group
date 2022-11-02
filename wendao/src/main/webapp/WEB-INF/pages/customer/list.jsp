@@ -81,7 +81,11 @@
                 <div class="ni-cheng">${customer.nickname}</div>
             </div>
             <%  Customer c =(Customer) request.getAttribute("customer");%>
-            <div class="guan-zhu">粉丝:<%=c.getFans().size()%>个</div>
+            <div class="LIYAN">
+                <div class="yan-fans"><a href="${ctxPath}/customer/fans">关注者:<%=c.getFans().size()%>个</a></div>
+                <div class="yan-concern"><a href="${ctxPath}/customer/concern">关注:<%=c.getFans().size()%>个</a></div>
+
+            </div>
             <div class="jie-shao"> 简介:${customer.introduction} </div>
         </div>
     </article>
