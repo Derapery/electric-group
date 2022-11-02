@@ -9,7 +9,7 @@
 <body class="sign">
 <div class="wrapper">
     <div class="logo">
-        <img src="/image/logo.svg">
+        <img src="/image/2.png">
     </div>
     <div class="form-container">
         <p>${message}</p>

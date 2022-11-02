@@ -94,14 +94,22 @@
                 <div style="width: 100%;height: 90px;text-align: center">
                     <img style="margin-top:20px " src="/image/te.png" height="79px" width="145px">
                 </div>
-                <div class="right-zi" style=" margin-top: 20px;">
-                    <button style="margin: 0 auto;display: block">
-                        请<a style="color: #ffffff" href="${ctxPath}/customer/sign/in">登录</a>
-                    </button>
-                    <div style="width: 150px;margin:0 auto;">
-                        没有账号？请<a href="${ctxPath}/customer/sign/up">注册</a>
+                <c:if test="${sessionScope.customer==null}">
+                    <div class="right-zi" style=" margin-top: 20px;">
+                        <button style="margin: 0 auto;display: block">
+                           请<a style="color: #ffffff" href="${ctxPath}/customer/sign/in">登录</a>
+                        </button>
+                       <div style="width: 150px;margin:0 auto;">
+                           没有账号？请<a href="${ctxPath}/customer/sign/up">注册</a>
+                       </div>
+                  </div>
+                </c:if>
+                <c:if test="${sessionScope.customer !=null}">
+                    <div class="huanying">
+                        <div class="kongbai">   </div>
+                        欢迎${sessionScope.customer.nickname}！！
                     </div>
-                </div>
+                </c:if>
             </div>
             <div class="right-two">
                 <div class="right-zi1">

@@ -19,7 +19,7 @@
             <div class="search-dtwo">
                 <div>
                     <div class="search-dthree">
-                        <img src="/image/2.png">
+                        <img src="/image/2.png" style="height: 210px">
                     </div>
                     <div class="search-dfour">
                         <div class="search-dfive">
