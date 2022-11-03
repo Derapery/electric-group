@@ -154,6 +154,7 @@ public class TopicServlet extends HttpServlet {
         if (!StringUtils.isEmpty(category) && StringUtils.isBlank(content) &&StringUtils.isEmpty(content)){
             Category c = topicService.loadCategory(Long.parseLong(category));
             req.setAttribute("category",c);
+            req.setAttribute("title",title);
             return false;
         }
             if(StringUtils.isEmpty(title) || StringUtils.isBlank(title)){
@@ -185,8 +186,8 @@ public class TopicServlet extends HttpServlet {
             String addr = req.getRemoteAddr();
             topic.setPublishAddress(addr);
             String categoryID=req.getParameter("categoryID");
-            System.out.println(categoryID);
-            topic.setCategory_id(Long.valueOf(categoryID));
+            Long StrcategoryID = Long.valueOf(categoryID);
+            topic.setCategory_id(StrcategoryID);
             if(req.getParameter("category")==null&&req.getParameter("categoryID")==null){
                 session.setAttribute("message", "未分类");
                 resp.sendRedirect(req.getContextPath()+"/topic/publish");

@@ -20,11 +20,10 @@
 }
 .right-aside .right-two{
     width: 280px;
-    height: 480px;
+    /*height: 480px;*/
     display: inline-flex;
     align-items: center;
     margin-top:10px;
-    background-color: #dedede;
     flex-direction: column;
 }
  .right-two .right-zi{
@@ -33,9 +32,6 @@
     font-family: "微软雅黑";
     background-color: #eae6e6;
      border-top: 1px solid #b5b1b1;
-}
-.right-two{
-
 }
 .right-zi{
      line-height: 38px;
@@ -46,7 +42,7 @@
 .right-zi>button{
     border-color:#ff8200 ;
     background-color: #ff8200;
-    height: 34px;
+    height: 43px;
     width: 160px;
     color: #ffffff;
     border-radius: 17px;

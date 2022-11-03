@@ -140,8 +140,6 @@ public class CustomerServlet extends HttpServlet {
            session.setAttribute("message","输入的验证码不能为空！");
            return false;
        }
-        System.out.println(captcha);
-        System.out.println((String)session.getAttribute("CAPTCHA"));
        if(!StringUtils.equalsIgnoreCase(captcha,(String)session.getAttribute("CAPTCHA"))){
            session.setAttribute("username",username);
            session.setAttribute("password",password);
@@ -168,7 +166,6 @@ public class CustomerServlet extends HttpServlet {
     //"POST" "/sing/in"
     private void singAction(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        System.out.println(req.getContextPath());
         if(validateSgin(req)){
             resp.sendRedirect(req.getContextPath() + "/index.jsp");
             return;
@@ -336,10 +333,8 @@ public class CustomerServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath()+"/customer/edit");
         }
         Customer customer=(Customer) session.getAttribute("customer");
-        System.out.println(customer);
         customer.setNickname(nickname);
         customer.setIntroduction(introduction);
-        System.out.println(introduction);
         try {
             cusSer.modify(customer,false);
         }catch (Exception cause){

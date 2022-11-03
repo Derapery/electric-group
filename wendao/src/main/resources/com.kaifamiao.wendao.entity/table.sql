@@ -84,3 +84,21 @@ CREATE TABLE `t_like_explain` (
                           FOREIGN KEY (`explain_id`) REFERENCES `t_explains` (`id`)
 
 );
+CREATE TABLE `operationing` (
+                              `id` BIGINT,
+                              `handler_id` BIGINT NOT NULL,
+                              `user_id` BIGINT NOT NULL,
+                              `type` INT NOT NULL,
+                              `state` INT NOT NULL,
+                              PRIMARY KEY(`id`),
+                              FOREIGN KEY(`handler_id`) REFERENCES `t_customers` (`id`),
+                              FOREIGN KEY(`user_id`) REFERENCES `t_customers` (`id`)
+
+);
+CREATE TABLE `bad_log` (
+                                `id` BIGINT,
+                                `user_id` BIGINT NOT NULL,
+                                `type` INT NOT NULL,
+                                PRIMARY KEY(`id`),
+                                FOREIGN KEY(`user_id`) REFERENCES `t_customers` (`id`)
+);

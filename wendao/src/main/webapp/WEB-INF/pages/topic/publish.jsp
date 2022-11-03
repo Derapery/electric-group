@@ -29,7 +29,7 @@
     <main class="editor-container">
         <form action="${ctxPath}/topic/publish" method="post">
             <p class="topic-title">
-                <input type="text" name="title" value="${title}" placeholder="请输入标题"/>
+                <input type="text" name="title" value="${title}" placeholder="${category.name}"/>
                 <div class="input-button">
                     请选择您的分类
                     <div class="btn-group">

@@ -40,7 +40,6 @@ public class ExplainDao extends BaseDao<Explain,Long> {
             explain.setDespise(rs.getInt("despise"));
             Topic topic=topicsDao.find(rs.getLong("topic_id"));
             explain.setTopic(topic);
-            System.out.println("点赞数："+explain.getPraise());
          return explain;
         }
         return null;
