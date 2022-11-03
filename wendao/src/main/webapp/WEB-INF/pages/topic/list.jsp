@@ -19,6 +19,8 @@
 <body>
 <jsp:include page="/WEB-INF/pages/commons/header.jsp"></jsp:include>
 
+
+
 <header class="header-wendao">
     <div class="search-wrapper">
         <video src="/image/earth.mp4" width="1520" height="330" STYLE="user-select: none" autoplay="autoplay" loop muted ></video>
@@ -88,6 +90,12 @@
             </div>
         </aside>
     </div>
+    <!-- 顶部-->
+    <div id="point" class="point">
+        <a class="point-hs" href="#top">
+            <i style="color: #8a93a6;font-size: 24px;" class="fa fa-arrow-up"> </i>
+        </a>
+    </div>
     <div class="right-aside">
         <aside >
             <div class="right-one">
@@ -136,6 +144,8 @@
             <a class="breadcrumb-item" href="${ctxPath}/index.jsp">首页</a>
             <a class="breadcrumb-item" href="#">话题列表</a>
         </nav>
+
+
         <%--当前页面主要内容--%>
         <main class="topics-container">
             <c:forEach items="${paging.dataList}" var="topic" varStatus="x">
@@ -244,4 +254,5 @@
 <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/js/top.js"></script>
 </html>

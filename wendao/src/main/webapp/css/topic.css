@@ -215,3 +215,18 @@ nav.list {
     user-select: none;
     background: #dcdee3;
 }
+
+
+
+/* 锚点*/
+.point-hs {
+    width:50px;
+    height: 50px;
+    border-radius: 5px;
+    position: fixed;
+    right: 100px;
+    bottom: 100px;
+    background: #ffffff;
+    padding: 13px 13px;
+    display: block;
+}
