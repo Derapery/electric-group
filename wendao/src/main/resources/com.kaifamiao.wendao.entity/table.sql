@@ -84,3 +84,14 @@ CREATE TABLE `t_like_explain` (
                           FOREIGN KEY (`explain_id`) REFERENCES `t_explains` (`id`)
 
 );
+CREATE TABLE `useraction` (
+                                  `id` BIGINT,
+                                  `customer_id` BIGINT NOT NULL,
+                                  `customer_id` BIGINT NOT NULL,
+                                  `type` BIGINT NOT NULL,
+                                  `state` VARCHAR(40) NOT NULL,
+                                  PRIMARY KEY(`id`),
+                                  FOREIGN KEY(`customer_id`) REFERENCES `t_customers` (`id`),
+                                  FOREIGN KEY (`explain_id`) REFERENCES `t_explains` (`id`)
+
+);
