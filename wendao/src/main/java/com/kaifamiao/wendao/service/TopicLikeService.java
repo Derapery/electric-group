@@ -2,9 +2,12 @@ package com.kaifamiao.wendao.service;
 
 import com.kaifamiao.wendao.dao.TopicLikeDao;
 import com.kaifamiao.wendao.entity.Customer;
+import com.kaifamiao.wendao.entity.Explain;
 import com.kaifamiao.wendao.entity.Topic;
 import com.kaifamiao.wendao.utils.Praise;
 import com.kaifamiao.wendao.utils.SnowflakeIdGenerator;
+
+import java.util.List;
 
 public class TopicLikeService {
     private TopicLikeDao topicLikeDao;
@@ -38,4 +41,5 @@ public class TopicLikeService {
     public void delete(Long customer_id,Long topic_id){
         topicLikeDao.delete(customer_id,topic_id);
     }
+
 }

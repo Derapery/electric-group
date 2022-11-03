@@ -75,6 +75,11 @@ public class TopicServlet extends HttpServlet {
             this.thumbsState(req,resp);
             return;
         }
+        //"GET" "delete"
+        if("GET".equals(method) && uri.endsWith("/delete")){
+            this.delete(req,resp);
+            return;
+        }
     }
     private Map<String,Object> havPaging(HttpServletRequest request){
         //默认的显示的话题数
@@ -284,6 +289,19 @@ public class TopicServlet extends HttpServlet {
             topicLikeService.save(customer.getId(), topic_id,state);
         }
         resp.sendRedirect(req.getContextPath()+"/topic/list?size="+size+"&current="+Integer.parseInt(current.trim()));
+    }
+    public void delete(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        HttpSession session=req.getSession();
+        Customer customer = (Customer) session.getAttribute("customer");
+        Integer size=Integer.valueOf(req.getParameter("size"));
+        String current=req.getParameter("current");
+        String topic=req.getParameter("topicId");
+        Long topic_id =Long.valueOf(topic);
+        //删除话题
+        topicService.delete(customer.getId(),topic_id);
+        resp.sendRedirect(req.getContextPath()+"/topic/list?size="+size+"&current="+Integer.parseInt(current.trim()));
+
     }
     @Override
     public void destroy() {
