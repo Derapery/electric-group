@@ -50,7 +50,7 @@
             <link rel="stylesheet" href="/css/aside.css">
             <div class="left">
                 <div class="left-one">
-                    <div class="left-zi">在线人数${applicationScope.onlineCount}</div>
+                    <div class="left-zi yanse">浏览在线人数${applicationScope.onlineCount}</div>
                     <P>${ServletContentScope.onlineCount}</P>
                 </div>
                 <div class="left-one">

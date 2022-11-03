@@ -26,12 +26,12 @@
     <aside class="left-aside">
         <div class="left">
             <div class="left-one">
-                <div class="left-zi"><b>个人主页</b></div>
+                <div class="left-zi yanse"><b>个人主页</b></div>
             </div>
             <div class="left-one">
                 <a class="left-zi" href="${ctxPath}/customer/edit">
                     <i class="left-tu fa fa-arrows" aria-hidden="true"></i>
-                    修改昵称
+                    修改信息
                 </a>
             </div>
             <div class="left-one">
@@ -82,11 +82,11 @@
             </div>
             <%  Customer c =(Customer) request.getAttribute("customer");%>
             <div class="LIYAN">
-                <div class="yan-fans"><a href="${ctxPath}/customer/fans">关注者:<%=c.getFans().size()%>个</a></div>
-                <div class="yan-concern"><a href="${ctxPath}/customer/concern">关注:<%=c.getFans().size()%>个</a></div>
+                <div class="yan-fans"><a href="${ctxPath}/customer/fans">粉丝:<%=c.getFans().size()%>个</a></div>
+                <div class="yan-fans"><a href="${ctxPath}/customer/concern">关注:<%=c.getFans().size()%>个</a></div>
 
             </div>
-            <div class="jie-shao"> 简介:${customer.introduction} </div>
+            <div class="jie-shao yanse"> 简介 :  ${customer.introduction} </div>
         </div>
     </article>
 

@@ -14,7 +14,7 @@
     <aside class="left-aside">
         <div class="left">
             <div class="left-one">
-                <div class="left-zi"><b>修改密码</b></div>
+                <div class="left-zi yanse"><b>修改密码</b></div>
             </div>
             <div class="left-one">
                 <a class="left-zi" href="${ctxPath}/customer/mine">
@@ -25,7 +25,7 @@
             <div class="left-one">
                 <a class="left-zi" href="${ctxPath}/customer/edit">
                     <i class="left-tu fa fa-arrows" aria-hidden="true"></i>
-                    修改昵称
+                    修改信息
                 </a>
             </div>
             <div class="left-one">
@@ -37,14 +37,14 @@
         </div>
     </aside>
     <article>
-        <div class="left-center">
+        <div class="left-center chang">
             <div class="bgc-tu">
                 <a href="${ctxPath}/index.jsp" class="fanhui"><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;首页</a>
                 <img class="yuan-ren rounded-circle" src="/image/ren.png" alt="">
             </div>
             <div class="left-n-kuang-n">
                 <p>${message}</p>
-                <form action="${ctxPath}/customer/change" method="post">
+                <form class="kuan" action="${ctxPath}/customer/change" method="post">
                     <div class="form-row-m">
                         <label for="username">登录名称</label>
                         <input class="wu-border" type="text" name="username" value="${customer.username}" id="username" autocomplete="off" readonly>
