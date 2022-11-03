@@ -17,7 +17,7 @@
     <aside class="left-aside">
         <div class="left">
             <div class="left-one">
-                <div class="left-zi"><b>修改昵称、简介</b></div>
+                <div class="left-zi yanse"><b>修改信息</b></div>
             </div>
             <div class="left-one">
                 <a class="left-zi" href="${ctxPath}/customer/mine">
@@ -72,7 +72,7 @@
                 <div class="ni-cheng">用户昵称</div>
             </div>
         <div class="left-n-kuang">
-            <form action="${ctxPath}/customer/change/nickname" method="post">
+            <form action="${ctxPath}/customer/edit" method="post">
                 <div class="form-row">
                     <label for="nickname">昵称:</label>
                     <input type="text" name="nickname" value="${customer.nickname}" id="nickname" >
@@ -89,6 +89,6 @@
         </div>
     </article>
 </div>
-<div class="kong"></div>
+
 </body>
 </html>
