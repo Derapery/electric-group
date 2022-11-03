@@ -174,7 +174,6 @@ public class TopicService {
         Topic[] sourceArray= new Topic[source.size()];
         sourceArray = source.toArray(sourceArray);
         quicklysort(sourceArray,0,sourceArray.length-1);
-        System.out.println(Arrays.toString(sourceArray));
         return List.of(sourceArray).subList(0,source.size()>10?10:source.size());
     }
 
