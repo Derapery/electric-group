@@ -173,11 +173,13 @@ public class TopicServlet extends HttpServlet {
                 resp.sendRedirect(req.getContextPath()+"/topic/publish");
             }
             topic.setAuthor(((Customer)session.getAttribute("customer")));
+
             String addr = req.getRemoteAddr();
             topic.setPublishAddress(addr);
             String categoryID=req.getParameter("categoryID");
             System.out.println(categoryID);
-            topic.setCategory_id(Long.valueOf(categoryID));
+            Long StrcategoryID = Long.valueOf(categoryID);
+            topic.setCategory_id(StrcategoryID);
             if(req.getParameter("category")==null&&req.getParameter("categoryID")==null){
                 session.setAttribute("message", "未分类");
                 resp.sendRedirect(req.getContextPath()+"/topic/publish");
