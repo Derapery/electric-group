@@ -53,18 +53,18 @@
     </aside>
     <div class="list-conter">
     <nav class="breadcrumb">
-        <a class="breadcrumb-item" href="${ctxPath}/index.jsp">首页</a>
-        <a class="breadcrumb-item" href="#">话题列表</a>
+        <a class="breadcrumb-item" href="${ctxPath}/index.jsp">管理</a>
+        <a class="breadcrumb-item" href="#">用户列表</a>
     </nav>
 
     <%--当前页面主要内容--%>
     <main class="topics-container">
         <div class="row title">
-            <span class="col-1">序号</span>
-            <span class="col-4">标题</span>
-            <span class="col-2">类别</span>
-            <span class="col-3">发布时间</span>
-            <span class="col-2">发布者</span>
+            <span class="col-1">ID</span>
+            <span class="col-4">用户名</span>
+            <span class="col-2">注册日期</span>
+            <span class="col-3">级别</span>
+            <span class="col-2">发布话题数</span>
         </div>
         <c:forEach items="${paging.dataList}" var="topic" varStatus="x">
             <div class="row topic">
