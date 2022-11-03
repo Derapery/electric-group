@@ -79,7 +79,7 @@
                          </c:if>
                             <c:if test="${e.author.id==sessionScope.customer.id}">
                                <span class="col-3 offset-2">
-                                   <a href="${ctxPath}/explain/delete?id=${e.id}&topic_id=${topic.id}">删除评论</a>
+                                   <a href="${ctxPath}/explain/delete?id=${e.id}&topicId=${topic.id}">删除评论</a>
                                </span>
                             </c:if>
                         </span>

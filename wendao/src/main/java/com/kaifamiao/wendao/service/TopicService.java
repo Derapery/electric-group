@@ -197,4 +197,22 @@ public class TopicService {
             }
         }
     }
+
+    public boolean delete(Long customer_id,Long topic_id){
+        //删除话题的相关评论
+        List<Explain> explainList = explainDao.findTop(topic_id);
+        //删除话题的评论及相关的点赞信息
+        for (Explain explain : explainList) {
+            LikeExplain explainLike = new LikeExplain();
+            explainLike.setExplain_id(explain.getId());
+            //删除每个评论的点赞信息
+            explainLikeDao.delete(explain.getId(),2);
+            //删除评论
+            explainDao.delete(explain.getId());
+        }
+        //获取每个话题的点赞信息列
+        topicLikeDao.delete(topic_id, 2);
+        //删除话题
+        return topicsDao.delete(topic_id);
+    }
 }

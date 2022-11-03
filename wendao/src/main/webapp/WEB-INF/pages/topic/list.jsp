@@ -201,9 +201,14 @@
                                     </a>
                                </span>
                          </c:if>
-                           <span class="col-2 offset-3 ">
+                           <span class="col-2 offset-1 ">
                                 <i class="fa fa-eye"> </i>${topic.priority}
                             </span>
+                            <c:if test="${topic.author.id == customer.id}" >
+                                <span class="col-3 offset-1">
+                                <a href="${ctxPath}/topic/delete?topicId=${topic.id}&size=${paging.size}&current=${paging.current} ">删除话题</a>
+                                </span>
+                            </c:if>
                         </span>
                     </div>
                 </div>

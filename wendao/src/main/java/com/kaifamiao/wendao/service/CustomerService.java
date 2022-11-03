@@ -141,7 +141,7 @@ public class CustomerService {
                 LikeExplain explainLike = new LikeExplain();
                 explainLike.setExplain_id(explain.getId());
                 //删除每个评论的点赞信息
-                explainLikeDao.delete(explain.getId());
+                explainLikeDao.delete(explain.getId(),2);
                 //删除评论
                 explainDao.delete(explain.getId());
             }
