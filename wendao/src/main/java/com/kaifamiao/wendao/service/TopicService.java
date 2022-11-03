@@ -5,10 +5,7 @@ import com.kaifamiao.wendao.entity.Category;
 import com.kaifamiao.wendao.entity.Customer;
 import com.kaifamiao.wendao.entity.Explain;
 import com.kaifamiao.wendao.entity.Topic;
-import com.kaifamiao.wendao.utils.LikeExplain;
-import com.kaifamiao.wendao.utils.Paging;
-import com.kaifamiao.wendao.utils.Praise;
-import com.kaifamiao.wendao.utils.SnowflakeIdGenerator;
+import com.kaifamiao.wendao.utils.*;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -20,6 +17,7 @@ public class TopicService {
    private CategoryDao categoryDao;
    private TopicLikeDao topicLikeDao;
    private ExplainLikeDao explainLikeDao;
+   private AttentionDao attentionDao;
    //获得雪花实例
    private SnowflakeIdGenerator snow = SnowflakeIdGenerator.getInstance();
    public TopicService(){
@@ -28,6 +26,7 @@ public class TopicService {
        categoryDao = new CategoryDao();
        topicLikeDao=new TopicLikeDao();
        explainLikeDao=new ExplainLikeDao();
+       attentionDao=new AttentionDao();
    }
    //保存话题
    public boolean save(Topic topic){
@@ -103,6 +102,8 @@ public class TopicService {
        paging.setBegin(begin);
        List<Topic> list=topicsDao.findPage(begin,size,customer_id,page);
         for (Topic t:list) {
+            Customer customer1=t.getAuthor();
+            customer1.setConcern(0);
             t.setCategory_name(categoryDao.find(t.getCategory_id()).getName());
             //查询话题的点赞数量
             t.setThumbUpCount(topicLikeDao.thumbUPCount(t.getId()));
@@ -110,6 +111,11 @@ public class TopicService {
             t.setThumbDownCount(topicLikeDao.thumbDownCount(t.getId()));
             //获取话题的赞或踩的信息的状态的列表
             if(customer_id != null){
+                Long id=t.getAuthor().getId();
+                Attention  attention=attentionDao.findSecond(customer_id,id);
+                int  attenState= attention==null? 0:1;
+                customer1.setConcern( attenState);
+                t.setAuthor(customer1);
                 Praise praise = topicLikeDao.find(customer_id,t.getId());
                 if(praise != null){
                     t.setState(praise.getState());

@@ -4,6 +4,7 @@ import com.kaifamiao.wendao.dao.CategoryDao;
 import com.kaifamiao.wendao.entity.Category;
 import com.kaifamiao.wendao.entity.Customer;
 import com.kaifamiao.wendao.entity.Topic;
+import com.kaifamiao.wendao.service.AttentionService;
 import com.kaifamiao.wendao.service.TopicLikeService;
 import com.kaifamiao.wendao.service.TopicService;
 import com.kaifamiao.wendao.utils.Paging;
@@ -29,10 +30,12 @@ import java.util.Map;
 public class TopicServlet extends HttpServlet {
     private TopicService topicService;
     private TopicLikeService topicLikeService;
+    private AttentionService attentionService;
     @Override
     public void init() throws ServletException {
         topicService=new TopicService();
         topicLikeService=new TopicLikeService();
+        attentionService=new AttentionService();
     }
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp)
@@ -178,6 +181,7 @@ public class TopicServlet extends HttpServlet {
                 resp.sendRedirect(req.getContextPath()+"/topic/publish");
             }
             topic.setAuthor(((Customer)session.getAttribute("customer")));
+            System.out.println(((Customer)session.getAttribute("customer")).getId());
             String addr = req.getRemoteAddr();
             topic.setPublishAddress(addr);
             String categoryID=req.getParameter("categoryID");

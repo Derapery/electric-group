@@ -106,7 +106,6 @@ public class CustomerService {
         List<Customer> lists=attentionDao.findByCustomer(customer);
         System.out.println("关注："+lists.size());
         customer.setAttention(lists);
-        customer.setId(2096031496380096512l);
         //获取用户的粉丝列表
         List<Customer> fans=attentionDao.findByFans(customer);
         System.out.println("粉丝"+fans.size());

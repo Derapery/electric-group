@@ -149,7 +149,12 @@
                         </div>
                         <a class="athor-name" href="${ctxPath}/customer/mine?id=${topic.author.id}">${topic.author.nickname}</a>
                         <span class="athor-where">发布于${topic.publishTime}</span>
-                        <a class="guanzhu :hover"  href="#">+关注</a>
+                        <c:if test="${topic.author.concern ==0}">
+                            <a class="guanzhu :hover"  href="${ctxPath}/customer/fansAction?customer_id=${topic.author.id}&concern=0&size=${paging.size}&current=${paging.current}">+关注</a>
+                        </c:if>
+                        <c:if test="${topic.author.concern ==1}">
+                            <a class="guanzhu :hover"  href="${ctxPath}/customer/fansAction?customer_id=${topic.author.id}&concern=1&size=${paging.size}&current=${paging.current}">-取消关注</a>
+                        </c:if>
                     </div>
                     <div class="content-a">
                         <a href="${ctxPath}/topic/detail?id=${topic.id}">
