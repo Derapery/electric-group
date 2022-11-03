@@ -49,3 +49,18 @@ footer.page .copyright {
 .content-a a:link,a:visited,a:hover {
     color: black;
 }
+
+.huanying{
+    font-size: 35px;
+    font-weight: 700;
+    color: #f26d5f;
+    line-height: 38px;
+    text-align: center;
+    height: 89px;
+    margin-top: 1px;
+    background-color: #fff3e7;
+}
+
+.kongbai{
+    height: 20px;
+}

@@ -15,6 +15,20 @@ public class Customer {
     private String gender;
     //用来存储用户的喜欢的话题列表
     private List<Topic> likeList;
+    //用来存储对于用户的简介
+    private String introduction;
+    private LocalDate registerDate;
+    // 黑话: 维护从 Customer 到 Topic 的 一对多 关联关系
+    // 白话: 当前用户发表了哪些话题
+    private List<Topic> topics;
+    // 维护从 Customer 到 Explain 的 一对多 关联关系
+    private List<Explain> explains; // 当前用户所有的解答
+    //维护用户到关注的一对多关系
+
+
+    private List<Customer> attention;
+
+    private List<Customer> fans;
 
     public List<Topic> getLikeList() {
         return likeList;
@@ -47,20 +61,7 @@ public class Customer {
     public void setAttention(List<Customer> attention) {
         this.attention = attention;
     }
-    //用来存储对于用户的简介
-    private String introduction;
-    private LocalDate registerDate;
-    // 黑话: 维护从 Customer 到 Topic 的 一对多 关联关系
-    // 白话: 当前用户发表了哪些话题
-    private List<Topic> topics;
-    // 维护从 Customer 到 Explain 的 一对多 关联关系
-    private List<Explain> explains; // 当前用户所有的解答
-    //维护用户到关注的一对多关系
 
-
-    private List<Customer> attention;
-
-    private List<Customer> fans;
     // 对象标识符属性
     public Long getId() {
         return id;

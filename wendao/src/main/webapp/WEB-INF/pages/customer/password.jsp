@@ -3,6 +3,10 @@
 <html>
 <head>
     <title>个人主页</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link  rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="${ctxPath}/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/aside.css">
@@ -29,10 +33,35 @@
                 </a>
             </div>
             <div class="left-one">
-                <a class="left-zi" href="${ctxPath}/customer/delete">
-                    <i class=" left-tu fa fa-window-close-o" aria-hidden="true"></i>
-                    注销用户
-                </a>
+                <div class="container">
+                    <!-- 按钮：用于打开模态框 -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                        注销用户
+                    </button>
+                    <!-- 模态框 -->
+                    <div class="modal fade" id="myModal">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <!-- 模态框头部 -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">模态框头部</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <!-- 模态框主体 -->
+                                <div class="modal-body">
+                                    模态框内容..
+                                </div>
+                                <!-- 模态框底部 -->
+                                <div class="modal-footer" style="background: #545b62">
+                                    <a  href="${ctxPath}/customer/delete">
+                                        <i class=" left-tu fa fa-window-close-o" aria-hidden="true">
+                                        </i>确定注销
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </aside>

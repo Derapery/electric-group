@@ -11,6 +11,7 @@ import com.kaifamiao.wendao.utils.Praise;
 import com.kaifamiao.wendao.utils.SnowflakeIdGenerator;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 public class TopicService {
@@ -109,10 +110,7 @@ public class TopicService {
             t.setThumbDownCount(topicLikeDao.thumbDownCount(t.getId()));
             //获取话题的赞或踩的信息的状态的列表
             if(customer_id != null){
-                System.out.println(t.getId());
-                System.out.println(customer_id);
                 Praise praise = topicLikeDao.find(customer_id,t.getId());
-                System.out.println(praise);
                 if(praise != null){
                     t.setState(praise.getState());
                     continue;
@@ -155,5 +153,48 @@ public class TopicService {
 
     public  Category loadCategory(Long id){
        return categoryDao.find(id);
+    }
+
+    public List<Topic> hotTopic(){
+        List<Topic> source =  topicsDao.findPage(0,100,null,1);
+
+        for (Topic t:source) {
+            t.setCategory_name(categoryDao.find(t.getCategory_id()).getName());
+            t.setThumbUpCount(topicLikeDao.thumbUPCount(t.getId()));
+            t.setThumbDownCount(topicLikeDao.thumbDownCount(t.getId()));
+            if(t.getAuthor().getId() != null){
+                Praise praise = topicLikeDao.find(t.getAuthor().getId(),t.getId());
+                if(praise != null){
+                    t.setState(praise.getState());
+                    continue;
+                }
+            }
+            t.setState(null);
+        }
+        Topic[] sourceArray= new Topic[source.size()];
+        sourceArray = source.toArray(sourceArray);
+        quicklysort(sourceArray,0,sourceArray.length-1);
+        System.out.println(Arrays.toString(sourceArray));
+        return List.of(sourceArray).subList(0,source.size()>10?10:source.size());
+    }
+
+    private int hotTop(Topic t){
+         return t.getPriority()+t.getThumbUpCount()*9+t.getThumbDownCount()*11;
+    }
+
+    public void quicklysort(Topic[] arr,int l,int h )
+    {
+        for(int i = 1;i<arr.length;i++)
+        {
+            for(int j =i;j>0;j--)
+            {
+                if(hotTop(arr[j])>hotTop(arr[j-1]))
+                {
+                    Topic x = arr[j];
+                    arr[j] = arr[j-1];
+                    arr[j-1] = x;
+                }
+            }
+        }
     }
 }

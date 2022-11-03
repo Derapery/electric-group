@@ -40,6 +40,19 @@ public class ExplainServlet extends HttpServlet {
             this.thumbsState(req,resp);
             return;
         }
+        //“GET” “/delete”
+        if("GET".equals(method) && uri.endsWith("/delete")){
+            this.delete(req,resp);
+            return;
+        }
+    }
+    public void delete(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        String id= (String)req.getParameter("id");
+        explainService.delete(Long.valueOf(id));
+        String topicID=req.getParameter("topicId");
+        resp.sendRedirect(req.getContextPath()+"/topic/detail?id="+topicID);
     }
 
     private void publish(HttpServletRequest req, HttpServletResponse resp)

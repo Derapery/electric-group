@@ -41,7 +41,7 @@
                 <a href="${ctxPath}/index.jsp" class="fanhui"><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;首页</a>
                 <img class="yuan-ren rounded-circle" src="/image/ren.png" alt="">
                 <div class="ni-cheng">
-                    <span>昵称</span>
+                    <span>${customer.nickname}</span>
                 </div>
             </div>
 
@@ -49,10 +49,18 @@
             <main class="topics-container">
                 <div class="row title">
                     <span class="col-1">序号</span>
-                    <span class="col-4">头像</span>
                     <span class="col-4">粉丝昵称</span>
+                    <span class="col-4">注册时间</span>
                     <span class="col-3">性别</span>
                 </div>
+                <c:forEach items="${customer.fans}" var="customer" varStatus="x">
+                    <div class="row title">
+                        <span class="col-1">${x.count}</span>
+                        <span class="col-4">${customer.nickname}</span>
+                        <span class="col-4">${customer.registerDate}</span>
+                        <span class="col-3">${customer.gender}</span>
+                    </div>
+                </c:forEach>
                 <c:forEach items="${pagination.dataList}" var="t" varStatus="x">
                     <div class="row topic">
                         <span class="col-1">${(pagination.current - 1 ) * pagination.size + x.count }</span>
