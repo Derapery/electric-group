@@ -88,10 +88,6 @@ public class CustomerServlet extends HttpServlet {
             this.fans(req,resp);
             return;
         }
-        if("GET".equals(method) && uri.endsWith("/concern")){
-            this.concern(req,resp);
-            return;
-        }
         if("GET".equals(method) && uri.endsWith("/fansAction")){
             this.fansAction(req,resp);
             return;
@@ -401,8 +397,8 @@ public class CustomerServlet extends HttpServlet {
     private void fans(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         HttpSession session=req.getSession();
-        Customer customer=(Customer) session.getAttribute("customer");
-        Customer cus=cusSer.find(customer.getId());
+        Long customer_id=Long.valueOf(req.getParameter("customer_id"));
+        Customer cus=cusSer.find(customer_id);
         List<Customer> fansList=cus.getFans();
         List<Customer> attenList=cus.getAttention();
         for (Customer c:fansList) {
@@ -413,29 +409,12 @@ public class CustomerServlet extends HttpServlet {
             Customer customer1=cusSer.find(c.getId());
             c=customer1;
         }
-        customer.setFans(fansList);
-        customer.setAttention(attenList);
+        cus.setFans(fansList);
+        cus.setAttention(attenList);
         Integer ID=Integer.valueOf(req.getParameter("ID"));
         int state= ID==1?1:2;
         session.setAttribute("state",state);
         session.setAttribute("customer",cus);
-        String path="/WEB-INF/pages/customer/fans.jsp";
-        RequestDispatcher dis= req.getRequestDispatcher(path);
-        dis.forward(req,resp);
-
-    }
-    //"GET" "/concern"
-    private void concern(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        HttpSession session=req.getSession();
-        Customer customer=(Customer) session.getAttribute("customer");
-        List<Customer> list=customer.getAttention();
-        for (Customer c:list) {
-            Customer customer1=cusSer.find(c.getId());
-            c=customer1;
-        }
-        customer.setAttention(list);
-        session.setAttribute("customer",customer);
         String path="/WEB-INF/pages/customer/fans.jsp";
         RequestDispatcher dis= req.getRequestDispatcher(path);
         dis.forward(req,resp);
