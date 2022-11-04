@@ -35,6 +35,11 @@ public class TopicService {
        topic.setId(snow.generate());
        //设置话题的发布的时间
        topic.setPublishTime(LocalDateTime.now());
+       String newTitle = rebulidContent(topic.getTitle());
+       if(!checkContent(topic.getTitle(),newTitle)){
+           topic.setTitle(newTitle);
+           setBadLog(topic);
+       }
        //调用DAO层的方法进行保存
        String newContent = rebulidContent(topic.getContent());
        if(!checkContent(topic.getContent(),newContent)){
