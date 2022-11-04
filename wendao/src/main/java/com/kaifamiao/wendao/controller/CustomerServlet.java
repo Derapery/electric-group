@@ -174,7 +174,7 @@ public class CustomerServlet extends HttpServlet {
             return;
         }
         if(validateSgin(req,resp)==1){
-            String path = req.getContextPath()+"/customer/list";
+            String path = req.getContextPath()+"/manager/list";
             bridgeAction(path,resp);
             return;
         }
