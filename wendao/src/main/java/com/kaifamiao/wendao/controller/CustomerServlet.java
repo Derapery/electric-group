@@ -1,6 +1,7 @@
 package com.kaifamiao.wendao.controller;
 
 import com.kaifamiao.wendao.entity.Customer;
+import com.kaifamiao.wendao.service.AttentionService;
 import com.kaifamiao.wendao.service.CustomerService;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -19,10 +20,11 @@ import java.util.Objects;
 @WebServlet("/customer/*")
 public class CustomerServlet extends HttpServlet {
     private CustomerService cusSer;
-
+    private AttentionService attentionService;
     @Override
     public void init() throws ServletException {
         cusSer=new CustomerService();
+        attentionService=new AttentionService();
     }
 
     @Override
@@ -79,13 +81,12 @@ public class CustomerServlet extends HttpServlet {
             this.fans(req,resp);
             return;
         }
-
         if("GET".equals(method) && uri.endsWith("/concern")){
             this.concern(req,resp);
             return;
         }
-        if("GET".equals(method) && uri.endsWith("/customer/fans")){
-            this.fans(req,resp);
+        if("GET".equals(method) && uri.endsWith("/fansAction")){
+            this.fansAction(req,resp);
             return;
         }
 
@@ -366,7 +367,7 @@ public class CustomerServlet extends HttpServlet {
         List<Customer> list=customer.getFans();
         for (Customer c:list) {
             Customer customer1=cusSer.find(c.getId());
-            c=customer1;
+
         }
         customer.setFans(list);
         session.setAttribute("customer",customer);
@@ -390,5 +391,20 @@ public class CustomerServlet extends HttpServlet {
         String path="/WEB-INF/pages/customer/fans.jsp";
         RequestDispatcher dis= req.getRequestDispatcher(path);
         dis.forward(req,resp);
+    }
+    private void fansAction(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        HttpSession session=req.getSession();
+        Customer customer=(Customer)session.getAttribute("customer");
+        int concern=Integer.valueOf(req.getParameter("concern"));
+        Long attention_id=Long.valueOf(req.getParameter("customer_id"));
+        Integer size=Integer.valueOf(req.getParameter("size"));
+        String current=req.getParameter("current");
+        if(concern==1){
+            attentionService.delete(customer.getId(),attention_id,1);
+        }else{
+            attentionService.save(customer.getId(), attention_id);
+        }
+        resp.sendRedirect(req.getContextPath()+"/topic/list?size="+size+"&current="+Integer.parseInt(current.trim()));
     }
 }

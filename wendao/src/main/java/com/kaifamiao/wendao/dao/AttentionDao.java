@@ -15,6 +15,9 @@ public class AttentionDao extends BaseDao<Attention,Long>{
     private static final String FIND_BY_ATTENTION = "SELECT up_id FROM t_fans WHERE follwer_id = ?";
     private static final String FIND_BY_FANS = "SELECT  follwer_id FROM t_fans WHERE up_id = ?";
     private static final String DELETE_CUSTOMER="DELETE FROM t_fans WHERE follwer_id=? OR up_id=?";
+    private static final String SELECT_FOCUS="SELECT id,follwer_id,up_id FROM t_fans  WHERE follwer_id=? AND up_id=?";
+    private static final String DELETE_FANS="DELETE FROM t_fans WHERE follwer_id=? AND up_id=?";
+    private static final String DELETE_ATTEN="DELETE FROM t_fans WHERE up_id=? AND follwer_id=?";
     private CustomerDao customerDao=new CustomerDao();
     private   ResultSetHandler<List<Customer>> rsHandler = rs -> {
         List<Customer> list = new ArrayList<>();
@@ -25,14 +28,26 @@ public class AttentionDao extends BaseDao<Attention,Long>{
         return list;
     };
     private Customer wrap(ResultSet resultSet) throws SQLException {
-            Customer customer=customerDao.find(resultSet.getLong(1));
-            return customer;
+        Customer customer = customerDao.find(resultSet.getLong(1));
+        return customer;
+    }
+    //根据传入的关注着和被关注着的信息获取Attention
+    private Attention rsHand(ResultSet rs) throws SQLException {
+        if(rs != null){
+            Attention attention=new Attention();
+            //粉丝的ID
+            attention.setFans_id(rs.getLong("follwer_id"));
+            attention.setAttention_id(rs.getLong("up_id"));
+            attention.setId(rs.getLong("id"));
+            return attention;
+        }
+        return null;
     }
     //添加关注的信息到表中
     @Override
     public boolean save(Attention attention) {
         try {
-            return runner.update(INSERT_ONE,attention.getId(),attention.getAttention_id(),attention.getFans_id())==1;
+            return runner.update(INSERT_ONE,attention.getId(),attention.getFans_id(),attention.getAttention_id())==1;
         } catch (SQLException cause) {
             throw new RuntimeException("关注信息保存失败！",cause);
         }
@@ -54,6 +69,20 @@ public class AttentionDao extends BaseDao<Attention,Long>{
         } catch (SQLException cause) {
             throw new RuntimeException("删除失败", cause);
         }
+    }
+    //删除关注信息
+    public boolean delete(Long fans,Long attention,int tage){
+        try{
+            Object [] objects={fans,attention};
+            if(tage==1){
+                return runner.update(DELETE_FANS,objects)==1;
+            }else{
+                return runner.update(DELETE_ATTEN,objects)==1;
+            }
+        }catch (SQLException cause){
+            throw  new RuntimeException("删除关注信息失败！",cause);
+        }
+
     }
     //删除关注用户的信息
     public void customerDelete(Long along){
@@ -88,4 +117,14 @@ public class AttentionDao extends BaseDao<Attention,Long>{
             throw new RuntimeException("查询粉丝列表失败", cause);
         }
     }
+    //查找关注的信息
+    public Attention findSecond(Long fans,Long attents)  {
+        Object[] objects = {fans,attents};
+        try {
+            return runner.query(SELECT_FOCUS,rs ->rs.next()? rsHand(rs):null,objects);
+        } catch (SQLException cause) {
+            throw new RuntimeException("查询点赞信息时发生错误!",cause);
+        }
+    }
+
 }
