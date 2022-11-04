@@ -102,6 +102,7 @@ nav.list {
     position: relative;
     margin: 0px 17vw;
     width: 60vw;
+
 }
 .topic-head-img{
     height: 50px;
@@ -128,8 +129,13 @@ nav.list {
     color:#FF0000FF;
 }
 .topic-all{
-    background: #edf2f6;
+    background: #ebe9e9;
+
+    height: 263px;
     margin: 10px;
+    margin-bottom: 24px;
+    box-shadow: 5px 5px 3px #d6d3d3;
+    border-radius:7px;
 }
 
 .icon-wrap{
