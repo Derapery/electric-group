@@ -355,7 +355,6 @@ public class CustomerServlet extends HttpServlet {
     //”GET“ ”edit“
     private void editPage(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
         String path="/WEB-INF/pages/customer/nickname.jsp";
         RequestDispatcher RB=req.getRequestDispatcher(path);
         RB.forward(req,resp);

@@ -210,7 +210,6 @@ public class TopicServlet extends HttpServlet {
                 session.setAttribute("title", topic.getTitle());
                 session.setAttribute("content", topic.getContent());
             } catch (Exception e){
-                Logger.error(e);
                 session.setAttribute("message", "话题发布失败");
                 session.setAttribute("title", topic.getTitle());
                 session.setAttribute("content", topic.getContent());
