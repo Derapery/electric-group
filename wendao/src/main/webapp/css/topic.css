@@ -63,6 +63,10 @@ nav.list {
     line-height: 36px;
     margin: 0;
 }
+.chuxian{
+    background-color: #8e1818;
+    
+}
 
 .topics-container>.topic:nth-child(2n+1) {
     background: #dfdfdf;
@@ -232,4 +236,9 @@ nav.list {
     background: #ffffff;
     padding: 13px 13px;
     display: block;
+}
+/*话题标签*/
+.chu-xian{
+    width: 80px;
+    height: 40px;
 }

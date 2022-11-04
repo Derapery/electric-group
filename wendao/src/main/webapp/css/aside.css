@@ -113,9 +113,7 @@ article{
 .topics-container {
     width: 60vw;
     border: 1px solid #565666;
-
-    margin-top: 68px;
-
+    margin-top: 10px;
 }
 
 .topics-container>.title {

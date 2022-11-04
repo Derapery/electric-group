@@ -145,11 +145,12 @@
             <a class="breadcrumb-item" href="${ctxPath}/index.jsp">首页</a>
             <a class="breadcrumb-item" href="#">话题列表</a>
         </nav>
-        <div class="btn-group">
             <c:forEach items="${categoryList}" var="cate" varStatus="x">
-                  <a class="btn btn-primary">${cate.name}</a>
-            </c:forEach>
-        </div>
+               <div class=" btn btn-warning chu-xian">
+                <a  href="#" >${cate.name} </a>
+               </div>
+           </c:forEach>
+
         <%--当前页面主要内容--%>
         <main class="topics-container">
             <c:forEach items="${paging.dataList}" var="topic" varStatus="x">
