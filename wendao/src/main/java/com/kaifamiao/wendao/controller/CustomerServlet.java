@@ -153,18 +153,18 @@ public class CustomerServlet extends HttpServlet {
         dis.forward(req,resp);
     }
     //对登录信息进行校验
-    private boolean validateSgin(HttpServletRequest req){
+    private int validateSgin(HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session=req.getSession();
        String username=req.getParameter("username");
        if(StringUtils.isBlank(username)||StringUtils.isEmpty(username)){
            session.setAttribute("message","用户名不能为空！");
-           return false;
+           return -1;
        }
        String password=req.getParameter("password");
        if(StringUtils.isEmpty(password)||StringUtils.isBlank(password)){
            session.setAttribute("message","密码不能为空！");
            session.setAttribute("username",username);
-           return false;
+           return -1;
 
        }
        String captcha=req.getParameter("captcha");
@@ -172,36 +172,45 @@ public class CustomerServlet extends HttpServlet {
            session.setAttribute("username",username);
            session.setAttribute("password",password);
            session.setAttribute("message","输入的验证码不能为空！");
-           return false;
+           return -1;
        }
        if(!StringUtils.equalsIgnoreCase(captcha,(String)session.getAttribute("CAPTCHA"))){
            session.setAttribute("username",username);
            session.setAttribute("password",password);
            session.setAttribute("message","输入的验证码不正确！");
-           return false;
+           return -1;
         }
        //判断用户是否存在
         Customer customer= cusSer.find(username);
        if(customer.getId()==0){
            session.setAttribute("message",customer.getUsername());
-           return false;
+           return -1;
        }
        if(customer==null){
            session.setAttribute("message","输入的用户不存在！");
-           return false;
+           return -1;
        }
        if(!StringUtils.equals(customer.getPassword(),cusSer.encrypt(password,customer.getSalt()))){
            session.setAttribute("message","输入的密码不正确！");
-           return false;
+           return -1;
        }
-       session.setAttribute( "customer",customer);
-       return true;
+       if(customer.getManagement()==1){
+           session.setAttribute( "manager",customer);
+           return 1;
+       }
+        session.setAttribute( "customer",customer);
+       return 0;
     }
     //"POST" "/sing/in"
     private void singAction(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        if(validateSgin(req)){
+        if(validateSgin(req,resp)==0){
             resp.sendRedirect(req.getContextPath() + "/index.jsp");
+            return;
+        }
+        if(validateSgin(req,resp)==1){
+            String path = req.getContextPath()+"/manager/list";
+            bridgeAction(path,resp);
             return;
         }
         resp.sendRedirect(req.getContextPath()+"/customer/sign/in");
@@ -433,5 +442,9 @@ public class CustomerServlet extends HttpServlet {
             attentionService.save(customer.getId(), attention_id);
         }
         resp.sendRedirect(req.getContextPath()+"/topic/list?size="+size+"&current="+Integer.parseInt(current.trim()));
+    }
+
+    private void bridgeAction(String path, HttpServletResponse resp) throws IOException {
+        resp.sendRedirect(path);
     }
 }
