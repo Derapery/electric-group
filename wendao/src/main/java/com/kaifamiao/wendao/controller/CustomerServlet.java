@@ -397,7 +397,6 @@ public class CustomerServlet extends HttpServlet {
     private void fans(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         HttpSession session=req.getSession();
-        System.out.println(req.getParameter("customer_id"));
         Long customer_id=Long.valueOf(req.getParameter("customer_id"));
         Customer cus=cusSer.find(customer_id);
         List<Customer> fansList=cus.getFans();

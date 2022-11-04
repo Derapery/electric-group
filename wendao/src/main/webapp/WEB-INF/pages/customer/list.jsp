@@ -113,6 +113,8 @@
                         <span class="col-3">${topic.publishTime}</span>
                     </div>
                 </c:forEach>
+            </main>
+
                 <div class="row pagination-container">
                     <div class="col-6">
                         每页显示
