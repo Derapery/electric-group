@@ -112,7 +112,7 @@
                 <c:if test="${sessionScope.customer !=null}">
                     <div class="huanying">
                         <div class="kongbai">   </div>
-                        欢迎${sessionScope.customer.nickname}！！
+                        欢迎${sessionScope.customer.nickname}
                     </div>
                 </c:if>
             </div>
@@ -124,8 +124,9 @@
                     </div>
                 </div>
                 <c:forEach items="${hotTopicList}" var="topic" varStatus="x">
-                    <div class="right-topic">
-                        <div><a href="${ctexPath}/topic/detail?id=${topic.id}">${topic.title}</a></div>
+                    <div class="right-zi">
+                        <span class="col-1">${(pagination.current - 1 ) * pagination.size + x.count }</span>
+                       <a href="${ctexPath}/topic/detail?id=${topic.id}">${topic.title}</a>
                     </div>
                 </c:forEach>
                 <div class="right-zi2">
@@ -141,13 +142,14 @@
             <a class="breadcrumb-item" href="${ctxPath}/index.jsp">首页</a>
             <a class="breadcrumb-item" href="#">话题列表</a>
         </nav>
-        <div class="btn-group">
             <c:forEach items="${categoryList}" var="cate" varStatus="x">
-                  <a class="btn btn-primary">${cate.name}</a>
-            </c:forEach>
-        </div>
+               <div class=" btn btn-warning chu-xian">
+                <a  href="#" >${cate.name} </a>
+               </div>
+           </c:forEach>
+
         <%--当前页面主要内容--%>
-        <main class="topics-container">
+        <main class="topics-container gao-du">
             <c:forEach items="${paging.dataList}" var="topic" varStatus="x">
                 <div class="topic-all">
                     <div class="topic-list-detail-head">
@@ -217,10 +219,10 @@
                                </span>
                          </c:if>
                             <span class="col-2 offset-1 ">
-                                <i class="fa fa-eye"> </i>${topic.priority}
+                                <a class="fa fa-eye" href="#"> </a>${topic.priority}
                             </span>
                             <span class="col-2 offset-1 " style="padding-right: 1px">
-                                <a class="fa fa-commenting-o"> </a>
+                                <a class="fa fa-commenting-o" href="${ctxPath}/topic/publishExplain?id=${topic.id}" title="我来解答"> </a>
                             </span>
                             <c:if test="${topic.author.id == customer.id}">
 
