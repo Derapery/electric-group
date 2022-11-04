@@ -240,6 +240,7 @@ nav.list {
 }
 /*话题标签*/
 .chu-xian{
+    background-color: #ff8822;
     width: 80px;
     height: 40px;
 }
