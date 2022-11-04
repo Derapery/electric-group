@@ -407,24 +407,12 @@ public class CustomerServlet extends HttpServlet {
     private void fans(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         HttpSession session=req.getSession();
-        Long customer_id=Long.valueOf(req.getParameter("customer_id"));
+        Long customer_id=Long.valueOf(req.getParameter("id"));
         Customer cus=cusSer.find(customer_id);
-        List<Customer> fansList=cus.getFans();
-        List<Customer> attenList=cus.getAttention();
-        for (Customer c:fansList) {
-            Customer customer1=cusSer.find(c.getId());
-            c=customer1;
-        }
-        for (Customer c:attenList) {
-            Customer customer1=cusSer.find(c.getId());
-            c=customer1;
-        }
-        cus.setFans(fansList);
-        cus.setAttention(attenList);
         Integer ID=Integer.valueOf(req.getParameter("ID"));
         int state= ID==1?1:2;
         session.setAttribute("state",state);
-        session.setAttribute("customer",cus);
+        session.setAttribute("cus",cus);
         String path="/WEB-INF/pages/customer/fans.jsp";
         RequestDispatcher dis= req.getRequestDispatcher(path);
         dis.forward(req,resp);

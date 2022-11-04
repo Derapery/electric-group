@@ -20,6 +20,7 @@ public class CustomerService {
     private AttentionDao attentionDao;
     private TopicLikeDao topicLikeDao;
     private ExplainLikeDao explainLikeDao;
+    private CategoryDao categoryDao;
     //获得一个SnowflakeIdGenerator实例
     private SnowflakeIdGenerator snowId= SnowflakeIdGenerator.getInstance();
     public CustomerService(){
@@ -29,6 +30,7 @@ public class CustomerService {
         attentionDao=new AttentionDao();
         topicLikeDao=new TopicLikeDao();
         explainLikeDao=new ExplainLikeDao();
+        categoryDao=new CategoryDao();
     }
     //查看用户是否存在
     public Customer exist(String username){
@@ -68,7 +70,22 @@ public class CustomerService {
         List<Topic> list= topicLikeDao.likeList(along);
         for(Topic topic : list){
             Long id=topic.getId();
-            topic=topicsDao.find(id);
+            Topic top=topicsDao.find(id);
+            List<Explain> explains = explainDao.findTop(id);
+            topic.setExplains(explains);
+            if(explains != null){
+                topic.setExplainCount(topic.getExplains().size());
+            }else{
+                topic.setExplainCount(0);
+            }
+            topic.setPriority(top.getPriority());
+            topic.setCategory_id(top.getCategory_id());
+            topic.setState(top.getState());
+            topic.setAuthor(top.getAuthor());
+            topic.setTitle(top.getTitle());
+            topic.setContent(top.getContent());
+            topic.setPublishTime(top.getPublishTime());
+            topic.setCategory_name(categoryDao.find(top.getCategory_id()).getName());
             topic.setThumbDownCount(topicLikeDao.thumbDownCount(id));
             topic.setThumbUpCount(topicLikeDao.thumbUPCount(id));
         }
@@ -96,7 +113,22 @@ public class CustomerService {
         }
         for(Topic topic : list){
             Long id=topic.getId();
-            topic=topicsDao.find(id);
+            Topic top=topicsDao.find(id);
+            List<Explain> explains = explainDao.findTop(id);
+            topic.setExplains(explains);
+            if(explains != null){
+                topic.setExplainCount(topic.getExplains().size());
+            }else{
+                topic.setExplainCount(0);
+            }
+            topic.setPriority(top.getPriority());
+            topic.setCategory_id(top.getCategory_id());
+            topic.setState(top.getState());
+            topic.setAuthor(top.getAuthor());
+            topic.setTitle(top.getTitle());
+            topic.setContent(top.getContent());
+            topic.setPublishTime(top.getPublishTime());
+            topic.setCategory_name(categoryDao.find(top.getCategory_id()).getName());
             topic.setThumbDownCount(topicLikeDao.thumbDownCount(id));
             topic.setThumbUpCount(topicLikeDao.thumbUPCount(id));
         }

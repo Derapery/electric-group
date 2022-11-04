@@ -54,20 +54,20 @@
                     <span class="col-3">性别</span>
                 </div>
                 <c:if test="${state==1}">
-                <c:forEach items="${customer.fans}" var="customer" varStatus="x">
+                <c:forEach items="${cus.fans}" var="customer" varStatus="x">
                     <div class="row title neirong">
                         <span class="col-1">${x.count}</span>
-                        <span class="col-4">${customer.nickname}</span>
+                        <span class="col-4"><a href="${ctxPath}/customer/mine?id=${customer.id}">${customer.nickname}</a></span>
                         <span class="col-4">${customer.registerDate}</span>
                         <span class="col-3">${customer.gender}</span>
                     </div>
                 </c:forEach>
                 </c:if>
-                <c:if test="${state==0}">
-                    <c:forEach items="${customer.fans}" var="customer" varStatus="x">
+                <c:if test="${state==2}">
+                    <c:forEach items="${cus.attention}" var="customer" varStatus="x">
                         <div class="row title neirong">
                             <span class="col-1">${x.count}</span>
-                            <span class="col-4">${customer.nickname}</span>
+                            <span class="col-4"><a href="${ctxPath}/customer/mine?id=${customer.id}">${customer.nickname}</a></span>
                             <span class="col-4">${customer.registerDate}</span>
                             <span class="col-3">${customer.gender}</span>
                         </div>

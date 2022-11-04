@@ -321,6 +321,7 @@ public class TopicServlet extends HttpServlet {
         Long customer_id=Long.valueOf(req.getParameter("id"));
         Customer cus=customerService.find(customer_id);
         req.setAttribute("customer",cus);
+        System.out.println(cus.getLikeList().get(0).getTitle());
         session.setAttribute("state",1);
         String path="/WEB-INF/pages/customer/list.jsp";
         RequestDispatcher dis= req.getRequestDispatcher(path);

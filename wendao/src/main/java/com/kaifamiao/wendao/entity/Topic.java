@@ -27,7 +27,7 @@ public class Topic {
     private Integer thumbDownCount;
     //话题的点赞的状态
     private Integer state;
-    //话题对应的评论的shuliang
+    //话题对应的评论的ngshulia
     private Integer explainCount;
 
     public Integer getExplainCount() {
