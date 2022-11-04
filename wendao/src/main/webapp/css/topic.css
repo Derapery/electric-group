@@ -50,9 +50,12 @@ nav.list {
 .topics-container>.title {
     height: 36px;
     line-height: 36px;
-    background: #ffeeba;
+    background: #7b7b95;
     color: #343a40;
     margin: 0;
+}
+.topics-container>.neirong {
+    background: #e6e6ee;
 }
 
 .topics-container>.topic {

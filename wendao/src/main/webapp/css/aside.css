@@ -125,7 +125,9 @@ article{
     color: white;
     margin: 0;
 }
-
+.topics-container>.neirong {
+    background: #e6e6ee;
+}
 .topics-container>.topic {
     height: 36px;
     line-height: 36px;

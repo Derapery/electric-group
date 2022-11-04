@@ -46,7 +46,7 @@
             </div>
 
 
-            <main class="topics-container">
+            <div class="topics-container">
                 <div class="row title">
                     <span class="col-1">序号</span>
                     <span class="col-4">粉丝昵称</span>
@@ -54,7 +54,7 @@
                     <span class="col-3">性别</span>
                 </div>
                 <c:forEach items="${customer.fans}" var="customer" varStatus="x">
-                    <div class="row title">
+                    <div class="row title neirong">
                         <span class="col-1">${x.count}</span>
                         <span class="col-4">${customer.nickname}</span>
                         <span class="col-4">${customer.registerDate}</span>
@@ -92,7 +92,7 @@
                         </li>
                     </ul>
                 </div>
-            </main>
+            </div>
 
 
         </div>
