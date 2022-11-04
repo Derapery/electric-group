@@ -82,6 +82,7 @@
             </div>
             <%  Customer c =(Customer) request.getAttribute("customer");%>
             <div class="LIYAN">
+                <div class="yan-fans"><a href="${ctxPath}/topic/like">我的喜欢:<%=c.getFans().size()%>个</a></div>
                 <div class="yan-fans"><a href="${ctxPath}/customer/fans">粉丝:<%=c.getFans().size()%>个</a></div>
                 <div class="yan-fans"><a href="${ctxPath}/customer/concern">关注:<%=c.getAttention().size()%>个</a></div>
 
