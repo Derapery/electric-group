@@ -104,6 +104,15 @@ public class TopicService {
         for (Topic t:list) {
             Customer customer1=t.getAuthor();
             customer1.setConcern(0);
+            List<Explain> explains = explainDao.findTop(t.getId());
+            t.setExplains(explains);
+            Integer cl;
+            if(explains != null){
+                cl=explains.size();
+            }else{
+                cl=0;
+            }
+            t.setExplainCount(cl);
             t.setCategory_name(categoryDao.find(t.getCategory_id()).getName());
             //查询话题的点赞数量
             t.setThumbUpCount(topicLikeDao.thumbUPCount(t.getId()));
