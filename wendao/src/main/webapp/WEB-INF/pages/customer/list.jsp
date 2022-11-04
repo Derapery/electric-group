@@ -99,7 +99,7 @@
                     <span class="col-5">话题名称</span>
                     <span class="col-1">赞数</span>
                     <span class="col-1">踩数</span>
-                    <span class="col-4">发布时间</span>
+                    <span class="col-3">发布时间</span>
                 </div>
                 <c:forEach items="${paging.dataList}" var="topic" varStatus="x">
                     <div class="row title neirong">
@@ -107,7 +107,7 @@
                         <span class="col-5">${topic.title}</span>
                         <span class="col-1">${topic.thumbUpCount}</span>
                         <span class="col-1">${topic.thumbDownCount}</span>
-                        <span class="col-4">${topic.publishTime}</span>
+                        <span class="col-3">${topic.publishTime}</span>
                     </div>
                 </c:forEach>
                 <div class="row pagination-container">
