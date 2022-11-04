@@ -86,15 +86,17 @@
             </div>
             <%  Customer c =(Customer) request.getAttribute("customer");
                 Long customer_id=c.getId();
+                List<Topic> list=c.getLikeList();
+                session.setAttribute("likeList",list);
                 session.setAttribute("customer_id",customer_id);
             %>
             <div class="LIYAN">
-                <div class="yan-fans"><a href="${ctxPath}/topic/like">我的喜欢:<%=c.getLikeList().size()%>个</a></div>
-                <div class="yan-fans"><a href="${ctxPath}/customer/fans?ID=1&customer_id=${customer_id}">粉丝:<%=c.getFans().size()%>个</a></div>
-                <div class="yan-fans"><a href="${ctxPath}/customer/fans?ID=2&customer_id=${customer_id}">关注:<%=c.getAttention().size()%>个</a></div>
+                <div class="yan-fans"><a href="${ctxPath}/topic/likeTopic?id=${customer_id}">我的喜欢:<%=c.getLikeList().size()%>个</a></div>
+                <div class="yan-fans"><a href="${ctxPath}/customer/fans?ID=1&id=${customer_id}">粉丝:<%=c.getFans().size()%>个</a></div>
+                <div class="yan-fans"><a href="${ctxPath}/customer/fans?ID=2&id=${customer_id}">关注:<%=c.getAttention().size()%>个</a></div>
 
             </div>
-            <div class="jie-shao"> 简介 : ${customer.introduction} </div>
+            <div class="jie-shao"> 简介 : <%=c.getIntroduction()%> </div>
             <c:if test="${state==2}">
             <% Paging<Topic> paging=(Paging<Topic>) request.getAttribute("paging");%>
             <main class="topics-container ">
@@ -116,8 +118,8 @@
                 </c:forEach>
             </main>
             </c:if>
-            <c:if test="state==1">
-                <c:forEach items="${likeTopic}" var="topic" varStatus="x">
+            <c:if test="${state==1}">
+                <c:forEach items="${likeList}" var="topic" varStatus="x">
                     <div class="topic-all">
                         <div class="topic-list-detail-head">
                             <div>
@@ -147,7 +149,7 @@
                             </div>
                         </div>
 
-                        <div class="footerr">
+                        <div class="footerr" style="margin-left: -1053px;">
                         <span class="col-6  row justify-content-end">
                             <c:if test="${ topic.state==null}">
                             <span class="col-2 justify-content-start">
@@ -155,7 +157,7 @@
                                        <i class="fa fa-thumbs-o-up"></i>(${topic.thumbUpCount})
                             </a>
                              </span>
-                                <span  class="col-2 offset-3">
+                                <span  class="col-2 offset-1">
                              <a href="${ctxPath}/topic/thumbsState?praise=0&size=${paging.size}&current=${paging.current} &topic_id=${topic.id}" class="praise">
                                    <i class="fa fa-thumbs-o-down"></i>(${topic.thumbDownCount})
                               </a>
@@ -167,29 +169,29 @@
                                    <i class="fa fa-thumbs-up"></i>(${topic.thumbUpCount})
                                </a>
                               </span>
-                             <span class="col-2 offset-3">
+                             <span class="col-2 offset-1">
                                   <a href="#" class="praise" style="user-select: none">
                                      <i class="fa fa-thumbs-o-down "></i>(${topic.thumbDownCount})
                                   </a>
                              </span>
                          </c:if>
-                         <c:if test="${ topic.state == 0}">
+                         <c:if test="${ topic.state == 0 }">
                                 <span class="col-2 justify-content-start">
                              <a href="#" class="praise disabled" style="user-select: none">
                                     <i class="fa fa-thumbs-o-up"></i>(${topic.thumbUpCount})
                             </a>
                                </span>
-                             <span class="col-2 offset-3">
+                             <span class="col-2 offset-1">
                                     <a href="${ctxPath}/topic/thumbsState?praise=0&size=${paging.size}&current=${paging.current} &topic_id=${topic.id}" class="praise">
                                        <i class="fa fa-thumbs-down "></i>(${topic.thumbDownCount})
                                     </a>
                                </span>
                          </c:if>
-                            <span class="col-2 offset-1 ">
+                            <span class="col-3 offset-0 ">
                                 <a class="fa fa-eye" href="#"></a> ${topic.priority}
                             </span>
                             <span class="col-2 offset-1 " style="padding-right: 1px">
-                                <a class="fa fa-commenting-o" href="${ctxPath}/topic/publishExplain?id=${topic.id}" title="我来解答"> </a>
+                                <a class="fa fa-commenting-o" href="${ctxPath}/topic/publishExplain?id=${topic.id}" title="我来解答"> </a>${topic.explainCount}
                             </span>
                             <c:if test="${topic.author.id == customer.id}">
 

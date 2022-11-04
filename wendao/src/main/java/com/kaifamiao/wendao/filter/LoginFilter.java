@@ -13,7 +13,7 @@ public class LoginFilter implements Filter {
 
     @Override
     public void init(FilterConfig config) throws ServletException {
-        urls = Set.of("/topic/thumbsState","/topic/publish","/topic/mine","/customer/settings","/customer/change","/explain/thumbsState","/customer/fansAction");
+        urls = Set.of("/topic/thumbsState","/topic/publish","/topic/mine","/customer/settings","/customer/change","/explain/thumbsState","/customer/fansAction","/customer/mine");
     }
 
     @Override

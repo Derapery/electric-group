@@ -190,7 +190,6 @@ public class TopicServlet extends HttpServlet {
                 resp.sendRedirect(req.getContextPath()+"/topic/publish");
             }
             topic.setAuthor(((Customer)session.getAttribute("customer")));
-            System.out.println(((Customer)session.getAttribute("customer")).getId());
             String addr = req.getRemoteAddr();
             topic.setPublishAddress(addr);
             String categoryID=req.getParameter("categoryID");
@@ -277,7 +276,6 @@ public class TopicServlet extends HttpServlet {
             keyWord=key;
             session.setAttribute("key",keyWord);
         }
-        System.out.println(keyWord);
         Map<String,Object> map=havPaging(req);
         Paging<Topic> paging=topicService.findPageLike(keyWord,(Integer)map.get("size"),(Integer)map.get("current"));
         session.setAttribute("paging",paging);
@@ -320,7 +318,7 @@ public class TopicServlet extends HttpServlet {
     public void likeTopic(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         HttpSession session=req.getSession();
-        Long customer_id=Long.valueOf(req.getParameter("customer_id"));
+        Long customer_id=Long.valueOf(req.getParameter("id"));
         Customer cus=customerService.find(customer_id);
         req.setAttribute("customer",cus);
         session.setAttribute("state",1);

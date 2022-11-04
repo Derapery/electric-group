@@ -19,6 +19,7 @@ public class Topic {
     // 维护从 Topic 到 Explain 之间的 一对多 关联关系
     private List<Explain> explains; // 当前话题下的所有解答
 
+
     private String category_name;
     //话题点赞的数量
     private Integer thumbUpCount;
@@ -26,6 +27,16 @@ public class Topic {
     private Integer thumbDownCount;
     //话题的点赞的状态
     private Integer state;
+    //话题对应的评论的shuliang
+    private Integer explainCount;
+
+    public Integer getExplainCount() {
+        return explainCount;
+    }
+
+    public void setExplainCount(Integer explainCount) {
+        this.explainCount = explainCount;
+    }
 
     public Integer getState() {
         return state;
