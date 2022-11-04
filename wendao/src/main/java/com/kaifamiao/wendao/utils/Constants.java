@@ -7,6 +7,8 @@ public enum Constants {
     CUSTOMER_ID(0),
     SUPER_MANAGER(2),
     FANS_LIST("fans"),
+    TYPE_CUSTOMER(1),
+    TYPE_TOPIC(0),
     ATTENTION_LIST("attentions");
     private Integer value;
     private String name;
