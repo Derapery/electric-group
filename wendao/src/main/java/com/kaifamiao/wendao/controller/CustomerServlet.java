@@ -140,6 +140,7 @@ public class CustomerServlet extends HttpServlet {
         Paging<Topic> paging=topicService.findPage((Integer)map.get("size"),(Integer)map.get("current"),customer,2);
         req.setAttribute("paging",paging);
         req.setAttribute("customer",customer);
+        req.setAttribute("state",2);
         String path="/WEB-INF/pages/customer/list.jsp";
         RequestDispatcher dis= req.getRequestDispatcher(path);
         dis.forward(req,resp);

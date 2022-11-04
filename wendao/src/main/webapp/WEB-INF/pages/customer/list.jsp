@@ -95,6 +95,7 @@
 
             </div>
             <div class="jie-shao"> 简介 : ${customer.introduction} </div>
+            <c:if test="${state==2}">
             <% Paging<Topic> paging=(Paging<Topic>) request.getAttribute("paging");%>
             <main class="topics-container ">
                 <div class="row title">
@@ -114,6 +115,95 @@
                     </div>
                 </c:forEach>
             </main>
+            </c:if>
+            <c:if test="state==1">
+                <c:forEach items="${likeTopic}" var="topic" varStatus="x">
+                    <div class="topic-all">
+                        <div class="topic-list-detail-head">
+                            <div>
+                                <img class="topic-head-img rounded-circle" src="/image/ren.png" alt="">
+                                <span class="icon-wrap" title="问道官方认证">
+                            <img class="topic-anquan-img" src="/image/anquan.png" alt="">
+                        </span>
+                            </div>
+                            <a class="athor-name" href="${ctxPath}/customer/mine?id=${topic.author.id}">${topic.author.nickname}</a>
+                            <span class="athor-where">发布于${topic.publishTime}</span>
+                            <c:if test="${topic.author.concern ==0}">
+                                <a class="guanzhu :hover"  href="${ctxPath}/customer/fansAction?customer_id=${topic.author.id}&concern=0&size=${paging.size}&current=${paging.current}">+关注</a>
+                            </c:if>
+                            <c:if test="${topic.author.concern ==1}">
+                                <a class="guanzhu :hover" style="height: 29px;width: 91px" href="${ctxPath}/customer/fansAction?customer_id=${topic.author.id}&concern=1&size=${paging.size}&current=${paging.current}">取消关注</a>
+                            </c:if>
+                        </div>
+                        <div class="content-a">
+                            <a href="${ctxPath}/topic/detail?id=${topic.id}">
+                                <div class="title-content">
+                                    <h3 class="topic-detail-title">${topic.title}</h3>
+                                </div>
+                            </a>
+                            <div class="topic-content">${topic.content}</div>
+                            <div class="category-content">
+                                <h6 class="topic-detail-category">#${topic.category_name}</h6>
+                            </div>
+                        </div>
+
+                        <div class="footerr">
+                        <span class="col-6  row justify-content-end">
+                            <c:if test="${ topic.state==null}">
+                            <span class="col-2 justify-content-start">
+                             <a href="${ctxPath}/topic/thumbsState?praise=1&size=${paging.size}&current=${paging.current} &topic_id=${topic.id}" class="praise">
+                                       <i class="fa fa-thumbs-o-up"></i>(${topic.thumbUpCount})
+                            </a>
+                             </span>
+                                <span  class="col-2 offset-3">
+                             <a href="${ctxPath}/topic/thumbsState?praise=0&size=${paging.size}&current=${paging.current} &topic_id=${topic.id}" class="praise">
+                                   <i class="fa fa-thumbs-o-down"></i>(${topic.thumbDownCount})
+                              </a>
+                              </span>
+                            </c:if>
+                         <c:if test="${ topic.state == 1}">
+                             <span class="col-2 justify-content-start">
+                                <a href="${ctxPath}/topic/thumbsState?praise=1&size=${paging.size}&current=${paging.current} &topic_id=${topic.id}" class="praise">
+                                   <i class="fa fa-thumbs-up"></i>(${topic.thumbUpCount})
+                               </a>
+                              </span>
+                             <span class="col-2 offset-3">
+                                  <a href="#" class="praise" style="user-select: none">
+                                     <i class="fa fa-thumbs-o-down "></i>(${topic.thumbDownCount})
+                                  </a>
+                             </span>
+                         </c:if>
+                         <c:if test="${ topic.state == 0}">
+                                <span class="col-2 justify-content-start">
+                             <a href="#" class="praise disabled" style="user-select: none">
+                                    <i class="fa fa-thumbs-o-up"></i>(${topic.thumbUpCount})
+                            </a>
+                               </span>
+                             <span class="col-2 offset-3">
+                                    <a href="${ctxPath}/topic/thumbsState?praise=0&size=${paging.size}&current=${paging.current} &topic_id=${topic.id}" class="praise">
+                                       <i class="fa fa-thumbs-down "></i>(${topic.thumbDownCount})
+                                    </a>
+                               </span>
+                         </c:if>
+                            <span class="col-2 offset-1 ">
+                                <a class="fa fa-eye" href="#"></a> ${topic.priority}
+                            </span>
+                            <span class="col-2 offset-1 " style="padding-right: 1px">
+                                <a class="fa fa-commenting-o" href="${ctxPath}/topic/publishExplain?id=${topic.id}" title="我来解答"> </a>
+                            </span>
+                            <c:if test="${topic.author.id == customer.id}">
+
+                                <span class="col-3 offset-1">
+                                <a href="${ctxPath}/topic/delete?topicId=${topic.id}&size=${paging.size}&current=${paging.current} ">删除话题</a>
+                                </span>
+                            </c:if>
+                        </span>
+                        </div>
+                    </div>
+                </c:forEach>
+
+            </c:if>
+
 
                 <div class="row pagination-container">
                     <div class="col-6">
