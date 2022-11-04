@@ -163,7 +163,7 @@
                             <a class="guanzhu :hover"  href="${ctxPath}/customer/fansAction?customer_id=${topic.author.id}&concern=0&size=${paging.size}&current=${paging.current}">+关注</a>
                         </c:if>
                         <c:if test="${topic.author.concern ==1}">
-                            <a class="guanzhu :hover"  href="${ctxPath}/customer/fansAction?customer_id=${topic.author.id}&concern=1&size=${paging.size}&current=${paging.current}">-取消关注</a>
+                            <a class="guanzhu :hover" style="height: 29px;width: 91px" href="${ctxPath}/customer/fansAction?customer_id=${topic.author.id}&concern=1&size=${paging.size}&current=${paging.current}">取消关注</a>
                         </c:if>
                     </div>
                     <div class="content-a">
