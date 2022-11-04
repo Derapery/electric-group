@@ -269,6 +269,7 @@ public class TopicServlet extends HttpServlet {
             keyWord=key;
             session.setAttribute("key",keyWord);
         }
+        System.out.println(keyWord);
         Map<String,Object> map=havPaging(req);
         Paging<Topic> paging=topicService.findPageLike(keyWord,(Integer)map.get("size"),(Integer)map.get("current"));
         session.setAttribute("paging",paging);

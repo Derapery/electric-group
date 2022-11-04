@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="search-dan">
-                        <form action="/topic/search" method="post">
+                        <form action="/topic/search" method="get">
                             <input type="text" style="width: 540px ;outline:none;
                                       height: 46px;margin: 0px;padding: 0px;border: none" name="keyworkd" placeholder="请输入话题搜索关键字" >
                             <button class="search-button" type="submit">搜索一下</button>

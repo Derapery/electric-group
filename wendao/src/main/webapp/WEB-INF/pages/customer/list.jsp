@@ -1,5 +1,7 @@
 <%@ page import="com.kaifamiao.wendao.entity.Customer" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.kaifamiao.wendao.utils.Paging" %>
+<%@ page import="com.kaifamiao.wendao.entity.Topic" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -83,12 +85,13 @@
             </div>
             <%  Customer c =(Customer) request.getAttribute("customer");%>
             <div class="LIYAN">
-                <div class="yan-fans"><a href="${ctxPath}/topic/like">我的喜欢:<%=c.getFans().size()%>个</a></div>
+                <div class="yan-fans"><a href="${ctxPath}/topic/like">我的喜欢:<%=c.getLikeList().size()%>个</a></div>
                 <div class="yan-fans"><a href="${ctxPath}/customer/fans">粉丝:<%=c.getFans().size()%>个</a></div>
-                <div class="yan-fans"><a href="${ctxPath}/customer/concern">关注:<%=c.getAttention().size()%>个</a></div>
+                <div class="yan-fans"><a href="${ctxPath}/customer/fans">关注:<%=c.getAttention().size()%>个</a></div>
 
             </div>
-            <div class="jie-shao"> 简介:${customer.introduction} </div>
+            <div class="jie-shao"> 简介:${c.introduction} </div>
+            <% Paging<Topic> paging=(Paging<Topic>) request.getAttribute("paging");%>
             <c:forEach items="${paging.dataList}" var="topic" varStatus="x">
                 <div class="topic-all">
                     <div class="topic-list-detail-head">
