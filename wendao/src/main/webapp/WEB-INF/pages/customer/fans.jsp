@@ -57,7 +57,7 @@
                 <c:forEach items="${customer.fans}" var="customer" varStatus="x">
                     <div class="row title neirong">
                         <span class="col-1">${x.count}</span>
-                        <span class="col-4"><a href="${ctxPath}/customer/mine?id=${topic.author.id}">${customer.nickname}</a></span>
+                        <span class="col-4"><a href="${ctxPath}/customer/mine?id=${customer.id}">${customer.nickname}</a></span>
                         <span class="col-4">${customer.registerDate}</span>
                         <span class="col-3">${customer.gender}</span>
                     </div>
@@ -77,7 +77,8 @@
                     <div class="row topic">
                         <span class="col-1">${(pagination.current - 1 ) * pagination.size + x.count }</span>
                         <span class="col-4">
-                            <a href="${ctxPath}/topic/detail?id=${t.id}">${t.title}</a>
+                            <a href="${ctxPath}/topic/detail?id=${t.id}
+">${t.title}</a>
                         </span>
                         <span class="col-4">${t.publishTime}</span>
                         <span class="col-3">${t.author.nickname}</span>

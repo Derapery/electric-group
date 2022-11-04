@@ -84,11 +84,14 @@
                 <img class="yuan-ren rounded-circle" src="/image/ren.png" alt="">
                 <div class="ni-cheng">${customer.nickname}</div>
             </div>
-            <%  Customer c =(Customer) request.getAttribute("customer");%>
+            <%  Customer c =(Customer) request.getAttribute("customer");
+                Long customer_id=c.getId();
+                session.setAttribute("customer_id",customer_id);
+            %>
             <div class="LIYAN">
                 <div class="yan-fans"><a href="${ctxPath}/topic/like">我的喜欢:<%=c.getLikeList().size()%>个</a></div>
-                <div class="yan-fans"><a href="${ctxPath}/customer/fans?ID=1&customer_id=${c.id}">粉丝:<%=c.getFans().size()%>个</a></div>
-                <div class="yan-fans"><a href="${ctxPath}/customer/fans?ID=2&customer_id=${c.id}">关注:<%=c.getAttention().size()%>个</a></div>
+                <div class="yan-fans"><a href="${ctxPath}/customer/fans?ID=1&customer_id=${customer_id}">粉丝:<%=c.getFans().size()%>个</a></div>
+                <div class="yan-fans"><a href="${ctxPath}/customer/fans?ID=2&customer_id=${customer_id}">关注:<%=c.getAttention().size()%>个</a></div>
 
             </div>
             <div class="jie-shao"> 简介:${c.introduction} </div>
@@ -138,6 +141,7 @@
 
 
 </div>
+<c:remove var="customer_id" scope="session"></c:remove>
 <div class="kong"></div>
 
 <jsp:include page="/WEB-INF/pages/commons/footer.jsp"></jsp:include>
