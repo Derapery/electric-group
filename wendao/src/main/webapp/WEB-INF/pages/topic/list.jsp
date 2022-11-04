@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="${ctxPath}/css/search.css">
     <link rel="stylesheet" href="${ctxPath}/css/right.css">
     <link rel="stylesheet" href="${ctxPath}/css/round.css">
+
     <meta charset="UTF-8">
 </head>
 
@@ -140,8 +141,11 @@
             <a class="breadcrumb-item" href="${ctxPath}/index.jsp">首页</a>
             <a class="breadcrumb-item" href="#">话题列表</a>
         </nav>
-
-
+        <div class="btn-group">
+            <c:forEach items="${categoryList}" var="cate" varStatus="x">
+                  <a class="btn btn-primary">${cate.name}</a>
+            </c:forEach>
+        </div>
         <%--当前页面主要内容--%>
         <main class="topics-container">
             <c:forEach items="${paging.dataList}" var="topic" varStatus="x">

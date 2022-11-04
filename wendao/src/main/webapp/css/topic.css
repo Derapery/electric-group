@@ -44,7 +44,7 @@ nav.list {
 .topics-container {
     width: 60vw;
     border: 1px solid #c69500;
-    margin: 15px auto;
+    /*margin: 15px auto;*/
 }
 
 .topics-container>.title {
