@@ -148,4 +148,28 @@ public class ManagerService {
     public boolean changePwd(Customer customer) {
         return false;
     }
+
+    public Paging<BadLog> findPageByOne(Integer size, Integer current, Integer page, Long id) {
+        Paging<BadLog> paging=new Paging<>();
+        List<BadLog> list= findBadlogById(id);
+        Integer begin=(current-1)*size;
+        Integer count = list.size();
+        Integer total=count/size;
+        total= count%size==0? total:total+1;
+        paging.setSize(size);
+        paging.setCurrent(current);
+        paging.setTotal(total);
+        paging.setBegin(begin);
+        paging.setDataList(list);
+        return paging;
+    }
+
+    private List<BadLog> findBadlogById(Long id) {
+        return badLogDao.findById(id);
+    }
+
+
+    public boolean changeManagement(Long customer_id, Long management) {
+        return customerDao.modifyLevel(customer_id,management);
+    }
 }

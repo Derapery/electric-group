@@ -46,6 +46,10 @@ public class ManagerServlet extends HttpServlet {
             this.badlogPage(req, resp);
             return;
         }
+        if ("GET".equals(method) && uri.endsWith("/badlogOne")) {
+            this.badlogOnePage(req, resp);
+            return;
+        }
         if ("GET".equals(method) && uri.endsWith("/category")) {
             this.changeCategoryPage(req, resp);
             return;
@@ -81,7 +85,55 @@ public class ManagerServlet extends HttpServlet {
         if ("POST".equals(method) && uri.endsWith("/changePwd")) {
             this.changePwdAction(req, resp);
             return;
+        }if ("GET".equals(method) && uri.endsWith("/changemanager")) {
+            this.changeMaPage(req, resp);
+            return;
         }
+        if ("POST".equals(method) && uri.endsWith("/changemanager")) {
+            this.changeMaAction(req, resp);
+            return;
+        }
+    }
+
+    private void changeMaAction(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        HttpSession session = req.getSession();
+        String customer_id = req.getParameter("customer_id");
+        String management = req.getParameter("management");
+        if (StringUtils.isEmpty(customer_id)||StringUtils.isBlank(customer_id)){
+            session.setAttribute("message","获取用户权限失败");
+            resp.sendRedirect(req.getContextPath()+"/manager/list");
+            return;
+        }
+        if(!managerService.changeManagement(Long.parseLong(customer_id),Long.parseLong(management))){
+            session.setAttribute("message","修改用户权限失败");
+            resp.sendRedirect(req.getContextPath()+"/manager/list");
+            return;
+        }
+        mangerPage(req, resp);
+    }
+
+    private void changeMaPage(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        HttpSession session = req.getSession();
+        String customer_id = req.getParameter("customer_id");
+        if (StringUtils.isEmpty(customer_id)||StringUtils.isBlank(customer_id)){
+            session.setAttribute("message","获取用户失败");
+            resp.sendRedirect(req.getContextPath()+"/manager/list");
+            return;
+        }
+        Customer customer = managerService.findCustomerById(Long.parseLong(customer_id));
+        req.setAttribute("customerMa",customer);
+        mangerPage(req,resp);
+    }
+
+    private void badlogOnePage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Map<String,Object> map=havPaging(req);
+        String customer_id = req.getParameter("customer_id");
+        Paging<BadLog> paging =managerService.findPageByOne((Integer)map.get("size"),(Integer)map.get("current"),1, Long.parseLong(customer_id));
+        req.setAttribute("paging",paging);
+        req.setAttribute("badlog",0);
+        String path="/WEB-INF/pages/manager/list.jsp";
+        RequestDispatcher dis= req.getRequestDispatcher(path);
+        dis.forward(req,resp);
     }
 
     private void badlogPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -105,11 +157,11 @@ public class ManagerServlet extends HttpServlet {
         Customer customer = managerService.findCustomerById(Long.parseLong(customer_id));
         String newPassword=req.getParameter("newPassword");
         customer.setPassword(newPassword);
-        /*if (managerService.changePwd(customer)){
+        if (managerService.changePwd(customer)){
             session.setAttribute("message", "修改成功！");
         }else {
             session.setAttribute("message", "修改失败！");
-        }*/
+        }
         resp.sendRedirect(req.getContextPath()+"/manager/list");
     }
 
@@ -121,7 +173,6 @@ public class ManagerServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/manager/list");
             return;
         }
-        System.out.println(1);
         Customer customer = managerService.findCustomerById(Long.parseLong(customer_id));
         req.setAttribute("customer",customer);
         req.setAttribute("type", "manager");

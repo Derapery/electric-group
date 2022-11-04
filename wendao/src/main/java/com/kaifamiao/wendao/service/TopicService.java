@@ -260,4 +260,44 @@ public class TopicService {
         }
         return content;
     }
+    public Paging<Topic> search(Integer size, Integer current,Long cate,Long customer_id){
+        Paging<Topic> paging=new Paging<>();
+        Integer begin=(current-1)*size;
+        Integer count=searchCount(cate);
+        Integer total=count/size;
+        total= count%size==0? total:total+1;
+        paging.setSize(size);
+        paging.setCurrent(current);
+        paging.setTotal(total);
+        paging.setBegin(begin);
+        List<Topic> list=topicsDao.searchPage(cate,begin,size);
+        for (Topic t:list) {
+            Customer customer1=t.getAuthor();
+            customer1.setConcern(0);
+            t.setCategory_name(categoryDao.find(t.getCategory_id()).getName());
+            //查询话题的点赞数量
+            t.setThumbUpCount(topicLikeDao.thumbUPCount(t.getId()));
+            //查询话题的踩的数量
+            t.setThumbDownCount(topicLikeDao.thumbDownCount(t.getId()));
+            //获取话题的赞或踩的信息的状态的列表
+            if(customer_id != null){
+                Long id=t.getAuthor().getId();
+                Attention  attention=attentionDao.findSecond(customer_id,id);
+                int  attenState= attention==null? 0:1;
+                customer1.setConcern( attenState);
+                t.setAuthor(customer1);
+                Praise praise = topicLikeDao.find(customer_id,t.getId());
+                if(praise != null){
+                    t.setState(praise.getState());
+                    continue;
+                }
+            }
+            t.setState(null);
+        }
+        paging.setDataList(list);
+        return paging;
+    }
+    private Integer searchCount(Long cate){
+        return topicsDao.searchCount(cate);
+    }
 }

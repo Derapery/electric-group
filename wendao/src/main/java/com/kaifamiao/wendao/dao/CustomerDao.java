@@ -12,6 +12,7 @@ import java.util.List;
 public class CustomerDao extends BaseDao<Customer,Long>{
     private String INSERT_ONE="INSERT INTO t_customers(username,password,salt,nickname,reg_date,introduce,management,gender,id) VALUES(?,?,?,?,?,?,?,?,?)";
     private String Modify="UPDATE t_customers SET username=?,password=?,salt=?,nickname=?,introduce=?,gender=? WHERE id=?";
+    private String UPDATE_LEVEL="UPDATE t_customers SET management=? WHERE id=?";
     private String DELETE="DELETE FROM t_customers WHERE id=?";
     private String SELECT_ONE_BASE="SELECT username,password,salt,nickname,reg_date,introduce,management,gender,id FROM t_customers WHERE";
     private String SELECT_ONE= SELECT_ONE_BASE+" id=?";
@@ -110,6 +111,13 @@ public class CustomerDao extends BaseDao<Customer,Long>{
         } catch (SQLException cause) {
             cause.printStackTrace();
             throw new RuntimeException("查询所有用户信息时发生错误！");
+        }
+    }
+    public boolean modifyLevel(Long customer_id, Long management){
+        try {
+            return runner.update(UPDATE_LEVEL,management,customer_id)==1;
+        } catch (SQLException cause) {
+            throw new RuntimeException("修改用户权限时发生错误！",cause);
         }
     }
 }

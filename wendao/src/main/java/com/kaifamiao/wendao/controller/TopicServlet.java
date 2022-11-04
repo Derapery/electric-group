@@ -91,6 +91,7 @@ public class TopicServlet extends HttpServlet {
             this.likeTopic(req,resp);
             return;
         }
+
         //"GET" “classify”
         if("GET".equals(method) && uri.endsWith("/classify")){
             this.classify(req,resp);
@@ -351,6 +352,7 @@ public class TopicServlet extends HttpServlet {
         RequestDispatcher db=req.getRequestDispatcher(path);
         db.forward(req,resp);
     }
+
     @Override
     public void destroy() {
         super.destroy();

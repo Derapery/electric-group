@@ -68,6 +68,15 @@
             </div>
         </form>
     </c:if>
+    <c:if test="${not empty customerMa}" >
+        <form action="${ctxPath}/manager/changemanager?customer_id=${customerMa.id}" method="post">
+            <div class="form-row">
+                <label for="category_name">权限等级:</label>
+                <input type="text" name="management" value="${customerMa.management}" placeholder="0默认，1管理员，-1禁止评论，-2禁止发布，-3禁止登录"  >
+                <button type="submit" style="margin: auto">修改权限</button>
+            </div>
+        </form>
+    </c:if>
         <p>${message}</p>
         <c:choose>
             <%--若会话对象中存在customer则认为用于已经登录--%>
@@ -99,8 +108,8 @@
                         <span class="col-3" style="font-size: 15px">
                             <a href="${ctxPath}/manager/editinfo?customer_id=${customer.id}">修改信息</a>
                             <a href="${ctxPath}/manager/changePwd?customer_id=${customer.id}">修改密码</a>
-                            <a href="${ctxPath}/manager/publish">不良记录</a>
-                            <a href="${ctxPath}/manager/changemanager">更改权限</a>
+                            <a href="${ctxPath}/manager/badlogOne?customer_id=${customer.id}">不良记录</a>
+                            <a href="${ctxPath}/manager/changemanager?customer_id=${customer.id}">更改权限</a>
                         </span>
                     </div>
                 </c:forEach>
@@ -150,7 +159,6 @@
                                     <span>敏感话题</span>
                                 </c:otherwise>
                             </c:choose>
-
                         </span>
                         <span class="col-6" style="font-size: 15px">
                             <a class="col-3 href="${ctxPath}/manager/topic/change/category?id=${badlog.user_id}">禁言用户</a>
@@ -190,6 +198,8 @@
 
     <c:remove var="message" scope="session" />
     <c:remove var="category" scope="request" />
+    <c:remove var="customer" scope="request" />
+    <c:remove var="customerMa" scope="request" />
 
 </body>
 <jsp:include page="/WEB-INF/pages/commons/footer.jsp"></jsp:include>
