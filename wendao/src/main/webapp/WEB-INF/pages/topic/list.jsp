@@ -218,10 +218,10 @@
                                </span>
                          </c:if>
                             <span class="col-2 offset-1 ">
-                                <i class="fa fa-eye"> </i>${topic.priority}
+                                <a class="fa fa-eye" href="#"> </a>${topic.priority}
                             </span>
                             <span class="col-2 offset-1 " style="padding-right: 1px">
-                                <a class="fa fa-commenting-o"> </a>
+                                <a class="fa fa-commenting-o" href="${ctxPath}/topic/publishExplain?id=${topic.id}" title="我来解答"> </a>
                             </span>
                             <c:if test="${topic.author.id == customer.id}">
 
