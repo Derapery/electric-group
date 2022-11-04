@@ -5,6 +5,7 @@ import com.kaifamiao.wendao.entity.Category;
 import com.kaifamiao.wendao.entity.Customer;
 import com.kaifamiao.wendao.entity.Topic;
 import com.kaifamiao.wendao.service.AttentionService;
+import com.kaifamiao.wendao.service.CustomerService;
 import com.kaifamiao.wendao.service.TopicLikeService;
 import com.kaifamiao.wendao.service.TopicService;
 import com.kaifamiao.wendao.utils.Paging;
@@ -31,11 +32,13 @@ public class TopicServlet extends HttpServlet {
     private TopicService topicService;
     private TopicLikeService topicLikeService;
     private AttentionService attentionService;
+    private CustomerService customerService;
     @Override
     public void init() throws ServletException {
         topicService=new TopicService();
         topicLikeService=new TopicLikeService();
         attentionService=new AttentionService();
+        customerService=new CustomerService();
     }
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp)
@@ -81,6 +84,11 @@ public class TopicServlet extends HttpServlet {
         //"GET" "delete"
         if("GET".equals(method) && uri.endsWith("/delete")){
             this.delete(req,resp);
+            return;
+        }
+        //“GET” “likeTopic”
+        if("GET".equals(method) && uri.endsWith("/likeTopic")){
+            this.likeTopic(req,resp);
             return;
         }
     }
@@ -308,6 +316,17 @@ public class TopicServlet extends HttpServlet {
         topicService.delete(customer.getId(),topic_id);
         resp.sendRedirect(req.getContextPath()+"/topic/list?size="+size+"&current="+Integer.parseInt(current.trim()));
 
+    }
+    public void likeTopic(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        HttpSession session=req.getSession();
+        Long customer_id=Long.valueOf(req.getParameter("customer_id"));
+        Customer cus=customerService.find(customer_id);
+        req.setAttribute("customer",cus);
+        session.setAttribute("state",1);
+        String path="/WEB-INF/pages/customer/list.jsp";
+        RequestDispatcher dis= req.getRequestDispatcher(path);
+        dis.forward(req,resp);
     }
     @Override
     public void destroy() {

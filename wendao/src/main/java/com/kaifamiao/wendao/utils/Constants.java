@@ -3,8 +3,9 @@ package com.kaifamiao.wendao.utils;
 public enum Constants {
 
     CUSTOMER_LOGINED("customer"),
-    MANAGEMENT_ID(0),
-    CUSTOMER_ID(1),
+    MANAGEMENT_ID(1),
+    CUSTOMER_ID(0),
+    SUPER_MANAGER(2),
     FANS_LIST("fans"),
     ATTENTION_LIST("attentions");
     private Integer value;

@@ -16,7 +16,7 @@ public class CustomerDao extends BaseDao<Customer,Long>{
     private String SELECT_ONE_BASE="SELECT username,password,salt,nickname,reg_date,introduce,management,gender,id FROM t_customers WHERE";
     private String SELECT_ONE= SELECT_ONE_BASE+" id=?";
     private String SELECT_ONE_USERNAME=SELECT_ONE_BASE+" username=?";
-    private String SELECT_ALL="SELECT username,password,salt,nickname,reg_date,id FROM t_customers ORDER BY id";
+    private String SELECT_ALL="SELECT username,password,salt,salt,introduce,gender,management,nickname,reg_date,id FROM t_customers ORDER BY id";
     @Override
     public boolean save(Customer customer) {
         LocalDate local=customer.getRegisterDate();
@@ -108,6 +108,7 @@ public class CustomerDao extends BaseDao<Customer,Long>{
         try {
             return runner.query(SELECT_ALL,resHand);
         } catch (SQLException cause) {
+            cause.printStackTrace();
             throw new RuntimeException("查询所有用户信息时发生错误！");
         }
     }
