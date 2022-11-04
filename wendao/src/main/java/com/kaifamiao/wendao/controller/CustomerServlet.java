@@ -1,5 +1,7 @@
 package com.kaifamiao.wendao.controller;
 
+import com.kaifamiao.wendao.dao.CategoryDao;
+import com.kaifamiao.wendao.entity.Category;
 import com.kaifamiao.wendao.entity.Customer;
 import com.kaifamiao.wendao.entity.Topic;
 import com.kaifamiao.wendao.service.AttentionService;
@@ -205,6 +207,7 @@ public class CustomerServlet extends HttpServlet {
     //"POST" "/sing/in"
     private void singAction(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        HttpSession session=req.getSession();
         if(validateSgin(req,resp)==0){
             resp.sendRedirect(req.getContextPath() + "/index.jsp");
             return;

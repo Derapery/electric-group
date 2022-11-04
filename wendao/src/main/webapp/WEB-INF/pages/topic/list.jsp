@@ -144,7 +144,7 @@
         </nav>
             <c:forEach items="${categoryList}" var="cate" varStatus="x">
                <div class=" btn btn-warning chu-xian">
-                <a  href="#" >${cate.name} </a>
+                <a  href="${ctxPath}/topic/classify?id=${cate.id}" >${cate.name} </a>
                </div>
            </c:forEach>
 

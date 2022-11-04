@@ -91,6 +91,11 @@ public class TopicServlet extends HttpServlet {
             this.likeTopic(req,resp);
             return;
         }
+        //"GET" “classify”
+        if("GET".equals(method) && uri.endsWith("/classify")){
+            this.classify(req,resp);
+            return;
+        }
     }
     private Map<String,Object> havPaging(HttpServletRequest request){
         //默认的显示的话题数
@@ -135,6 +140,8 @@ public class TopicServlet extends HttpServlet {
                 c.setTitle(c.getTitle().substring(0,10)+"...");
             }
         }
+        List<Category> categories=customerService.getCategory();
+        session.setAttribute("categoryList",categories);
         session.setAttribute("hotTopicList",hotTopicList);
         session.setAttribute("paging",paging);
         String path="/WEB-INF/pages/topic/list.jsp";
@@ -326,6 +333,24 @@ public class TopicServlet extends HttpServlet {
         String path="/WEB-INF/pages/customer/list.jsp";
         RequestDispatcher dis= req.getRequestDispatcher(path);
         dis.forward(req,resp);
+    }
+    private void classify(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        Map<String,Object> map=havPaging(req);
+        HttpSession session=req.getSession();
+        Long ID= Long.valueOf(req.getParameter("id"));
+        Customer customer=(Customer) session.getAttribute("customer");
+        Long customer_id;
+        if(customer==null){
+            customer_id=null;
+        }else{
+            customer_id=customer.getId();
+        }
+        Paging<Topic> paging=topicService.search((Integer)map.get("size"),(Integer)map.get("current"),ID,customer_id);
+        session.setAttribute("paging",paging);
+        String path="/WEB-INF/pages/topic/list.jsp";
+        RequestDispatcher db=req.getRequestDispatcher(path);
+        db.forward(req,resp);
     }
     @Override
     public void destroy() {

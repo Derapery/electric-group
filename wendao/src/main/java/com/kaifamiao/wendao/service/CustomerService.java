@@ -1,6 +1,7 @@
 package com.kaifamiao.wendao.service;
 
 import com.kaifamiao.wendao.dao.*;
+import com.kaifamiao.wendao.entity.Category;
 import com.kaifamiao.wendao.entity.Customer;
 import com.kaifamiao.wendao.entity.Explain;
 import com.kaifamiao.wendao.entity.Topic;
@@ -198,6 +199,10 @@ public class CustomerService {
             customer.setPassword(encrypt(password,salt));
         }
         return customerDao.modify(customer);
+    }
+    //获取话题类型的分类表
+    public List<Category> getCategory(){
+       return categoryDao.finaAll();
     }
     //查询用户发表的评论
     public List<Explain> findExplain(Long along){
