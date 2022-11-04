@@ -112,7 +112,7 @@
                 <c:if test="${sessionScope.customer !=null}">
                     <div class="huanying">
                         <div class="kongbai">   </div>
-                        欢迎${sessionScope.customer.nickname}！！
+                        欢迎${sessionScope.customer.nickname}
                     </div>
                 </c:if>
             </div>
@@ -148,7 +148,7 @@
            </c:forEach>
 
         <%--当前页面主要内容--%>
-        <main class="topics-container">
+        <main class="topics-container gao-du">
             <c:forEach items="${paging.dataList}" var="topic" varStatus="x">
                 <div class="topic-all">
                     <div class="topic-list-detail-head">
