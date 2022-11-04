@@ -91,6 +91,11 @@ public class TopicServlet extends HttpServlet {
             this.likeTopic(req,resp);
             return;
         }
+        //"GET" “classify”
+        if("GET".equals(method) && uri.endsWith("/classify")){
+            this.classify(req,resp);
+            return;
+        }
     }
     private Map<String,Object> havPaging(HttpServletRequest request){
         //默认的显示的话题数
@@ -135,6 +140,8 @@ public class TopicServlet extends HttpServlet {
                 c.setTitle(c.getTitle().substring(0,10)+"...");
             }
         }
+        List<Category> categories=customerService.getCategory();
+        session.setAttribute("categoryList",categories);
         session.setAttribute("hotTopicList",hotTopicList);
         session.setAttribute("paging",paging);
         String path="/WEB-INF/pages/topic/list.jsp";
@@ -190,7 +197,6 @@ public class TopicServlet extends HttpServlet {
                 resp.sendRedirect(req.getContextPath()+"/topic/publish");
             }
             topic.setAuthor(((Customer)session.getAttribute("customer")));
-            System.out.println(((Customer)session.getAttribute("customer")).getId());
             String addr = req.getRemoteAddr();
             topic.setPublishAddress(addr);
             String categoryID=req.getParameter("categoryID");
@@ -276,7 +282,6 @@ public class TopicServlet extends HttpServlet {
             keyWord=key;
             session.setAttribute("key",keyWord);
         }
-        System.out.println(keyWord);
         Map<String,Object> map=havPaging(req);
         Paging<Topic> paging=topicService.findPageLike(keyWord,(Integer)map.get("size"),(Integer)map.get("current"));
         session.setAttribute("paging",paging);
@@ -319,13 +324,32 @@ public class TopicServlet extends HttpServlet {
     public void likeTopic(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         HttpSession session=req.getSession();
-        Long customer_id=Long.valueOf(req.getParameter("customer_id"));
+        Long customer_id=Long.valueOf(req.getParameter("id"));
         Customer cus=customerService.find(customer_id);
         req.setAttribute("customer",cus);
+        System.out.println(cus.getLikeList().get(0).getTitle());
         session.setAttribute("state",1);
         String path="/WEB-INF/pages/customer/list.jsp";
         RequestDispatcher dis= req.getRequestDispatcher(path);
         dis.forward(req,resp);
+    }
+    private void classify(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        Map<String,Object> map=havPaging(req);
+        HttpSession session=req.getSession();
+        Long ID= Long.valueOf(req.getParameter("id"));
+        Customer customer=(Customer) session.getAttribute("customer");
+        Long customer_id;
+        if(customer==null){
+            customer_id=null;
+        }else{
+            customer_id=customer.getId();
+        }
+        Paging<Topic> paging=topicService.search((Integer)map.get("size"),(Integer)map.get("current"),ID,customer_id);
+        session.setAttribute("paging",paging);
+        String path="/WEB-INF/pages/topic/list.jsp";
+        RequestDispatcher db=req.getRequestDispatcher(path);
+        db.forward(req,resp);
     }
     @Override
     public void destroy() {

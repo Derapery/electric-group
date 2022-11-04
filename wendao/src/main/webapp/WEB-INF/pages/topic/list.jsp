@@ -143,8 +143,8 @@
             <a class="breadcrumb-item" href="#">话题列表</a>
         </nav>
             <c:forEach items="${categoryList}" var="cate" varStatus="x">
-               <div class=" btn btn-warning chu-xian">
-                <a  href="#" >${cate.name} </a>
+               <div class=" btn btn-warning chu-xian" style="background: #E9ECEF;border-color: #FEF9F3">
+                <a  href="${ctxPath}/topic/classify?id=${cate.id} " style="text-decoration: none">${cate.name} </a>
                </div>
            </c:forEach>
 
@@ -212,17 +212,17 @@
                                     <i class="fa fa-thumbs-o-up"></i>(${topic.thumbUpCount})
                             </a>
                                </span>
-                             <span class="col-2 offset-3">
+                             <span class="col-2 offset-2">
                                     <a href="${ctxPath}/topic/thumbsState?praise=0&size=${paging.size}&current=${paging.current} &topic_id=${topic.id}" class="praise">
                                        <i class="fa fa-thumbs-down "></i>(${topic.thumbDownCount})
                                     </a>
                                </span>
                          </c:if>
-                            <span class="col-2 offset-1 ">
-                                <a class="fa fa-eye" href="#"> </a>${topic.priority}
+                            <span class="col-3 offset-1 ">
+                                <a class="fa fa-eye" href="#"></a> ${topic.priority}
                             </span>
                             <span class="col-2 offset-1 " style="padding-right: 1px">
-                                <a class="fa fa-commenting-o" href="${ctxPath}/topic/publishExplain?id=${topic.id}" title="我来解答"> </a>
+                                <a class="fa fa-commenting-o" href="${ctxPath}/topic/publishExplain?id=${topic.id}" title="我来解答"> </a>${topic.explainCount}
                             </span>
                             <c:if test="${topic.author.id == customer.id}">
 

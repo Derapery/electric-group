@@ -54,7 +54,7 @@
                     <span class="col-3">性别</span>
                 </div>
                 <c:if test="${state==1}">
-                <c:forEach items="${customer.fans}" var="customer" varStatus="x">
+                <c:forEach items="${cus.fans}" var="customer" varStatus="x">
                     <div class="row title neirong">
                         <span class="col-1">${x.count}</span>
                         <span class="col-4"><a href="${ctxPath}/customer/mine?id=${customer.id}">${customer.nickname}</a></span>
@@ -64,7 +64,7 @@
                 </c:forEach>
                 </c:if>
                 <c:if test="${state==2}">
-                    <c:forEach items="${customer.attention}" var="customer" varStatus="x">
+                    <c:forEach items="${cus.attention}" var="customer" varStatus="x">
                         <div class="row title neirong">
                             <span class="col-1">${x.count}</span>
                             <span class="col-4"><a href="${ctxPath}/customer/mine?id=${customer.id}">${customer.nickname}</a></span>
@@ -77,8 +77,7 @@
                     <div class="row topic">
                         <span class="col-1">${(pagination.current - 1 ) * pagination.size + x.count }</span>
                         <span class="col-4">
-                            <a href="${ctxPath}/topic/detail?id=${t.id}
-">${t.title}</a>
+                            <a href="${ctxPath}/topic/detail?id=${t.id}">${t.title}</a>
                         </span>
                         <span class="col-4">${t.publishTime}</span>
                         <span class="col-3">${t.author.nickname}</span>

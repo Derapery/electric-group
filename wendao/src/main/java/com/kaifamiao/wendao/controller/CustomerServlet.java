@@ -1,5 +1,7 @@
 package com.kaifamiao.wendao.controller;
 
+import com.kaifamiao.wendao.dao.CategoryDao;
+import com.kaifamiao.wendao.entity.Category;
 import com.kaifamiao.wendao.entity.Customer;
 import com.kaifamiao.wendao.entity.Topic;
 import com.kaifamiao.wendao.service.AttentionService;
@@ -140,6 +142,7 @@ public class CustomerServlet extends HttpServlet {
         Paging<Topic> paging=topicService.findPage((Integer)map.get("size"),(Integer)map.get("current"),customer,2);
         req.setAttribute("paging",paging);
         req.setAttribute("customer",customer);
+        req.setAttribute("state",2);
         String path="/WEB-INF/pages/customer/list.jsp";
         RequestDispatcher dis= req.getRequestDispatcher(path);
         dis.forward(req,resp);
@@ -204,6 +207,7 @@ public class CustomerServlet extends HttpServlet {
     //"POST" "/sing/in"
     private void singAction(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        HttpSession session=req.getSession();
         if(validateSgin(req,resp)==0){
             resp.sendRedirect(req.getContextPath() + "/index.jsp");
             return;
@@ -409,24 +413,12 @@ public class CustomerServlet extends HttpServlet {
     private void fans(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         HttpSession session=req.getSession();
-        Long customer_id=Long.valueOf(req.getParameter("customer_id"));
+        Long customer_id=Long.valueOf(req.getParameter("id"));
         Customer cus=cusSer.find(customer_id);
-        List<Customer> fansList=cus.getFans();
-        List<Customer> attenList=cus.getAttention();
-        for (Customer c:fansList) {
-            Customer customer1=cusSer.find(c.getId());
-            c=customer1;
-        }
-        for (Customer c:attenList) {
-            Customer customer1=cusSer.find(c.getId());
-            c=customer1;
-        }
-        cus.setFans(fansList);
-        cus.setAttention(attenList);
         Integer ID=Integer.valueOf(req.getParameter("ID"));
         int state= ID==1?1:2;
         session.setAttribute("state",state);
-        session.setAttribute("customer",cus);
+        session.setAttribute("cus",cus);
         String path="/WEB-INF/pages/customer/fans.jsp";
         RequestDispatcher dis= req.getRequestDispatcher(path);
         dis.forward(req,resp);

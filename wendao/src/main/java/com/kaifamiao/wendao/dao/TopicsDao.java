@@ -11,20 +11,22 @@ import java.util.List;
 
 public class TopicsDao extends BaseDao<Topic,Long> {
     private CustomerDao cusDao=new CustomerDao();
-    private String INSERT_ONE="INSERT INTO t_topics(id,title,content,publish_time,publish_address,priority,customer_id,category_id) VALUES(?,?,?,?,?,?,?,?)";
-    private String SELECT_MAX_ID="SELECT max(id) FROM t_topics";
-    private String MODIFY="UPDATE t_topics SET title=?,content=?,publish_time=?,publish_address=?,priority=?,customer_id=? WHERE id=?";
-    private String DELETE_ONE="DELETE FROM t_topics WHERE id=?";
-    private String FIND_BASE="SELECT title,content,publish_time,publish_address,priority,customer_id,category_id,id FROM t_topics WHERE ";
-    private String FIND_ONE_ID=FIND_BASE+" id=?";
-    private String FIND_USER_ID=FIND_BASE+" customer_id=?";
-    private String FIND_ALL="SELECT title,content,publish_time,publish_address,priority,customer_id,category_id,id FROM t_topics";
-    private String SELECT_COUNT_BASE="SELECT count(1) FROM t_topics";
-    private String SELECT_COUNT_CUS=SELECT_COUNT_BASE+" WHERE customer_id=?";
-    private String SELECT_PAGE_BASE=FIND_ALL+" ORDER BY id DESC LIMIT ?,?";
-    private String SELECT_PAGE_CUS=FIND_ALL+" WHERE customer_id = ? ORDER BY id DESC LIMIT ?,?";
-    private String SELECT_COUNT_LIKE=SELECT_COUNT_BASE+" WHERE title like ?";
+    private static String INSERT_ONE="INSERT INTO t_topics(id,title,content,publish_time,publish_address,priority,customer_id,category_id) VALUES(?,?,?,?,?,?,?,?)";
+    private static String SELECT_MAX_ID="SELECT max(id) FROM t_topics";
+    private static String MODIFY="UPDATE t_topics SET title=?,content=?,publish_time=?,publish_address=?,priority=?,customer_id=? WHERE id=?";
+    private static String DELETE_ONE="DELETE FROM t_topics WHERE id=?";
+    private static String FIND_BASE="SELECT title,content,publish_time,publish_address,priority,customer_id,category_id,id FROM t_topics WHERE ";
+    private static String FIND_ONE_ID=FIND_BASE+" id=?";
+    private static String FIND_USER_ID=FIND_BASE+" customer_id=?";
+    private static String FIND_ALL="SELECT title,content,publish_time,publish_address,priority,customer_id,category_id,id FROM t_topics";
+    private static String SELECT_COUNT_BASE="SELECT count(1) FROM t_topics";
+    private static String SELECT_COUNT_CUS=SELECT_COUNT_BASE+" WHERE customer_id=?";
+    private static String SELECT_PAGE_BASE=FIND_ALL+" ORDER BY id DESC LIMIT ?,?";
+    private static String SELECT_PAGE_CUS=FIND_ALL+" WHERE customer_id = ? ORDER BY id DESC LIMIT ?,?";
+    private static String SELECT_COUNT_LIKE=SELECT_COUNT_BASE+" WHERE title like ?";
     private static final String ADD_COUNT = "UPDATE t_topics SET priority=? WHERE id =?";
+    private static final  String SEARCH_COUNT="SELECT count(1) FROM t_topics WHERE category_id=?";
+    private static final String SEARCH=FIND_BASE+" category_id=? LIMIT ?,?";
     private ResultSetHandler<List<Topic>> rsHand=rs->{
         List<Topic> list=new ArrayList<>();
         while(rs.next()){
@@ -168,6 +170,22 @@ public class TopicsDao extends BaseDao<Topic,Long> {
             runner.update(ADD_COUNT,priority+1,t.getId());
         }catch (SQLException cause){
             throw new RuntimeException("热度自增出现错误！",cause);
+        }
+    }
+
+    public Integer searchCount(Long cate){
+        try {
+            return runner.query(SEARCH_COUNT,rs->rs.next()?rs.getInt(1):0,cate);
+        } catch (SQLException cause) {
+            throw  new RuntimeException("查询标签中的话题数失败！",cause);
+        }
+    }
+    public List<Topic> searchPage(Long cate,Integer begin,Integer size) {
+        Object [] objects={cate,begin,size};
+        try {
+            return runner.query(SEARCH,rsHand,objects);
+        } catch (SQLException cause) {
+           throw  new RuntimeException("查询话题失败！",cause);
         }
     }
 
