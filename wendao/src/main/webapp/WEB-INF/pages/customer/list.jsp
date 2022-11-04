@@ -96,7 +96,7 @@
             </div>
             <div class="jie-shao"> 简介:${c.introduction} </div>
             <% Paging<Topic> paging=(Paging<Topic>) request.getAttribute("paging");%>
-            <main class="topics-container">
+            <main class="topics-container ">
                 <div class="row title">
                     <span class="col-1">序号</span>
                     <span class="col-5">话题名称</span>
