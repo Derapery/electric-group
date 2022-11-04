@@ -87,8 +87,8 @@
             <%  Customer c =(Customer) request.getAttribute("customer");%>
             <div class="LIYAN">
                 <div class="yan-fans"><a href="${ctxPath}/topic/like">我的喜欢:<%=c.getLikeList().size()%>个</a></div>
-                <div class="yan-fans"><a href="${ctxPath}/customer/fans?ID=1">粉丝:<%=c.getFans().size()%>个</a></div>
-                <div class="yan-fans"><a href="${ctxPath}/customer/fans?ID=2">关注:<%=c.getAttention().size()%>个</a></div>
+                <div class="yan-fans"><a href="${ctxPath}/customer/fans?ID=1&customer_id=${c.id}">粉丝:<%=c.getFans().size()%>个</a></div>
+                <div class="yan-fans"><a href="${ctxPath}/customer/fans?ID=2&customer_id=${c.id}">关注:<%=c.getAttention().size()%>个</a></div>
 
             </div>
             <div class="jie-shao"> 简介:${c.introduction} </div>
@@ -104,7 +104,7 @@
                 <c:forEach items="${paging.dataList}" var="topic" varStatus="x">
                     <div class="row title neirong">
                         <span class="col-1">${x.count}</span>
-                        <span class="col-5">${topic.title}</span>
+                        <span class="col-5"><a href="${ctexPath}/topic/detail?id=${topic.id}">${topic.title}</a></span>
                         <span class="col-1">${topic.thumbUpCount}</span>
                         <span class="col-1">${topic.thumbDownCount}</span>
                         <span class="col-3">${topic.publishTime}</span>
