@@ -17,10 +17,6 @@
 </head>
 
 <body>
-<jsp:include page="/WEB-INF/pages/commons/header.jsp"></jsp:include>
-
-
-
 <header class="header-wendao">
     <div class="search-wrapper">
         <video src="/image/earth.mp4" width="1520" height="330" STYLE="user-select: none" autoplay="autoplay" loop muted ></video>

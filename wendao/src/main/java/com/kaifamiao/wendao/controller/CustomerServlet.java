@@ -134,7 +134,8 @@ public class CustomerServlet extends HttpServlet {
         if(!StringUtils.isBlank(id) && !StringUtils.isEmpty(id)){
             customer=cusSer.find(Long.valueOf(id));
         }else{
-            customer =(Customer)session.getAttribute("customer");
+             Customer cus=(Customer)session.getAttribute("customer");
+            customer=cusSer.find(cus.getId());
         }
         if(customer == null){
             session.setAttribute("message","请先登录，再查看个人主页");
@@ -401,13 +402,23 @@ public class CustomerServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session=req.getSession();
         Customer customer=(Customer) session.getAttribute("customer");
-        List<Customer> list=customer.getFans();
-        for (Customer c:list) {
+        Customer cus=cusSer.find(customer.getId());
+        List<Customer> fansList=cus.getFans();
+        List<Customer> attenList=cus.getAttention();
+        for (Customer c:fansList) {
             Customer customer1=cusSer.find(c.getId());
-
+            c=customer1;
         }
-        customer.setFans(list);
-        session.setAttribute("customer",customer);
+        for (Customer c:attenList) {
+            Customer customer1=cusSer.find(c.getId());
+            c=customer1;
+        }
+        customer.setFans(fansList);
+        customer.setAttention(attenList);
+        Integer ID=Integer.valueOf(req.getParameter("ID"));
+        int state= ID==1?1:2;
+        session.setAttribute("state",state);
+        session.setAttribute("customer",cus);
         String path="/WEB-INF/pages/customer/fans.jsp";
         RequestDispatcher dis= req.getRequestDispatcher(path);
         dis.forward(req,resp);
