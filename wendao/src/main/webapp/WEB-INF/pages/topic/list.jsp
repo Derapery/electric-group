@@ -124,8 +124,9 @@
                     </div>
                 </div>
                 <c:forEach items="${hotTopicList}" var="topic" varStatus="x">
-                    <div class="right-topic">
-                        <div><a href="${ctexPath}/topic/detail?id=${topic.id}">${topic.title}</a></div>
+                    <div class="right-zi">
+                        <span class="col-1">${(pagination.current - 1 ) * pagination.size + x.count }</span>
+                       <a href="${ctexPath}/topic/detail?id=${topic.id}">${topic.title}</a>
                     </div>
                 </c:forEach>
                 <div class="right-zi2">

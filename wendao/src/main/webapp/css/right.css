@@ -96,3 +96,11 @@
     background-color: #eae6e6;
     color: #f26d5f;
 }
+.col-1{
+    width: 24px;
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #f26d5f;
+    line-height: 38px;
+}
