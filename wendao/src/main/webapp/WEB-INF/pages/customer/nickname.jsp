@@ -69,7 +69,7 @@
             <div class="bgc-tu">
                 <a href="${ctxPath}/index.jsp" class="fanhui"><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;首页</a>
                 <img class="yuan-ren rounded-circle" src="/image/ren.png" alt="">
-                <div class="ni-cheng">用户昵称</div>
+                <div class="ni-cheng">${customer.nickname}</div>
             </div>
         <div class="left-n-kuang">
             <form action="${ctxPath}/customer/edit" method="post">

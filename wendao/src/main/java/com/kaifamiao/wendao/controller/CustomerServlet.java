@@ -1,7 +1,11 @@
 package com.kaifamiao.wendao.controller;
 
 import com.kaifamiao.wendao.entity.Customer;
+import com.kaifamiao.wendao.entity.Topic;
+import com.kaifamiao.wendao.service.AttentionService;
 import com.kaifamiao.wendao.service.CustomerService;
+import com.kaifamiao.wendao.service.TopicService;
+import com.kaifamiao.wendao.utils.Paging;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -13,16 +17,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @WebServlet("/customer/*")
 public class CustomerServlet extends HttpServlet {
     private CustomerService cusSer;
-
+    private AttentionService attentionService;
+    private TopicService topicService;
     @Override
     public void init() throws ServletException {
         cusSer=new CustomerService();
+        attentionService=new AttentionService();
+        topicService=new TopicService();
     }
 
     @Override
@@ -79,31 +88,57 @@ public class CustomerServlet extends HttpServlet {
             this.fans(req,resp);
             return;
         }
-
-        if("GET".equals(method) && uri.endsWith("/concern")){
-            this.concern(req,resp);
-            return;
-        }
-        if("GET".equals(method) && uri.endsWith("/customer/fans")){
-            this.fans(req,resp);
+        if("GET".equals(method) && uri.endsWith("/fansAction")){
+            this.fansAction(req,resp);
             return;
         }
 
     }
+    private Map<String,Object> havPaging(HttpServletRequest request){
+        //默认的显示的话题数
+        Integer DEFAULT_SIZE=5;
+        //默认的当前页数
+        Integer DEFAULT_CURRENT=1;
+        HttpSession session=request.getSession();
+        //获取会话中的SIZE
+        Integer size=(Integer)session.getAttribute("size");
+        //判断如果获取到的是null，那么就是默认的
+        size= size==null? DEFAULT_SIZE:size;
+        //获取请求中的size
+        String realSize=request.getParameter("size");
+        if(!StringUtils.isEmpty(realSize) && !StringUtils.isBlank(realSize)){
+            //如果请求中的size不为空，那么取请求中的size
+            size=Integer.valueOf(realSize);
+            session.setAttribute("size",size);
+        }
+        String currentPage=request.getParameter("current");
+        Integer current=DEFAULT_CURRENT;
+        if(!StringUtils.isBlank(currentPage) && !StringUtils.isEmpty(currentPage)){
+            current=Integer.valueOf(currentPage);
+        }
+        Map<String,Object> map=new HashMap<>();
+        map.put("size",size);
+        map.put("current",current);
+        return map;
+    }
 
     private void mineAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Map<String,Object> map=havPaging(req);
         HttpSession session = req.getSession();
         String id = req.getParameter("id");
         Customer customer;
         if(!StringUtils.isBlank(id) && !StringUtils.isEmpty(id)){
             customer=cusSer.find(Long.valueOf(id));
         }else{
-            customer =(Customer)session.getAttribute("customer");
+             Customer cus=(Customer)session.getAttribute("customer");
+            customer=cusSer.find(cus.getId());
         }
         if(customer == null){
             session.setAttribute("message","请先登录，再查看个人主页");
             resp.sendRedirect(req.getContextPath()+"/customer/sign/in");
         }
+        Paging<Topic> paging=topicService.findPage((Integer)map.get("size"),(Integer)map.get("current"),customer,2);
+        req.setAttribute("paging",paging);
         req.setAttribute("customer",customer);
         String path="/WEB-INF/pages/customer/list.jsp";
         RequestDispatcher dis= req.getRequestDispatcher(path);
@@ -371,34 +406,43 @@ public class CustomerServlet extends HttpServlet {
     private void fans(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         HttpSession session=req.getSession();
-        Customer customer=(Customer) session.getAttribute("customer");
-        List<Customer> list=customer.getFans();
-        for (Customer c:list) {
+        System.out.println(req.getParameter("customer_id"));
+        Long customer_id=Long.valueOf(req.getParameter("customer_id"));
+        Customer cus=cusSer.find(customer_id);
+        List<Customer> fansList=cus.getFans();
+        List<Customer> attenList=cus.getAttention();
+        for (Customer c:fansList) {
             Customer customer1=cusSer.find(c.getId());
             c=customer1;
         }
-        customer.setFans(list);
-        session.setAttribute("customer",customer);
+        for (Customer c:attenList) {
+            Customer customer1=cusSer.find(c.getId());
+            c=customer1;
+        }
+        cus.setFans(fansList);
+        cus.setAttention(attenList);
+        Integer ID=Integer.valueOf(req.getParameter("ID"));
+        int state= ID==1?1:2;
+        session.setAttribute("state",state);
+        session.setAttribute("customer",cus);
         String path="/WEB-INF/pages/customer/fans.jsp";
         RequestDispatcher dis= req.getRequestDispatcher(path);
         dis.forward(req,resp);
-
     }
-    //"GET" "/concern"
-    private void concern(HttpServletRequest req, HttpServletResponse resp)
+    private void fansAction(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         HttpSession session=req.getSession();
-        Customer customer=(Customer) session.getAttribute("customer");
-        List<Customer> list=customer.getAttention();
-        for (Customer c:list) {
-            Customer customer1=cusSer.find(c.getId());
-            c=customer1;
+        Customer customer=(Customer)session.getAttribute("customer");
+        int concern=Integer.valueOf(req.getParameter("concern"));
+        Long attention_id=Long.valueOf(req.getParameter("customer_id"));
+        Integer size=Integer.valueOf(req.getParameter("size"));
+        String current=req.getParameter("current");
+        if(concern==1){
+            attentionService.delete(customer.getId(),attention_id,1);
+        }else{
+            attentionService.save(customer.getId(), attention_id);
         }
-        customer.setAttention(list);
-        session.setAttribute("customer",customer);
-        String path="/WEB-INF/pages/customer/fans.jsp";
-        RequestDispatcher dis= req.getRequestDispatcher(path);
-        dis.forward(req,resp);
+        resp.sendRedirect(req.getContextPath()+"/topic/list?size="+size+"&current="+Integer.parseInt(current.trim()));
     }
 
     private void bridgeAction(String path, HttpServletResponse resp) throws IOException {

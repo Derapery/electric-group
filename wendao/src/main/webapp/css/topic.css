@@ -1,4 +1,3 @@
-
 nav.publish,
 
 nav.list {
@@ -50,15 +49,21 @@ nav.list {
 .topics-container>.title {
     height: 36px;
     line-height: 36px;
-    background: #ffeeba;
+    background: #7b7b95;
     color: #343a40;
     margin: 0;
 }
-
+.topics-container>.neirong {
+    background: #e2e2e7;
+}
 .topics-container>.topic {
     height: 36px;
     line-height: 36px;
     margin: 0;
+}
+.chuxian{
+    background-color: #8e1818;
+    
 }
 
 .topics-container>.topic:nth-child(2n+1) {
@@ -97,6 +102,7 @@ nav.list {
     position: relative;
     margin: 0px 17vw;
     width: 60vw;
+
 }
 .topic-head-img{
     height: 50px;
@@ -123,8 +129,13 @@ nav.list {
     color:#FF0000FF;
 }
 .topic-all{
-    background: #edf2f6;
+    background: #ebe9e9;
+
+    height: 263px;
     margin: 10px;
+    margin-bottom: 24px;
+    box-shadow: 5px 5px 3px #d6d3d3;
+    border-radius:7px;
 }
 
 .icon-wrap{
@@ -168,14 +179,19 @@ nav.list {
 }
 
 .footerr{
+    margin-bottom: 40px;
     display: flex;
     width: auto;
-    height: 30px;
     justify-content: space-around;
-    align-items: center;
+    align-items: flex-end;
+    justify-content: flex-end;
 }
 
 .footerr>*{
+    display: flex;
+    margin-right: 140px;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
     text-align: center;
 }
 
@@ -214,4 +230,25 @@ nav.list {
 .editor-container .category-input {
     user-select: none;
     background: #dcdee3;
+}
+
+
+
+/* 锚点*/
+.point-hs {
+    width:50px;
+    height: 50px;
+    border-radius: 5px;
+    position: fixed;
+    right: 100px;
+    bottom: 100px;
+    background: #ffffff;
+    padding: 13px 13px;
+    display: block;
+}
+/*话题标签*/
+.chu-xian{
+    background-color: #ff8822;
+    width: 80px;
+    height: 40px;
 }

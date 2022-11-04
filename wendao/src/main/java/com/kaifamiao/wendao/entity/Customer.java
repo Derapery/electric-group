@@ -29,6 +29,15 @@ public class Customer {
     private List<Customer> attention;
 
     private List<Customer> fans;
+    //表示登录者和此用户的关注信息
+    private int concern;
+    public int getConcern() {
+        return concern;
+    }
+
+    public void setConcern(int concern) {
+        this.concern = concern;
+    }
 
     public List<Topic> getLikeList() {
         return likeList;

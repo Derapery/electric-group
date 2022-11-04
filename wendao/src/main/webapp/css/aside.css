@@ -113,9 +113,10 @@ article{
 .topics-container {
     width: 60vw;
     border: 1px solid #565666;
-
     margin-top: 68px;
-
+}
+.gao-du{
+    margin-top: 10px;
 }
 
 .topics-container>.title {
@@ -125,7 +126,9 @@ article{
     color: white;
     margin: 0;
 }
-
+.topics-container>.neirong {
+    background: #dddde3;
+}
 .topics-container>.topic {
     height: 36px;
     line-height: 36px;

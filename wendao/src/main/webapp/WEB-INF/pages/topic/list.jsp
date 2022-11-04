@@ -13,12 +13,11 @@
     <link rel="stylesheet" href="${ctxPath}/css/search.css">
     <link rel="stylesheet" href="${ctxPath}/css/right.css">
     <link rel="stylesheet" href="${ctxPath}/css/round.css">
+
     <meta charset="UTF-8">
 </head>
 
 <body>
-<jsp:include page="/WEB-INF/pages/commons/header.jsp"></jsp:include>
-
 <header class="header-wendao">
     <div class="search-wrapper">
         <video src="/image/earth.mp4" width="1520" height="330" STYLE="user-select: none" autoplay="autoplay" loop muted ></video>
@@ -34,7 +33,7 @@
                         </div>
                     </div>
                     <div class="search-dan">
-                        <form action="/topic/search" method="post">
+                        <form action="/topic/search" method="get">
                             <input type="text" style="width: 540px ;outline:none;
                                       height: 46px;margin: 0px;padding: 0px;border: none" name="keyworkd" placeholder="请输入话题搜索关键字" >
                             <button class="search-button" type="submit">搜索一下</button>
@@ -88,6 +87,12 @@
             </div>
         </aside>
     </div>
+    <!-- 顶部-->
+    <div id="point" class="point">
+        <a class="point-hs" href="#top">
+            <i style="color: #8a93a6;font-size: 24px;" class="fa fa-arrow-up"> </i>
+        </a>
+    </div>
     <div class="right-aside">
         <aside >
             <div class="right-one">
@@ -107,7 +112,7 @@
                 <c:if test="${sessionScope.customer !=null}">
                     <div class="huanying">
                         <div class="kongbai">   </div>
-                        欢迎${sessionScope.customer.nickname}！！
+                        欢迎${sessionScope.customer.nickname}
                     </div>
                 </c:if>
             </div>
@@ -119,8 +124,9 @@
                     </div>
                 </div>
                 <c:forEach items="${hotTopicList}" var="topic" varStatus="x">
-                    <div class="right-topic">
-                        <div><a href="${ctexPath}/topic/detail?id=${topic.id}">${topic.title}</a></div>
+                    <div class="right-zi">
+                        <span class="col-1">${(pagination.current - 1 ) * pagination.size + x.count }</span>
+                       <a href="${ctexPath}/topic/detail?id=${topic.id}">${topic.title}</a>
                     </div>
                 </c:forEach>
                 <div class="right-zi2">
@@ -136,8 +142,14 @@
             <a class="breadcrumb-item" href="${ctxPath}/index.jsp">首页</a>
             <a class="breadcrumb-item" href="#">话题列表</a>
         </nav>
+            <c:forEach items="${categoryList}" var="cate" varStatus="x">
+               <div class=" btn btn-warning chu-xian">
+                <a  href="#" >${cate.name} </a>
+               </div>
+           </c:forEach>
+
         <%--当前页面主要内容--%>
-        <main class="topics-container">
+        <main class="topics-container gao-du">
             <c:forEach items="${paging.dataList}" var="topic" varStatus="x">
                 <div class="topic-all">
                     <div class="topic-list-detail-head">
@@ -149,7 +161,12 @@
                         </div>
                         <a class="athor-name" href="${ctxPath}/customer/mine?id=${topic.author.id}">${topic.author.nickname}</a>
                         <span class="athor-where">发布于${topic.publishTime}</span>
-                        <a class="guanzhu :hover"  href="#">+关注</a>
+                        <c:if test="${topic.author.concern ==0}">
+                            <a class="guanzhu :hover"  href="${ctxPath}/customer/fansAction?customer_id=${topic.author.id}&concern=0&size=${paging.size}&current=${paging.current}">+关注</a>
+                        </c:if>
+                        <c:if test="${topic.author.concern ==1}">
+                            <a class="guanzhu :hover" style="height: 29px;width: 91px" href="${ctxPath}/customer/fansAction?customer_id=${topic.author.id}&concern=1&size=${paging.size}&current=${paging.current}">取消关注</a>
+                        </c:if>
                     </div>
                     <div class="content-a">
                         <a href="${ctxPath}/topic/detail?id=${topic.id}">
@@ -201,10 +218,14 @@
                                     </a>
                                </span>
                          </c:if>
-                           <span class="col-2 offset-1 ">
-                                <i class="fa fa-eye"> </i>${topic.priority}
+                            <span class="col-2 offset-1 ">
+                                <a class="fa fa-eye" href="#"> </a>${topic.priority}
                             </span>
-                            <c:if test="${topic.author.id == customer.id}" >
+                            <span class="col-2 offset-1 " style="padding-right: 1px">
+                                <a class="fa fa-commenting-o" href="${ctxPath}/topic/publishExplain?id=${topic.id}" title="我来解答"> </a>
+                            </span>
+                            <c:if test="${topic.author.id == customer.id}">
+
                                 <span class="col-3 offset-1">
                                 <a href="${ctxPath}/topic/delete?topicId=${topic.id}&size=${paging.size}&current=${paging.current} ">删除话题</a>
                                 </span>
@@ -244,4 +265,5 @@
 <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/js/top.js"></script>
 </html>
