@@ -94,7 +94,7 @@
                 <div class="yan-fans"><a href="${ctxPath}/customer/fans?ID=2&customer_id=${customer_id}">关注:<%=c.getAttention().size()%>个</a></div>
 
             </div>
-            <div class="jie-shao"> 简介:${c.introduction} </div>
+            <div class="jie-shao"> 简介 : ${customer.introduction} </div>
             <% Paging<Topic> paging=(Paging<Topic>) request.getAttribute("paging");%>
             <main class="topics-container ">
                 <div class="row title">
