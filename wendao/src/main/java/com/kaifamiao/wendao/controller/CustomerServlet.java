@@ -399,6 +399,10 @@ public class CustomerServlet extends HttpServlet {
             resp.sendRedirect("/index.jsp");
             return;
         }
+        if (session.getAttribute("manager")!=null&&session.getAttribute("customer")==null){
+            resp.sendRedirect(req.getContextPath() + "/manager/list");
+            return;
+        }
         resp.sendRedirect(req.getContextPath()+"/topic/list");
 
     }

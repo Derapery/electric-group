@@ -26,10 +26,43 @@
     </nav>
     <p class="message">${message}</p>
     <%--当前页面主要内容--%>
-    <main class="editor-container">
-        <form action="${ctxPath}/topic/publish" method="post">
-            <p class="topic-title">
-                <input type="text" name="title" value="${title}" placeholder="${category.name}"/>
+<c:choose>
+    <%--若会话对象中存在customer则认为用于已经登录--%>
+    <c:when test="${ not empty requestScope.topic }">
+        <main class="editor-container">
+            <form action="${ctxPath}/manager/edit" method="post">
+                <p class="topic-title">
+                    <input type="text" name="title" value="${topic.title}" placeholder="${category.name}"/>
+                <div class="input-button">
+                    请选择您的分类
+                    <div class="btn-group">
+                        <c:forEach items="${categoryList}" var="cate" varStatus="x">
+                            <button type="submit" id="category" name="category" value="${cate.id}" class="btn btn-primary">${cate.name}</button>
+                        </c:forEach>
+                    </div>
+                    <div>
+                        <input hidden class="category-input" type="text" name="topic_id" value="${topic.id}" />
+                        <input hidden class="category-input" type="text" name="customer_id" value="${customer_id}" />
+                        <input hidden class="category-input" type="text" name="category_ID" value="${category.id}" />
+                    </div>
+                </div>
+                </p>
+                <textarea class="chi-cun" name="content" id="editor">${topic.content}</textarea>
+                    <%--在Bootstrap中.row表示一行--%>
+                <div class="row buttons">
+            <span class="col-4 offset-8 row justify-content-end">
+                <button type="reset" class="col-5" >重置</button>
+                <button type="submit" class="col-5 offset-1" >发布</button>
+            </span>
+                </div>
+            </form>
+        </main>
+    </c:when>
+    <c:otherwise>
+        <main class="editor-container">
+            <form action="${ctxPath}/topic/publish" method="post">
+                <p class="topic-title">
+                    <input type="text" name="title" value="${title}" placeholder="${category.name}"/>
                 <div class="input-button">
                     请选择您的分类
                     <div class="btn-group">
@@ -41,17 +74,20 @@
                         <input hidden class="category-input" type="text" name="categoryID" value="${category.id}" />
                     </div>
                 </div>
-            </p>
-            <textarea class="chi-cun" name="content" id="editor">${content}</textarea>
-            <%--在Bootstrap中.row表示一行--%>
-            <div class="row buttons">
+                </p>
+                <textarea class="chi-cun" name="content" id="editor">${content}</textarea>
+                    <%--在Bootstrap中.row表示一行--%>
+                <div class="row buttons">
             <span class="col-4 offset-8 row justify-content-end">
                 <button type="reset" class="col-5" >重置</button>
                 <button type="submit" class="col-5 offset-1" >发布</button>
             </span>
-            </div>
-        </form>
-    </main>
+                </div>
+            </form>
+        </main>
+    </c:otherwise>
+</c:choose>
+
 
 
 

@@ -56,12 +56,12 @@
                             <div class="modal-content">
                                 <!-- 模态框头部 -->
                                 <div class="modal-header">
-                                    <h4 class="modal-title">模态框头部</h4>
+                                    <h4 class="modal-title">确定进行删除操作吗？</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 <!-- 模态框主体 -->
                                 <div class="modal-body">
-                                    模态框内容..
+                                    删除后您的话题/评论/点赞都会删除，请慎重删除！
                                 </div>
                                 <!-- 模态框底部 -->
                                 <div class="modal-footer" style="background: #545b62">
