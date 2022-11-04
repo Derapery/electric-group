@@ -143,8 +143,8 @@
             <a class="breadcrumb-item" href="#">话题列表</a>
         </nav>
             <c:forEach items="${categoryList}" var="cate" varStatus="x">
-               <div class=" btn btn-warning chu-xian">
-                <a  href="${ctxPath}/topic/classify?id=${cate.id}" >${cate.name} </a>
+               <div class=" btn btn-warning chu-xian" style="background: #E9ECEF;border-color: #FEF9F3">
+                <a  href="${ctxPath}/topic/classify?id=${cate.id} " style="text-decoration: none">${cate.name} </a>
                </div>
            </c:forEach>
 
