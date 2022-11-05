@@ -384,7 +384,7 @@ public class ManagerServlet extends HttpServlet {
                 managerService.addOperating(manager.getId(),topic.getAuthor().getId(),Constants.STATE_DO.getValue(),Constants.EDIT_USER.getValue());
                 return;
             }
-            session.setAttribute("message", "话题发布失败");
+            session.setAttribute("message", "错误话题发布失败");
             session.setAttribute("title", topic.getTitle());
             session.setAttribute("content", topic.getContent());
         } catch (Exception e) {
@@ -408,6 +408,7 @@ public class ManagerServlet extends HttpServlet {
             session.setAttribute("categoryList",categoryList);
         }
         Topic t = managerService.FindTopic(Long.parseLong(topic_id));
+        req.setAttribute("category_ID",t.getCategory_id());
         req.setAttribute("topic",t);
         String path="/WEB-INF/pages/topic/publish.jsp";
         RequestDispatcher dis= req.getRequestDispatcher(path);

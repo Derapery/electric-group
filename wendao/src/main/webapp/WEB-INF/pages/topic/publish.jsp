@@ -44,6 +44,7 @@
                         <input hidden class="category-input" type="text" name="topic_id" value="${topic.id}" />
                         <input hidden class="category-input" type="text" name="customer_id" value="${customer_id}" />
                         <input hidden class="category-input" type="text" name="category_ID" value="${category.id}" />
+                        <input hidden class="category-input" type="text" name="category_id" value="${category_ID}" />
                     </div>
                 </div>
                 </p>

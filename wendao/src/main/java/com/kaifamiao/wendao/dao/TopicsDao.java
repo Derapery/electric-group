@@ -38,6 +38,7 @@ public class TopicsDao extends BaseDao<Topic,Long> {
     //插入一条话题
     @Override
     public boolean save(Topic topic) {
+        System.out.println(topic);
         return storage(topic,INSERT_ONE);
     }
     //将数据封装，减少代码冗余
