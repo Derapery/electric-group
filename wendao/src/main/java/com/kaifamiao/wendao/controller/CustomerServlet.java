@@ -7,6 +7,7 @@ import com.kaifamiao.wendao.entity.Topic;
 import com.kaifamiao.wendao.service.AttentionService;
 import com.kaifamiao.wendao.service.CustomerService;
 import com.kaifamiao.wendao.service.TopicService;
+import com.kaifamiao.wendao.utils.Constants;
 import com.kaifamiao.wendao.utils.Paging;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -185,6 +186,10 @@ public class CustomerServlet extends HttpServlet {
         }
        //判断用户是否存在
         Customer customer= cusSer.find(username);
+        if (customer.getManagement()<= Constants.Manager_Level_0.getValue()){
+            session.setAttribute("message","对不起您的权限不足");
+            return -1;
+        }
        if(customer.getId()==0){
            session.setAttribute("message",customer.getUsername());
            return -1;

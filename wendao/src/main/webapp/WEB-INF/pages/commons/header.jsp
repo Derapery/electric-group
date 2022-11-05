@@ -13,15 +13,12 @@
         <ul class="nav justify-content-end end">
             <c:choose>
                 <%--若会话对象中存在customer则认为用于已经登录--%>
-                <c:when test="${ not empty sessionScope.customer }">
+                <c:when test="${ not empty sessionScope.manager }">
                     <li class="nav-item">
-                        <a>欢迎${customer.nickname}</a>
+                        <a>欢迎管理员${manager.nickname}</a>
                     </li>
                     <li class="nav-item">
-                        <a>与您同时在线用户${applicationScope.onlineCustomer}位</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="${ctxPath}/topic/publish">发布话题</a>
+                        <a>在线用户${applicationScope.onlineCustomer}位</a>
                     </li>
                     <li class="nav-item">
                         <a href="${ctxPath}/customer/sign/out">退出</a>

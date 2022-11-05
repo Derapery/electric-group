@@ -6,6 +6,7 @@ import com.kaifamiao.wendao.entity.Topic;
 import com.kaifamiao.wendao.service.ExplainLikeService;
 import com.kaifamiao.wendao.service.ExplainService;
 import com.kaifamiao.wendao.service.TopicService;
+import com.kaifamiao.wendao.utils.Constants;
 import com.kaifamiao.wendao.utils.LikeExplain;
 import org.apache.commons.lang3.StringUtils;
 
@@ -88,6 +89,11 @@ public class ExplainServlet extends HttpServlet {
         explain.setPublishAddress(req.getRemoteAddr());
         Customer customer=(Customer) session.getAttribute("customer");
         explain.setAuthor(customer);
+        if (customer.getManagement()<= Constants.Manager_Level_0.getValue()){
+            session.setAttribute("message","对不起您的权限不足");
+            resp.sendRedirect(req.getContextPath()+"/topic/detail?id="+topicID);
+            return;
+        }
         explainService.save(explain);
         resp.sendRedirect(req.getContextPath()+"/topic/detail?id="+topicID);
     }

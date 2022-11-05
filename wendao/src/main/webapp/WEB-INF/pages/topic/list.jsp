@@ -105,7 +105,7 @@
                            请<a style="color: #ffffff" href="${ctxPath}/customer/sign/in">登录</a>
                         </button>
                        <div style="width: 150px;margin:0 auto;">
-                           没有账号？请<a href="${ctxPath}/customer/sign/up">注册</a>
+                           没有账号？请<a href="${ctxPath}/customer/login/up">注册</a>
                        </div>
                   </div>
                 </c:if>

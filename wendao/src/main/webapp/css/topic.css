@@ -178,7 +178,6 @@ nav.list {
 }
 
 .footerr{
-    margin-bottom: 40px;
 
     display: flex;
     width: auto;
@@ -189,7 +188,6 @@ nav.list {
 
 .footerr>*{
     display: flex;
-    margin-top: 13vw;
     margin-right: 140px;
     flex-wrap: nowrap;
     justify-content: flex-end;

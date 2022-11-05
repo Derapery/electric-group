@@ -8,6 +8,7 @@ import com.kaifamiao.wendao.service.AttentionService;
 import com.kaifamiao.wendao.service.CustomerService;
 import com.kaifamiao.wendao.service.TopicLikeService;
 import com.kaifamiao.wendao.service.TopicService;
+import com.kaifamiao.wendao.utils.Constants;
 import com.kaifamiao.wendao.utils.Paging;
 import com.kaifamiao.wendao.utils.Praise;
 import org.apache.commons.beanutils.BeanUtils;
@@ -197,7 +198,8 @@ public class TopicServlet extends HttpServlet {
                 session.setAttribute("message","数据转换发生异常，发布失败！");
                 resp.sendRedirect(req.getContextPath()+"/topic/publish");
             }
-            topic.setAuthor(((Customer)session.getAttribute("customer")));
+            Customer customer = (Customer) session.getAttribute("customer");
+            topic.setAuthor(customer);
             String addr = req.getRemoteAddr();
             topic.setPublishAddress(addr);
             String categoryID=req.getParameter("categoryID");
@@ -206,6 +208,11 @@ public class TopicServlet extends HttpServlet {
             if(req.getParameter("category")==null&&req.getParameter("categoryID")==null){
                 session.setAttribute("message", "未分类");
                 resp.sendRedirect(req.getContextPath()+"/topic/publish");
+                return;
+            }
+            if (customer.getManagement()<= Constants.Manager_Level_0.getValue()){
+                session.setAttribute("message","对不起您的权限不足");
+                resp.sendRedirect(req.getContextPath()+"/topic/list");
                 return;
             }
             try {
