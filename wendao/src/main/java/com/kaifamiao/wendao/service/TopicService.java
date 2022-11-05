@@ -269,4 +269,30 @@ public class TopicService {
     private Integer searchCount(Long cate){
       return topicsDao.searchCount(cate);
     }
+
+    public Topic searchOne(Long topic_id ,Long customer_id){
+       Topic topic = topicsDao.find(topic_id);
+        Customer customer1=topic.getAuthor();
+        customer1.setConcern(0);
+        topic.setCategory_name(categoryDao.find(topic.getCategory_id()).getName());
+        //查询话题的点赞数量
+        topic.setThumbUpCount(topicLikeDao.thumbUPCount(topic.getId()));
+        //查询话题的踩的数量
+        topic.setThumbDownCount(topicLikeDao.thumbDownCount(topic.getId()));
+        //获取话题的赞或踩的信息的状态的列表
+        if(customer_id != null){
+            Long id=topic.getAuthor().getId();
+            Attention  attention=attentionDao.findSecond(customer_id,id);
+            int  attenState= attention==null? 0:1;
+            customer1.setConcern( attenState);
+            topic.setAuthor(customer1);
+            Praise praise = topicLikeDao.find(customer_id,topic.getId());
+            if(praise != null){
+                topic.setState(praise.getState());
+            }
+        }
+        topic.setState(null);
+        return topic;
+    }
+
 }

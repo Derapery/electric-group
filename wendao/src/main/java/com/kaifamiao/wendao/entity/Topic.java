@@ -29,6 +29,16 @@ public class Topic {
     private Integer state;
     //话题对应的评论的ngshulia
     private Integer explainCount;
+    //存储我的评论时保存
+    private String myExplain;
+
+    public String getMyExplain() {
+        return myExplain;
+    }
+
+    public void setMyExplain(String myExplain) {
+        this.myExplain = myExplain;
+    }
 
     public Integer getExplainCount() {
         return explainCount;

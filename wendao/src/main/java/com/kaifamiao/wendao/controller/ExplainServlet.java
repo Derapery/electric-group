@@ -5,9 +5,11 @@ import com.kaifamiao.wendao.entity.Explain;
 import com.kaifamiao.wendao.entity.Topic;
 import com.kaifamiao.wendao.service.ExplainLikeService;
 import com.kaifamiao.wendao.service.ExplainService;
+import com.kaifamiao.wendao.service.TopicService;
 import com.kaifamiao.wendao.utils.LikeExplain;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,15 +17,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("explain/*")
 public class ExplainServlet extends HttpServlet {
     private ExplainService explainService;
     private ExplainLikeService explainLikeService;
+    private TopicService topicService;
     @Override
     public void init() throws ServletException {
         explainService=new ExplainService();
         explainLikeService=new ExplainLikeService();
+        topicService=new TopicService();
     }
 
     @Override
@@ -43,6 +48,11 @@ public class ExplainServlet extends HttpServlet {
         //“GET” “/delete”
         if("GET".equals(method) && uri.endsWith("/delete")){
             this.delete(req,resp);
+            return;
+        }
+        //“get” "/mine"
+        if("GET".equals(method) && uri.endsWith("/mine")){
+            this.myExplain(req,resp);
             return;
         }
     }
@@ -112,5 +122,15 @@ public class ExplainServlet extends HttpServlet {
             }
         }
         resp.sendRedirect(req.getContextPath()+"/topic/detail?id="+topicID);
+    }
+    private void myExplain(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        HttpSession session =req.getSession();
+        Customer customer = (Customer) session.getAttribute("customer");
+        List<Explain> explains =explainService.explainMy(customer.getId());
+        session.setAttribute("explains",explains);
+        String path="/WEB-INF/pages/topic/myExplain.jsp";
+        RequestDispatcher db=req.getRequestDispatcher(path);
+        db.forward(req,resp);
     }
 }
