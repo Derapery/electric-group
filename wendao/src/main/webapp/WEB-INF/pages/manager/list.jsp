@@ -174,18 +174,18 @@
             </c:when>
             <c:when test="${ not empty requestScope.operating }">
                 <div class="row title">
-                    <span class="col-3">操作记录</span>
+                    <span class="col-2">操作记录</span>
                     <span class="col-2">操作者ID</span>
-                    <span class="col-3">操作对象</span>
+                    <span class="col-2">操作对象</span>
                     <span class="col-3">操作类型</span>
-                    <span class="col-1">操作状态</span>
+                    <span class="col-3">操作状态</span>
                 </div>
                 <c:forEach items="${paging.dataList}" var="operation" varStatus="x">
                     <div class="row topic">
-                        <span class="col-3">${operation.id}</span>
+                        <span class="col-2">${operation.id}</span>
                         <span class="col-2">${operation.handler_id}</span>
-                        <span class="col-3">${operation.user_id}</span>
-                        <span class="col-3">
+                        <span class="col-2">${operation.user_id}</span>
+                        <span class="col-2">
                             <c:choose>
                                 <c:when test="${operation.type==101}">
                                     <span>编辑用户信息</span>
@@ -195,7 +195,8 @@
                                 </c:when>
                             </c:choose>
                         </span>
-                        <span class="col-1">
+                        <span class="col-4">
+                        <c:if test="${manager.management<2}" >
                             <c:choose>
                                 <c:when test="${operation.state==555}">
                                     <span>已操作</span>
@@ -208,6 +209,21 @@
                                     <span>待处理操作</span>
                                 </c:when>
                             </c:choose>
+                        </c:if>
+                        <c:if test="${manager.management==2}" >
+                            <c:choose>
+                                <c:when test="${operation.state==555}">
+                                    <span>已操作</span>
+                                </c:when>
+                                <c:when test="${operation.state==888}">
+                                    <span>已拒绝</span>
+                                </c:when>
+                                <c:when test="${operation.state==666}">
+                                    <a style="margin: 0px 5px" href="${ctxPath}/manager/operation?operation_id=${operation.id}&state=555">通过请求</a>
+                                    <a style="margin: 0px 5px" href="${ctxPath}/manager/operation?operation_id=${operation.id}&state=888">拒绝请求</a>
+                                </c:when>
+                            </c:choose>
+                        </c:if>
                         </span>
                     </div>
                 </c:forEach>

@@ -186,7 +186,7 @@ public class CustomerServlet extends HttpServlet {
         }
        //判断用户是否存在
         Customer customer= cusSer.find(username);
-        if (customer.getManagement()<= Constants.Manager_Level_0.getValue()){
+        if (customer.getManagement()< Constants.Manager_Level_0.getValue()){
             session.setAttribute("message","对不起您的权限不足");
             return -1;
         }
@@ -202,7 +202,7 @@ public class CustomerServlet extends HttpServlet {
            session.setAttribute("message","输入的密码不正确！");
            return -1;
        }
-       if(customer.getManagement()==1){
+       if(customer.getManagement()>1){
            session.setAttribute( "manager",customer);
            return 1;
        }

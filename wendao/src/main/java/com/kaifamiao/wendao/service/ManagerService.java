@@ -194,4 +194,15 @@ public class ManagerService {
         category.setName(category_name);
         return categoryDao.save(category);
     }
+
+    public Operating findOperating(Long id) {
+        return operatingDao.find(id);
+    }
+
+    public void doOperating(Operating operating) {
+        if (operating.getState()==Constants.STATE_REQUEST.getValue()){
+            categoryDao.delete(operating.getUser_id());
+        }
+        operatingDao.modify(operating);
+    }
 }

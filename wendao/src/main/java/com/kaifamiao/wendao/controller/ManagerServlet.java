@@ -120,6 +120,32 @@ public class ManagerServlet extends HttpServlet {
             this.CategoryPage(req, resp);
             return;
         }
+        if ("GET".equals(method) && uri.endsWith("/operation")) {
+            this.operationAction(req, resp);
+            return;
+        }
+    }
+
+    private void operationAction(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        HttpSession session = req.getSession();
+        Customer manager = (Customer) session.getAttribute("manager");
+        Integer management = manager.getManagement();
+        if(!management.equals(Constants.Manager_Level_2.getValue())){
+            session.setAttribute("message","权限不足");
+            resp.sendRedirect(req.getContextPath()+"/manager/topic");
+            return;
+        }
+        else {
+            String op = req.getParameter("operation_id");
+            if (op==null){
+                session.setAttribute("message","未获取到记录");
+                resp.sendRedirect(req.getContextPath()+"/manager/topic");
+                return;
+            }
+            Operating operating =  managerService.findOperating(Long.parseLong(op));
+            managerService.doOperating(operating);
+            resp.sendRedirect(req.getContextPath()+"/manager/topic");
+        }
     }
 
     private void operatingPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -197,7 +223,13 @@ public class ManagerServlet extends HttpServlet {
             return;
         }
         Customer manager = (Customer) session.getAttribute("manager");
-        managerService.addOperating(manager.getId(),Long.parseLong(customer_id),Constants.STATE_DO.getValue(),Constants.EDIT_USER.getValue());
+        String management4 = Constants.Manager_Level_6.getValue()+"";
+        if(management4.equals(management4)){
+            managerService.addOperating(manager.getId(),Long.parseLong(customer_id),Constants.STATE_REQUEST.getValue(),Constants.EDIT_USER.getValue());
+
+        }else {
+            managerService.addOperating(manager.getId(),Long.parseLong(customer_id),Constants.STATE_DO.getValue(),Constants.EDIT_USER.getValue());
+        }
         mangerPage(req, resp);
     }
 
@@ -228,6 +260,11 @@ public class ManagerServlet extends HttpServlet {
             return;
         }
         Customer manager = (Customer) session.getAttribute("manager");
+        if(manager.getManagement().equals(Long.parseLong(management))){
+            managerService.addOperating(manager.getId(),Long.parseLong(customer_id),Constants.STATE_REQUEST.getValue(),Constants.EDIT_USER.getValue());
+            mangerPage(req, resp);
+            return;
+        }
         managerService.addOperating(manager.getId(),Long.parseLong(customer_id),Constants.STATE_DO.getValue(),Constants.EDIT_USER.getValue());
         mangerPage(req, resp);
     }

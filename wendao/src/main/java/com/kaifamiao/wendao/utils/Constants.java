@@ -6,6 +6,7 @@ public enum Constants {
     STATE_REFUSE(888,"已拒绝"),
     EDIT_USER(101,"编辑用户信息"),
     CHANGE_PWD(102,"修改用户密码"),
+    DELETE_USE(103,"删除用户"),
     Manager_Level_0(0,"用户"),
     Manager_Level_1(1,"管理员"),
     Manager_Level_2(2,"超级管理员"),
