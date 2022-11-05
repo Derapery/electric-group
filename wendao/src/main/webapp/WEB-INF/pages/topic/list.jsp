@@ -123,6 +123,12 @@
                         <a class="a1" href="#"><i class="fa fa-refresh" aria-hidden="true"></i>点击刷新</a>
                     </div>
                 </div>
+                <c:if test="${applicationScope.topTopic !=null}">
+                    <div class="right-zi">
+                        <span class="col-1" style="color: #bd2130;">最热：</span>
+                        <a href="${ctexPath}/topic/detail?id=${topTopic.id}">${topTopic.title}</a>
+                    </div>
+                </c:if>
                 <c:forEach items="${hotTopicList}" var="topic" varStatus="x">
                     <div class="right-zi">
                         <span class="col-1">${(pagination.current - 1 ) * pagination.size + x.count }</span>
@@ -142,6 +148,7 @@
             <a class="breadcrumb-item" href="${ctxPath}/index.jsp">首页</a>
             <a class="breadcrumb-item" href="#">话题列表</a>
         </nav>
+
             <c:forEach items="${categoryList}" var="cate" varStatus="x">
                <div class=" btn btn-warning chu-xian" style="background: #E9ECEF;border-color: #FEF9F3">
                 <a  href="${ctxPath}/topic/classify?id=${cate.id} " style="text-decoration: none">${cate.name} </a>
@@ -179,7 +186,6 @@
                             <h6 class="topic-detail-category">#${topic.category_name}</h6>
                         </div>
                     </div>
-
                     <div class="footerr">
                         <span class="col-6  row justify-content-end">
                             <c:if test="${ topic.state==null}">

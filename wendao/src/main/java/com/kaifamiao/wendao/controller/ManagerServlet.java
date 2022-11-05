@@ -1,14 +1,12 @@
 package com.kaifamiao.wendao.controller;
 
-import com.kaifamiao.wendao.entity.BadLog;
-import com.kaifamiao.wendao.entity.Category;
-import com.kaifamiao.wendao.entity.Customer;
-import com.kaifamiao.wendao.entity.Topic;
+import com.kaifamiao.wendao.entity.*;
 import com.kaifamiao.wendao.service.ManagerService;
 import com.kaifamiao.wendao.utils.Constants;
 import com.kaifamiao.wendao.utils.Paging;
 import org.apache.commons.lang3.StringUtils;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,12 +36,20 @@ public class ManagerServlet extends HttpServlet {
             this.mangerPage(req, resp);
             return;
         }
+        if ("GET".equals(method) && uri.endsWith("/operating")) {
+            this.operatingPage(req, resp);
+            return;
+        }
         if ("GET".equals(method) && uri.endsWith("/topic")) {
             this.topicPage(req, resp);
             return;
         }
         if ("GET".equals(method) && uri.endsWith("/badlog")) {
             this.badlogPage(req, resp);
+            return;
+        }
+        if ("GET".equals(method) && uri.endsWith("/top")) {
+            this.topAction(req, resp);
             return;
         }
         if ("GET".equals(method) && uri.endsWith("/badlogOne")) {
@@ -85,7 +91,8 @@ public class ManagerServlet extends HttpServlet {
         if ("POST".equals(method) && uri.endsWith("/changePwd")) {
             this.changePwdAction(req, resp);
             return;
-        }if ("GET".equals(method) && uri.endsWith("/changemanager")) {
+        }
+        if ("GET".equals(method) && uri.endsWith("/changemanager")) {
             this.changeMaPage(req, resp);
             return;
         }
@@ -93,6 +100,117 @@ public class ManagerServlet extends HttpServlet {
             this.changeMaAction(req, resp);
             return;
         }
+        if ("GET".equals(method) && uri.endsWith("/quckChange")) {
+            this.quckChangeAction(req, resp);
+            return;
+        }
+        if ("GET".equals(method) && uri.endsWith("/categoryList")) {
+            this.categoryListPage(req, resp);
+            return;
+        }
+        if ("GET".equals(method) && uri.endsWith("/addCategory")) {
+            this.addCategoryPage(req, resp);
+            return;
+        }
+        if ("POST".equals(method) && uri.endsWith("/addCategory")) {
+            this.addCategoryAction(req, resp);
+            return;
+        }
+        if ("GET".equals(method) && uri.endsWith("/changeCategory")) {
+            this.CategoryPage(req, resp);
+            return;
+        }
+    }
+
+    private void operatingPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Map<String,Object> map=havPaging(req);
+        Paging<Operating> paging =managerService.findPage((Integer)map.get("size"),(Integer)map.get("current"),1, Constants.TYPE_OPERATING.getValue());
+        req.setAttribute("paging",paging);
+        req.setAttribute("operating",0);
+        String path="/WEB-INF/pages/manager/list.jsp";
+        RequestDispatcher dis= req.getRequestDispatcher(path);
+        dis.forward(req,resp);
+    }
+
+    private void addCategoryAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        String category_name = req.getParameter("category_name");
+        if(StringUtils.isBlank(category_name)||StringUtils.isBlank(category_name)){
+            session.setAttribute("message","分类名不得为空");
+        }
+        if (!managerService.addCategory(category_name)){
+            session.setAttribute("message","添加分类失败");
+        }
+        resp.sendRedirect(req.getContextPath()+"/manager/topic");
+    }
+
+    private void addCategoryPage(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        HttpSession session = req.getSession();
+        Category category = managerService.findAllCategory().get(0);
+        req.setAttribute("newcategory",category);
+        List<Category> categoryList = managerService.findAllCategory();
+        req.setAttribute("categoryList",categoryList);
+        String path="/WEB-INF/pages/manager/list.jsp";
+        RequestDispatcher dis= req.getRequestDispatcher(path);
+        dis.forward(req,resp);
+    }
+
+    private void CategoryPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        String category_id = req.getParameter("id");
+        if (StringUtils.isEmpty(category_id)||StringUtils.isBlank(category_id)){
+            session.setAttribute("message","获取分类失败");
+            resp.sendRedirect(req.getContextPath()+"/manager/topic");
+            return;
+        }
+        Category category = managerService.findCategory(Long.parseLong(category_id));
+        req.setAttribute("category",category);
+        List<Category> categoryList = managerService.findAllCategory();
+        req.setAttribute("categoryList",categoryList);
+        String path="/WEB-INF/pages/manager/list.jsp";
+        RequestDispatcher dis= req.getRequestDispatcher(path);
+        dis.forward(req,resp);
+    }
+
+
+    private void categoryListPage(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        HttpSession session = req.getSession();
+        List<Category> categoryList = managerService.findAllCategory();
+        req.setAttribute("categoryList",categoryList);
+        String path="/WEB-INF/pages/manager/list.jsp";
+        RequestDispatcher dis= req.getRequestDispatcher(path);
+        dis.forward(req,resp);
+    }
+
+    private void quckChangeAction(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        HttpSession session = req.getSession();
+        String customer_id = req.getParameter("customer_id");
+        String management = req.getParameter("management");
+        if (StringUtils.isEmpty(customer_id)||StringUtils.isBlank(customer_id)){
+            session.setAttribute("message","获取用户权限失败");
+            resp.sendRedirect(req.getContextPath()+"/manager/list");
+            return;
+        }
+        if(!managerService.changeManagement(Long.parseLong(customer_id),Long.parseLong(management))){
+            session.setAttribute("message","修改用户权限失败");
+            resp.sendRedirect(req.getContextPath()+"/manager/list");
+            return;
+        }
+        Customer manager = (Customer) session.getAttribute("manager");
+        managerService.addOperating(manager.getId(),Long.parseLong(customer_id),Constants.STATE_DO.getValue(),Constants.EDIT_USER.getValue());
+        mangerPage(req, resp);
+    }
+
+    private void topAction(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        HttpSession session = req.getSession();
+        String topic_id = req.getParameter("topic_id");
+        if (StringUtils.isEmpty(topic_id)||StringUtils.isBlank(topic_id)){
+            session.setAttribute("message","获取话题失败");
+        }
+        ServletContext app = session.getServletContext();
+        Topic topTopic = managerService.findTopic(Long.parseLong(topic_id));
+        app.setAttribute("topTopic",topTopic);
+        resp.sendRedirect(req.getContextPath()+"/manager/list");
     }
 
     private void changeMaAction(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -109,6 +227,8 @@ public class ManagerServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath()+"/manager/list");
             return;
         }
+        Customer manager = (Customer) session.getAttribute("manager");
+        managerService.addOperating(manager.getId(),Long.parseLong(customer_id),Constants.STATE_DO.getValue(),Constants.EDIT_USER.getValue());
         mangerPage(req, resp);
     }
 
@@ -122,6 +242,8 @@ public class ManagerServlet extends HttpServlet {
         }
         Customer customer = managerService.findCustomerById(Long.parseLong(customer_id));
         req.setAttribute("customerMa",customer);
+        Customer manager = (Customer) session.getAttribute("manager");
+        managerService.addOperating(manager.getId(),customer.getId(),Constants.STATE_DO.getValue(),Constants.EDIT_USER.getValue());
         mangerPage(req,resp);
     }
 
@@ -148,6 +270,8 @@ public class ManagerServlet extends HttpServlet {
 
     private void changePwdAction(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session=req.getSession();
+        Customer manager = (Customer) session.getAttribute("manager");
+
         String customer_id = req.getParameter("customer_id");
         if (customer_id==null){
             session.setAttribute("message", "获取用户信息失败");
@@ -162,6 +286,7 @@ public class ManagerServlet extends HttpServlet {
         }else {
             session.setAttribute("message", "修改失败！");
         }
+        managerService.addOperating(manager.getId(),customer.getId(),Constants.STATE_DO.getValue(),Constants.EDIT_USER.getValue());
         resp.sendRedirect(req.getContextPath()+"/manager/list");
     }
 
@@ -183,6 +308,7 @@ public class ManagerServlet extends HttpServlet {
 
     private void deleteTopicAction(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session=req.getSession();
+        Customer manager = (Customer) session.getAttribute("manager");
         String customer_name = req.getParameter("customer_name");
         Customer customer = managerService.findCustomer(customer_name);
         String topic=req.getParameter("topic_id");
@@ -191,11 +317,13 @@ public class ManagerServlet extends HttpServlet {
         if(!managerService.deleteTopic(customer.getId(),topic_id)){
             session.setAttribute("message", "删除失败！");
         }
+        managerService.addOperating(manager.getId(),customer.getId(),Constants.STATE_DO.getValue(),Constants.EDIT_USER.getValue());
         resp.sendRedirect(req.getContextPath() + "/manager/list");
     }
 
     private void changeInfoAction(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
+        Customer manager = (Customer) session.getAttribute("manager");
         String nickname = req.getParameter("nickname");
         String introduction = req.getParameter("introduction");
         Customer customer = (Customer) session.getAttribute("customer");
@@ -210,7 +338,9 @@ public class ManagerServlet extends HttpServlet {
             session.setAttribute("nickname", nickname);
             session.setAttribute("introduction", introduction);
             resp.sendRedirect(req.getContextPath() + "/manager/list");
+            return;
         }
+        managerService.addOperating(manager.getId(),customer.getId(),Constants.STATE_DO.getValue(),Constants.EDIT_USER.getValue());
         resp.sendRedirect(req.getContextPath() + "/manager/list");
     }
 
@@ -236,6 +366,7 @@ public class ManagerServlet extends HttpServlet {
 
     private void editTopicAction(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         HttpSession session = req.getSession();
+        Customer manager = (Customer) session.getAttribute("manager");
         String topic_id = req.getParameter("topic_id");
         String topic_title = req.getParameter("title");
         String topic_content = req.getParameter("content");
@@ -250,9 +381,10 @@ public class ManagerServlet extends HttpServlet {
         try {
             if (managerService.editTopic(topic)) {
                 resp.sendRedirect(req.getContextPath() + "/manager/list");
+                managerService.addOperating(manager.getId(),topic.getAuthor().getId(),Constants.STATE_DO.getValue(),Constants.EDIT_USER.getValue());
                 return;
             }
-            session.setAttribute("message", "话题发布失败");
+            session.setAttribute("message", "错误话题发布失败");
             session.setAttribute("title", topic.getTitle());
             session.setAttribute("content", topic.getContent());
         } catch (Exception e) {
@@ -261,12 +393,7 @@ public class ManagerServlet extends HttpServlet {
             session.setAttribute("content", topic.getContent());
             resp.sendRedirect(req.getContextPath() + "/manager/list");
         }
-        String path = "/WEB-INF/pages/manager/list.jsp";
-        RequestDispatcher db = req.getRequestDispatcher(path);
-        db.forward(req,resp);
     }
-
-
 
     private void editTopicPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
@@ -281,6 +408,7 @@ public class ManagerServlet extends HttpServlet {
             session.setAttribute("categoryList",categoryList);
         }
         Topic t = managerService.FindTopic(Long.parseLong(topic_id));
+        req.setAttribute("category_ID",t.getCategory_id());
         req.setAttribute("topic",t);
         String path="/WEB-INF/pages/topic/publish.jsp";
         RequestDispatcher dis= req.getRequestDispatcher(path);
@@ -290,7 +418,7 @@ public class ManagerServlet extends HttpServlet {
     private void changeCategoryAction(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
         String category_id = req.getParameter("category_id");
-        String category_name = req.getParameter("customer_id");
+        String category_name = req.getParameter("category_name");
         if(StringUtils.isBlank(category_name)||StringUtils.isBlank(category_id)){
             session.setAttribute("message","获取分类失败");
         }

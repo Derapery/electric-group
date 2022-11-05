@@ -117,7 +117,7 @@ public class ManagerService {
 
     public boolean editTopic(Topic topic) {
         //调用DAO层的方法进行保存
-        return topicsDao.save(topic);
+        return topicsDao.modify(topic);
     }
 
     public List<Category> loadCategoryList() {
@@ -171,5 +171,27 @@ public class ManagerService {
 
     public boolean changeManagement(Long customer_id, Long management) {
         return customerDao.modifyLevel(customer_id,management);
+    }
+
+    public void addOperating(Long handler_id,Long user_id,Integer state,Integer type) {
+        Operating op = new Operating();
+        op.setId(snowId.generate());
+        op.setHandler_id(handler_id);
+        op.setUser_id(user_id);
+        op.setType(type);
+        op.setState(state);
+        operatingDao.save(op);
+    }
+
+
+    public List<Category> findAllCategory() {
+        return categoryDao.finaAll();
+    }
+
+    public boolean addCategory(String category_name) {
+        Category category = new Category();
+        category.setId(snowId.generate());
+        category.setName(category_name);
+        return categoryDao.save(category);
     }
 }

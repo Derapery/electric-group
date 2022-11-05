@@ -153,5 +153,24 @@ public class Topic {
         this.explains = explains;
     }
 
-
+    @Override
+    public String toString() {
+        return "Topic{" +
+                "id=" + id +
+                ", category_id=" + category_id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", publishTime=" + publishTime +
+                ", publishAddress='" + publishAddress + '\'' +
+                ", priority=" + priority +
+                ", author=" + author +
+                ", explains=" + explains +
+                ", category_name='" + category_name + '\'' +
+                ", thumbUpCount=" + thumbUpCount +
+                ", thumbDownCount=" + thumbDownCount +
+                ", state=" + state +
+                ", explainCount=" + explainCount +
+                ", myExplain='" + myExplain + '\'' +
+                '}';
+    }
 }
