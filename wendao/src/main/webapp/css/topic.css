@@ -130,8 +130,7 @@ nav.list {
 }
 .topic-all{
     background: #ebe9e9;
-
-    height: 263px;
+    height: 30vw;
     margin: 10px;
     margin-bottom: 24px;
     box-shadow: 5px 5px 3px #d6d3d3;
@@ -180,6 +179,7 @@ nav.list {
 
 .footerr{
     margin-bottom: 40px;
+
     display: flex;
     width: auto;
     justify-content: space-around;
@@ -189,6 +189,7 @@ nav.list {
 
 .footerr>*{
     display: flex;
+    margin-top: 13vw;
     margin-right: 140px;
     flex-wrap: nowrap;
     justify-content: flex-end;

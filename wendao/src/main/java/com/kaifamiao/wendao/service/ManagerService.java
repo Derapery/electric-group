@@ -184,4 +184,14 @@ public class ManagerService {
     }
 
 
+    public List<Category> findAllCategory() {
+        return categoryDao.finaAll();
+    }
+
+    public boolean addCategory(String category_name) {
+        Category category = new Category();
+        category.setId(snowId.generate());
+        category.setName(category_name);
+        return categoryDao.save(category);
+    }
 }

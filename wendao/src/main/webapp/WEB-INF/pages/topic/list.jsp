@@ -186,7 +186,6 @@
                             <h6 class="topic-detail-category">#${topic.category_name}</h6>
                         </div>
                     </div>
-
                     <div class="footerr">
                         <span class="col-6  row justify-content-end">
                             <c:if test="${ topic.state==null}">
