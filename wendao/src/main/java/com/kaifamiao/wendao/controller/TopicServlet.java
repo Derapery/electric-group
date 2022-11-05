@@ -210,7 +210,7 @@ public class TopicServlet extends HttpServlet {
                 resp.sendRedirect(req.getContextPath()+"/topic/publish");
                 return;
             }
-            if (customer.getManagement()<= Constants.Manager_Level_0.getValue()){
+            if (customer.getManagement()<= Constants.Manager_Level_3.getValue()){
                 session.setAttribute("message","对不起您的权限不足");
                 resp.sendRedirect(req.getContextPath()+"/topic/list");
                 return;
