@@ -13,6 +13,7 @@ public class TopicsDao extends BaseDao<Topic,Long> {
     private CustomerDao cusDao=new CustomerDao();
     private static String INSERT_ONE="INSERT INTO t_topics(id,title,content,publish_time,publish_address,priority,customer_id,category_id) VALUES(?,?,?,?,?,?,?,?)";
     private static String SELECT_MAX_ID="SELECT max(id) FROM t_topics";
+    private static String MODIFY_EDIT="UPDATE t_topics SET title=?,content=? WHERE id=?";
     private static String MODIFY="UPDATE t_topics SET title=?,content=?,publish_time=?,publish_address=?,priority=?,customer_id=? WHERE id=?";
     private static String DELETE_ONE="DELETE FROM t_topics WHERE id=?";
     private static String FIND_BASE="SELECT title,content,publish_time,publish_address,priority,customer_id,category_id,id FROM t_topics WHERE ";
@@ -189,6 +190,12 @@ public class TopicsDao extends BaseDao<Topic,Long> {
            throw  new RuntimeException("查询话题失败！",cause);
         }
     }
-
+    public boolean edit(Topic topic){
+        try {
+            return runner.update(MODIFY_EDIT,topic.getTitle(),topic.getContent(),topic.getId())==1;
+        } catch (SQLException cause) {
+            throw new RuntimeException("删除话题失败！",cause);
+        }
+    }
 
 }

@@ -117,7 +117,7 @@ public class ManagerService {
 
     public boolean editTopic(Topic topic) {
         //调用DAO层的方法进行保存
-        return topicsDao.modify(topic);
+        return topicsDao.edit(topic);
     }
 
     public List<Category> loadCategoryList() {

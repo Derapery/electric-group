@@ -1,5 +1,6 @@
 package com.kaifamiao.wendao.dao;
 
+import com.kaifamiao.wendao.entity.Topic;
 import com.kaifamiao.wendao.utils.DataSourceFactory;
 import org.apache.commons.dbutils.QueryRunner;
 
@@ -13,4 +14,5 @@ public abstract class BaseDao<T,P> implements Dao<T,P>{
        DataSourceFactory factory=DataSourceFactory.getInstance();
        runner=new QueryRunner(factory.getDataSource());
     }
+
 }
