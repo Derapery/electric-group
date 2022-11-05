@@ -1,10 +1,7 @@
 package com.kaifamiao.wendao.service;
 
 import com.kaifamiao.wendao.dao.*;
-import com.kaifamiao.wendao.entity.Category;
-import com.kaifamiao.wendao.entity.Customer;
-import com.kaifamiao.wendao.entity.Explain;
-import com.kaifamiao.wendao.entity.Topic;
+import com.kaifamiao.wendao.entity.*;
 import com.kaifamiao.wendao.utils.*;
 
 import java.time.LocalDateTime;
@@ -18,7 +15,10 @@ public class TopicService {
    private TopicLikeDao topicLikeDao;
    private ExplainLikeDao explainLikeDao;
    private AttentionDao attentionDao;
-   //获得雪花实例
+    private BadLogDao badLogDao;
+    private static final String[] ZANGHUA = {"\u6211\u64cd","\u5367\u69fd","\u82cf\u5f66\u4f1f","\u50bb\u903c","\u72d7\u4e1c\u897f"};
+
+    //获得雪花实例
    private SnowflakeIdGenerator snow = SnowflakeIdGenerator.getInstance();
    public TopicService(){
        topicsDao=new TopicsDao();
@@ -27,6 +27,7 @@ public class TopicService {
        topicLikeDao=new TopicLikeDao();
        explainLikeDao=new ExplainLikeDao();
        attentionDao=new AttentionDao();
+       badLogDao = new BadLogDao();
    }
    //保存话题
    public boolean save(Topic topic){
@@ -34,10 +35,25 @@ public class TopicService {
        topic.setId(snow.generate());
        //设置话题的发布的时间
        topic.setPublishTime(LocalDateTime.now());
+       String newTitle = rebulidContent(topic.getTitle());
+       if(!checkContent(topic.getTitle(),newTitle)){
+           topic.setTitle(newTitle);
+           setBadLog(topic);
+       }
        //调用DAO层的方法进行保存
+       String newContent = rebulidContent(topic.getContent());
+       if(!checkContent(topic.getContent(),newContent)){
+           topic.setContent(rebulidContent(topic.getContent()));
+           setBadLog(topic);
+       }
       return topicsDao.save(topic);
    }
-   //删除话题
+
+    public static Boolean checkContent(String content,String newContent) {
+        return content.equals(newContent);
+    }
+
+    //删除话题
     public boolean delete(Long along){
        //删除话题首先删除话题相关的评论
         explainDao.deleteTop(along);
@@ -229,6 +245,21 @@ public class TopicService {
         //删除话题
         return topicsDao.delete(topic_id);
     }
+
+    private void setBadLog(Topic topic){
+        BadLog badLog = new BadLog();
+        badLog.setType(Constants.BADLOG_TYPE.getValue());
+        badLog.setId(snow.generate());
+        badLog.setUser_id(topic.getAuthor().getId());
+        badLogDao.save(badLog);
+    }
+
+    public  String rebulidContent(String content) {
+        for (String s:ZANGHUA) {
+            content = content.replaceAll(s, "\\*".repeat(s.length()));
+        }
+        return content;
+    }
     public Paging<Topic> search(Integer size, Integer current,Long cate,Long customer_id){
         Paging<Topic> paging=new Paging<>();
         Integer begin=(current-1)*size;
@@ -267,7 +298,7 @@ public class TopicService {
         return paging;
     }
     private Integer searchCount(Long cate){
-      return topicsDao.searchCount(cate);
+        return topicsDao.searchCount(cate);
     }
 
     public Topic searchOne(Long topic_id ,Long customer_id){

@@ -91,6 +91,7 @@ public class TopicServlet extends HttpServlet {
             this.likeTopic(req,resp);
             return;
         }
+
         //"GET" “classify”
         if("GET".equals(method) && uri.endsWith("/classify")){
             this.classify(req,resp);
@@ -216,7 +217,6 @@ public class TopicServlet extends HttpServlet {
                 session.setAttribute("title", topic.getTitle());
                 session.setAttribute("content", topic.getContent());
             } catch (Exception e){
-                Logger.error(e);
                 session.setAttribute("message", "话题发布失败");
                 session.setAttribute("title", topic.getTitle());
                 session.setAttribute("content", topic.getContent());
@@ -352,6 +352,7 @@ public class TopicServlet extends HttpServlet {
         RequestDispatcher db=req.getRequestDispatcher(path);
         db.forward(req,resp);
     }
+
     @Override
     public void destroy() {
         super.destroy();

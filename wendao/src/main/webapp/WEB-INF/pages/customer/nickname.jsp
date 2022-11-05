@@ -72,19 +72,36 @@
                 <div class="ni-cheng">${customer.nickname}</div>
             </div>
         <div class="left-n-kuang">
+        <c:if test="${empty type}" >
             <form action="${ctxPath}/customer/edit" method="post">
                 <div class="form-row">
                     <label for="nickname">昵称:</label>
                     <input type="text" name="nickname" value="${customer.nickname}" id="nickname" >
                 </div>
                 <div class="form-row">
-                    <label for="nickname">简介:</label>
+                    <label for="nicknames">简介:</label>
                     <input type="text" name="introduction" value="${customer.introduction}" id="nicknames" >
                 </div>
                 <div class="form-buttons">
                     <button type="submit">确认修改</button>
                 </div>
             </form>
+        </c:if>
+            <c:if test="${not empty type}" >
+                <form action="${ctxPath}/manager/editinfo" method="post">
+                    <div class="form-row">
+                        <label for="nickname1">昵称:</label>
+                        <input type="text" name="nickname" value="${customer.nickname}" id="nickname1" >
+                    </div>
+                    <div class="form-row">
+                        <label for="nicknames1">简介:</label>
+                        <input type="text" name="introduction" value="${customer.introduction}" id="nicknames1" >
+                    </div>
+                    <div class="form-buttons">
+                        <button type="submit">确认修改</button>
+                    </div>
+                </form>
+            </c:if>
         </div>
         </div>
     </article>

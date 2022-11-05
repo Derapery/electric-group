@@ -36,18 +36,7 @@ public class BadLogDao extends BaseDao<BadLog,Long>{
 
     @Override
     public BadLog find(Long user_id) {
-        ResultSetHandler<BadLog> rsHandler = rs -> {
-            if( rs.next() ) {
-                BadLog badLog = wrap(rs);
-                return badLog;
-            }
-            return null;
-        };
-        try {
-            return runner.query(FIND,rsHandler,user_id);
-        } catch (SQLException cause) {
-            throw new RuntimeException("删除失败", cause);
-        }
+        return null;
     }
 
     private BadLog wrap(ResultSet rs) throws SQLException {
@@ -72,6 +61,22 @@ public class BadLogDao extends BaseDao<BadLog,Long>{
             return runner.query(FIND_ALL,rsHandler);
         } catch (SQLException cause) {
             throw new RuntimeException("查找记录失败！",cause);
+        }
+    }
+
+    public List<BadLog> findById(Long user_id) {
+        ResultSetHandler<List<BadLog>> rsHandler = rs -> {
+            List<BadLog> list = new ArrayList<>();
+            while( rs.next() ) {
+                BadLog badLog = wrap(rs);
+                list.add(badLog);
+            }
+            return list;
+        };
+        try {
+            return runner.query(FIND,rsHandler,user_id);
+        } catch (SQLException cause) {
+            throw new RuntimeException("删除失败", cause);
         }
     }
 }

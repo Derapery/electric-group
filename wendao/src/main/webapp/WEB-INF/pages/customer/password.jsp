@@ -73,6 +73,7 @@
             </div>
             <div class="left-n-kuang-n">
                 <p>${message}</p>
+    <c:if test="${empty type}" >
                 <form class="kuan" action="${ctxPath}/customer/change" method="post">
                     <div class="form-row-m">
                         <label for="username">登录名称</label>
@@ -94,6 +95,22 @@
                         <button type="submit">确认修改</button>
                     </div>
                 </form>
+    </c:if>
+    <c:if test="${not empty type}" >
+        <form class="kuan" action="${ctxPath}/manager/changePwd" method="post">
+            <div class="form-row-m">
+                <label for="username">登录名称</label>
+                <input class="wu-border" type="text" name="username" value="${customer.username}"  autocomplete="off" readonly>
+            </div>
+            <div class="form-row-m">
+                <label for="newPassword">新  密  码</label>
+                <input type="password" name="newPassword" />
+            </div>
+            <div class="form-buttons-m">
+                <button type="submit">确认修改</button>
+            </div>
+        </form>
+    </c:if>
             </div>
         </div>
     </article>
