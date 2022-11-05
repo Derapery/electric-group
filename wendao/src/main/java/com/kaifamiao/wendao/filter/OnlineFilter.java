@@ -4,12 +4,10 @@ import com.kaifamiao.wendao.entity.Customer;
 import com.kaifamiao.wendao.utils.Constants;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Set;
 
 public class OnlineFilter implements Filter {

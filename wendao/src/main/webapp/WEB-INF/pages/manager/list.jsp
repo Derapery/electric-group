@@ -132,7 +132,7 @@
                         <span class="col-2">${topic.author.username}</span>
                         <span class="col-3" style="font-size: 15px">
                             <a href="${ctxPath}/manager/topic/change/category?id=${topic.category_id}">修改分类</a>
-                            <a href="${ctxPath}/topic/publish">置顶话题</a>
+                            <a href="${ctxPath}/manager/topic/top?topic_id=${topic.id}">置顶话题</a>
                             <a href="${ctxPath}/manager/topic/edit?topic_id=${topic.id}&customer_name=${topic.author.username}">编辑内容</a>
                             <a href="${ctxPath}/manager/topic/deleteTopic?topic_id=${topic.id}&customer_name=${topic.author.username}">删除话题</a>
                         </span>
@@ -161,10 +161,11 @@
                             </c:choose>
                         </span>
                         <span class="col-6" style="font-size: 15px">
-                            <a class="col-3 href="${ctxPath}/manager/topic/change/category?id=${badlog.user_id}">禁言用户</a>
-                            <a class="col-3 href="${ctxPath}/topic/publish">禁止登陆</a>
-                            <a  class="col-3 href="${ctxPath}/manager/topic/edit?topic_id=${badlog.user_id}&customer_name=${badlog.user_id}">禁止发布</a>
-                            <a  class="col-3 href="${ctxPath}/manager/topic/deleteTopic?topic_id=${badlog.user_id}&customer_name=${badlog.user_id}">删除用户</a>
+                            <a style="margin: 0px 5px" href="${ctxPath}/manager/quckChange?customer_id=${badlog.user_id}&management=-1">禁言用户</a>
+                            <a style="margin: 0px 5px" href="${ctxPath}/manager/quckChange?customer_id=${badlog.user_id}&management=-3">禁止登陆</a>
+                            <a style="margin: 0px 5px" href="${ctxPath}/manager/quckChange?customer_id=${badlog.user_id}&management=-2">禁止发布</a>
+                            <a style="margin: 0px 5px" href="${ctxPath}/manager/quckChange?customer_id=${badlog.user_id}&management=-4">删除用户</a>
+                            <a style="margin: 0px 5px" href="${ctxPath}/manager/quckChange?customer_id=${badlog.user_id}&management=0">恢复权限</a>
                         </span>
                     </div>
                 </c:forEach>

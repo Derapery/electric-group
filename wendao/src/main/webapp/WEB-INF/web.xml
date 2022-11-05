@@ -52,5 +52,16 @@
     <dispatcher>REQUEST</dispatcher>
   </filter-mapping>
 
+  <filter>
+    <filter-name>manager-filter</filter-name>
+    <filter-class>com.kaifamiao.wendao.filter.ManagerFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>manager-filter</filter-name>
+    <url-pattern>/manager/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
+
 
 </web-app>

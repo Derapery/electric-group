@@ -1,7 +1,18 @@
 package com.kaifamiao.wendao.utils;
 
 public enum Constants {
-
+    STATE_DO(555,"已操作"),
+    STATE_REQUEST(666,"待处理操作"),
+    STATE_REFUSE(888,"已拒绝"),
+    EDIT_USER(101,"编辑用户信息"),
+    CHANGE_PWD(102,"修改用户密码"),
+    Manager_Level_0(0,"用户"),
+    Manager_Level_1(1,"管理员"),
+    Manager_Level_2(2,"超级管理员"),
+    Manager_Level_3(-1,"禁止评论"),
+    Manager_Level_4(-2,"禁止发布话题"),
+    Manager_Level_5(-3,"禁止登陆"),
+    Manager_Level_6(-4,"待删除"),
     CUSTOMER_LOGINED("customer"),
     MANAGEMENT_ID(1),
     CUSTOMER_ID(0),
